@@ -1,8 +1,10 @@
 /* Style the navigation menu */
 .topnav {
     overflow: hidden;
-    background-color: rgb(109, 6, 6);
-    position: relative;
+    /* background-color: rgb(109, 6, 6);  */
+    /* position: relative; */ 
+    position: fixed;
+
   }
   
   /* Hide the links inside the navigation menu (except for logo/home) */
@@ -21,9 +23,10 @@
   
   /* Style the hamburger menu */
   .topnav a.icon {
-    background: black;
+    /* background: black; */
     display: block;
-    position: absolute;
+    /* position: absolute; */
+    position: fixed;
     right: 0;
     top: 0;
   }
@@ -36,7 +39,7 @@
   
   /* Style the active link (or home/logo) */
   .active {
-    background-color: rgb(109, 6, 6);
+    /* background-color: rgb(109, 6, 6); */
     color: white;
   } 
 
@@ -53,4 +56,46 @@
 
   p {
     font-size: 20px;
+  }
+
+  #welcome-section{
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: url("https://cdn.pixabay.com/photo/2017/08/24/03/41/starry-sky-2675322__340.jpg");
+
+  }
+
+  #projects{
+    height: 500px;
+    text-align: center;
+   
+  }
+  .row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .column{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+    flex: 1;
+  }
+
+  .profile-links{
+    display: flex;
+  }
+
+
+  @media only screen and (max-width: 600px) {
+    /*body {
+      background-color: lightblue;
+    } */
+    #profile-link {
+      display: none;
+    } 
   }

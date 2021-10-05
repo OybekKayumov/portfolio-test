@@ -7,6 +7,8 @@
     <title>Portfolio Page</title>
     <link rel="stylesheet" href="styles.css">
     <script src="scripts.js"></script>
+    <script src="https://kit.fontawesome.com/11e5f401cf.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <header>
@@ -19,10 +21,16 @@
     
     <!-- Top Navigation Menu -->
     <div class="topnav">
-        <a href="#home" class="active">Logo</a>
+        <div class="profile-links">
+          <a href="https://github.com/OybekKayumov" id="profile-link" target="_blank" class="active"><i class="fab fa-github-square fa-lg "></i></a>
+        
+          <a href="https://www.facebook.com/oybek.kayumov.39/"  target="_blank" class="active"><i class="fab fa-facebook-square fa-lg"></i></i></a>
+          
+        
+        </div>
         <!-- Navigation links (hidden by default) -->
             <div id="myLinks">
-            <a href="#news">News</a>
+            <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
             <a href="#about">About</a>
             </div>
@@ -32,7 +40,7 @@
         </a>
     </div>
 
-
+    
 
 
     <section id="welcome-section">
@@ -42,5 +50,32 @@
           </div>  
     </section>
     
+
+    <section id="projects">
+        <h1>Projects</h1>
+        <div class="grid-container">
+            <div class="row">
+                <div class="column">
+                    Project 1
+                </div>
+                <div class="column">
+                    Project 2
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="column">
+                    Project 3
+                </div>
+                <div class="column">
+                    Project 4
+                </div>
+            </div>
+
+        </div>  
+    </section>
+
+
+
 </body>
 </html>
