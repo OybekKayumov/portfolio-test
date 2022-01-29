@@ -64,8 +64,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-image: url("https://cdn.pixabay.com/photo/2017/08/24/03/41/starry-sky-2675322__340.jpg");
-
+    background-image: url("./img/bg.jpg");
+    background-size: cover;
   }
 
   #projects{
@@ -91,10 +91,12 @@
   }
 
 
-  @media only screen and (max-width: 600px) {
-    /*body {
+  @media only screen and (max-width: 320px) {
+
+    body {
       background-color: lightblue;
-    } */
+    }
+
     #profile-link {
       display: none;
     } 
