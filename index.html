@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/11e5f401cf.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+        <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Space+Mono:700&display=swap">
+        
+    </header>    
+    
+    <!-- Top Navigation Menu -->
+    <div class="topnav">
+        <div class="profile-links">
+            <a href="https://github.com/OybekKayumov" id="profile-link" target="_blank" class="active"><i class="fab fa-github-square fa-lg "></i></a>
+            
+            <a href="https://www.facebook.com/oybek.kayumov.39/"  target="_blank" class="active"><i class="fab fa-facebook-square fa-lg"></i></i></a>
+            
+            
+        </div>
+        <!-- Navigation links (hidden by default) -->
+        <div id="myLinks">
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+            <a href="#about">About</a>
+        </div>
+        <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+
+    <section id="welcome-section">
+        <div>
+            <h1> Full Stack Developer</h1>
+            <p>Oybek Kayumov</p>
+        </div>  
+    </section>
+    
+    <section id="projects">
+        <h1>Projects</h1>
+        <div class="grid-container">
+            <div class="row">
+                <div class="column">
+                    Project 1
+                </div>
+                <div class="column">
+                    Project 2
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="column">
+                    Project 3
+                </div>
+                <div class="column">
+                    Project 4
+                </div>
+            </div>
+            
+        </div>  
+    </section>
+    
+    <script src="scripts.js"></script>
+</body>
+</html>
