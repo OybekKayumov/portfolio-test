@@ -1,5 +1,4 @@
 const container = document.querySelector('.container');
-// const inpTitle = document.querySelector('#title').focus();
 const inpTitle = document.querySelector('#title');
 const inpAuthor = document.querySelector('#author');
 const addBtn = document.querySelector('#btn');
@@ -27,7 +26,6 @@ class Books {
       `;
     })
     container.innerHTML = books;
-    console.log(container);
     const remBtn = document.querySelectorAll('.remBtn');
     remBtn.forEach((btn, i) => {
       btn.addEventListener('click', (e) => {
@@ -39,16 +37,13 @@ class Books {
 
   removeBook(id) {
     this.bookList = JSON.parse(localStorage.getItem('storageData'));
-    // bookList.filter((book) => bookList.indexOf(book) !== id)
     const filterArr = this.bookList.filter((book) => this.bookList.indexOf(book) !== id);
     localStorage.setItem('storageData', JSON.stringify(filterArr));
     this.renderBooks(filterArr);
-    // this.title.focus();
   }
 
   addBook() {
     addBtn.addEventListener('click', (e) => {
-    //! addBtn.addEventListener('submit', (e) => {
       if (this.author.value === '' || this.title.value === '') {
         alert.innerHTML = 'Enter "Book Title" and "Author"';        
         return
@@ -61,7 +56,6 @@ class Books {
 
       const listBooks = JSON.parse(localStorage.getItem('storageData')) || [];
       listBooks.push(bookObj);
-      console.log('bookObj: ', bookObj);
       
       localStorage.setItem('storageData', JSON.stringify(listBooks));
       this.renderBooks(listBooks);
@@ -69,13 +63,11 @@ class Books {
       this.title.value ='';
       this.author.value = '';
       alert.innerHTML = '';
-      // this.title.focus();
     })
   }
 }
 
 const Store = new Books(inpTitle, inpAuthor);
-// this.title.focus();
 Store.bookList = JSON.parse(localStorage.getItem('storageData')) || [];
 Store.renderBooks(Store.bookList);
 Store.addBook();
