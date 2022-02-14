@@ -1,0 +1,104 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Comic Neue', sans-serif;
+  background-color: lightslategrey;
+}
+
+header {
+  display: grid;
+  grid-row: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+h2 {
+  text-align: center;
+  margin-top: 20px;
+  border-top: 2px solid #000;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.container {
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  /* border: 3px solid #000; */
+  margin: 10px;
+  padding: 10px;
+  /* max-width: 900px; */
+  min-width: 500px;
+}
+
+.display {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  width: 100%;
+  padding: 8px;
+}
+
+.display:nth-child(odd) {
+  background-color: blanchedalmond;  
+}
+
+.display:nth-child(even) {
+  background-color: lightskyblue ;  
+}
+
+.add-book {
+  min-width: 400px;
+}
+
+.add-btn,
+.remBtn {
+  font-size: 16px;
+  padding: 0 0.25rem;
+  border: 2px solid #000;
+  box-shadow: 2px 2px 5px 3px #ec4252;
+  font-weight: bold;
+  text-align: end;
+  /* transform: translateX(5.1rem); */
+}
+
+.add-btn {
+  float: right;
+}
+
+input {
+  font-size: 20px;
+  padding: 0 0.25rem;
+  border: 3px solid #000;
+  margin-bottom: 10px;
+  background-color: blanchedalmond;  
+  width: 100%;
+}
+
+:focus
+
+input::placeholder {
+  color: gray;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#alert {
+  margin: 5px 0;
+  padding: 10px 0;
+  color: khaki;
+  color: greenyellow;
+}
