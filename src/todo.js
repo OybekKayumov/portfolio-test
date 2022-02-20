@@ -94,10 +94,15 @@ todoTask.addEventListener('change', (event) => {
 // important task
 todoTask.addEventListener('contextmenu', (event) => {
   event.preventDefault();
-  todoList.forEach((item) => {
+  todoList.forEach((item, index) => {
     if(item.todo === event.target.innerHTML) {
-      item.important = !item.important;
-      
+      // delete task by "right click mouse + CTRL" 
+      if (event.ctrlKey || event.metaKey) {
+        todoList.splice(index, 1)
+      } else {
+        item.important = !item.important;
+      }
+
       renderMessages();
 
       localStorage.setItem('todo', JSON.stringify(todoList));
