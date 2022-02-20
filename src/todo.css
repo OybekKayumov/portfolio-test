@@ -16,10 +16,10 @@ body {
   padding-top: 50px; 
 }
 
-/* .important {
+.important {
   font-weight: bold;
-  color: #A40E11; 
-} */
+  color: #A40E11;
+}
 
 .todo_list {
   max-width: 450px;

@@ -55,7 +55,7 @@ function renderMessages() {
     renderMessage += `
         <li>
           <input type="checkbox" id="item_${index}" ${item.checked ? 'checked' : ''}>
-          <label for="item_${index}">${item.todo}</label>
+          <label for="item_${index}" class="${item.important ? 'important' : ''}">${item.todo}</label>
         </li>    
     `;
     
@@ -94,5 +94,15 @@ todoTask.addEventListener('change', (event) => {
 // important task
 todoTask.addEventListener('contextmenu', (event) => {
   event.preventDefault();
+  todoList.forEach((item) => {
+    if(item.todo === event.target.innerHTML) {
+      item.important = !item.important;
+      
+      renderMessages();
+
+      localStorage.setItem('todo', JSON.stringify(todoList));
+    }
+
+  })
 
 })
