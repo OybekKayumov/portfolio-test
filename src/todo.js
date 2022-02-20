@@ -89,6 +89,10 @@ todoTask.addEventListener('change', (event) => {
       localStorage.setItem('todo', JSON.stringify(todoList));
     }
   })
+})
 
+// important task
+todoTask.addEventListener('contextmenu', (event) => {
+  event.preventDefault();
 
 })
