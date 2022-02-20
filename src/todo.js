@@ -5,6 +5,16 @@ const todoTask = document.querySelector('.todo');
 
 
 let todoList = [];
+// check localStorage for data
+if (localStorage.getItem('todo')) {
+  // if in localStorage we have some data, 
+  todoList = JSON.parse(localStorage.getItem('todo'));
+  // render data from LocalStorage to HTML
+  renderMessages();
+} else {
+  todoList = [];
+}
+
 
 
 addBtn.addEventListener('click', () => {
