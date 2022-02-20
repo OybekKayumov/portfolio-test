@@ -18,7 +18,11 @@ if (localStorage.getItem('todo')) {
 
 
 addBtn.addEventListener('click', () => {
-  
+  // if input is empty, we cannot add a task
+  if (!addMessage.value) {
+    alert("Enter a new task")
+    return;
+  }  
   // every task to OBJECT
   // every OBJECT to Array => todoList
   // create new array 
@@ -38,10 +42,12 @@ addBtn.addEventListener('click', () => {
   renderMessages()
   // localStorage gets string
   localStorage.setItem('todo', JSON.stringify(todoList));
+  addMessage.value = '';
 })
 
 function renderMessages() { 
   let renderMessage = '';
+  if (todoList.length === 0) todoTask.innerHTML = '';
   todoList.forEach((item, index) => {
     // console.log('render items', item);
     // const renderMessage = `Our task is: ${addMessage.value}`;
