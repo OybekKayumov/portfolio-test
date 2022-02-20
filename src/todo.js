@@ -61,5 +61,34 @@ function renderMessages() {
     
     todoTask.innerHTML = renderMessage; 
   })
-
 }
+
+// see and update for task status 'checked'
+// if checked, save to LocalStorage
+// we can find 'checked' by input
+// our task list 
+todoTask.addEventListener('change', (event) => {
+  // see on consol which task we pressed
+  // console.log(event.target); 
+  // take attribute ID for this target
+  // console.log(event.target.getAttribute('id'));
+  
+  let idInput  = event.target.getAttribute('id');
+  let forLabel = todoTask.querySelector('[for=' + idInput + ']');
+  let valueLabel = forLabel.innerHTML;
+
+  // item number
+  // console.log('forlabel: ', forLabel);
+  // value label = text (task 1)
+  // console.log('valuelabel: ', valueLabel);
+
+  todoList.forEach((item) => {
+    if (item.todo === valueLabel) {
+      item.checked = !item.checked;
+
+      localStorage.setItem('todo', JSON.stringify(todoList));
+    }
+  })
+
+
+})
