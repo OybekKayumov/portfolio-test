@@ -26,6 +26,8 @@ addBtn.addEventListener('click', () => {
   // console.log('TodoList Array": ', todoList);
   // call every time when we click on Add button
   renderMessages()
+  // localStorage gets string
+  localStorage.setItem('todo', JSON.stringify(todoList));
 })
 
 function renderMessages() { 
