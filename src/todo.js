@@ -3,7 +3,6 @@ const addBtn = document.querySelector('.add');
 //list of tasks
 const todoTask = document.querySelector('.todo');
 
-
 let todoList = [];
 // check localStorage for data
 if (localStorage.getItem('todo')) {
@@ -15,12 +14,10 @@ if (localStorage.getItem('todo')) {
   todoList = [];
 }
 
-
-
 addBtn.addEventListener('click', () => {
   // if input is empty, we cannot add a task
   if (!addMessage.value) {
-    alert("Enter a new task")
+    // alert("Enter a new task")
     return;
   }  
   // every task to OBJECT
@@ -110,10 +107,7 @@ todoTask.addEventListener('contextmenu', (event) => {
       }
 
       renderMessages();
-
       localStorage.setItem('todo', JSON.stringify(todoList));
     }
-
   })
-
-})
+});
