@@ -9,3 +9,8 @@ body {
   width: 100%;
   min-height: 100vh;
 }
+
+div {
+  margin-bottom: 30px;
+  border: 2px dashed red;
+}
