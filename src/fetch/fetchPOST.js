@@ -73,7 +73,38 @@ fetch('https://jsonplaceholder.typicode.com/posts', {
    `
   });
 
-  //todo 4 try with function 
+  //todo 4  PUT
+  
+  const putFetch = document.querySelector('.putFetch');
+
+  fetch('https://jsonplaceholder.typicode.com/posts/2', {
+    method: 'PUT',
+    body: JSON.stringify({
+      id: 1,
+      title: 'Bob Houston',
+      body: 'lion',
+      userId: 567,
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log('data: ', data)
+    
+      putFetch.innerHTML = `
+         <p>Put data:</p>
+         <p>Name: ${data.title}</p>
+         <p>About: ${data.body}</p>
+         <p>userID: ${data.userId}</p>
+         <p>ID: ${data.id}</p>
+
+  `
+    })
+
+
+  //todo 5  with function 
 
 
 
