@@ -8,8 +8,8 @@
 
 body {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  background-color: lightslategrey;
-  color: navajowhite;
+  background-color: rgb(183, 199, 192);
+  color: #333;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,13 +24,13 @@ body {
 }
 
 .result {
-  background-color: lightcoral;
+  background-color: rgb(243, 179, 179);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 12px;
-  height: 450px;
-  width: 325px;
+  /* height: 450px; */
+  /* width: 325px; */
 }
 
 .result img {
