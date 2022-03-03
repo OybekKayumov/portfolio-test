@@ -9,3 +9,15 @@ body {
   width: 100%;
   min-height: 100vh;
 }
+
+div .postFetch{
+  margin-bottom: 30px;
+  border: 2px dashed red;
+}
+
+input,
+.btn {
+  height: 30px;  
+  font-size: 20px;
+  margin: 10px;
+}
