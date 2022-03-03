@@ -144,3 +144,22 @@ Array.prototype.unique = function() {
 console.log('unique Arr: ', arr.unique());
 //* unique Arr:  (6) [3, 6, 4, 5, 9, 7]
 // but this is not good idea, 1. JS may publish method with same name but with other functionality, 2. when you work with team, others may use this method  with other name and it can destroy functionality of your code
+ 
+//todo look at more built-in objects 
+const h1 = document.querySelector('h1');
+
+// we know that all the DOM elements are behind the scenes OBJECTS
+// console.log('h1: ', h1);
+console.dir(h1);
+// analyze CHAIN in consol:
+// 1 [[Prototype]]: HTMLHeadingElement
+// 2 [[Prototype]]: HTMLElement
+// 3 [[Prototype]]: Element
+// 4 [[Prototype]]: Node
+// 5 [[Prototype]]: EventTarget
+// 6 [[Prototype]]: Object
+// end of the Prototype CHAIN for H1
+
+// more example
+console.dir( x=> x + 1);
+// also has Prototype
