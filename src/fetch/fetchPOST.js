@@ -47,6 +47,9 @@
 
 //todo  3 : POST works.
 const postFetch = document.querySelector('.postFetch');
+const input = document.querySelector('.input');
+const sendBtn = document.querySelector('.btn');
+
 
 fetch('https://jsonplaceholder.typicode.com/posts', {
   method: 'POST',
@@ -72,6 +75,8 @@ fetch('https://jsonplaceholder.typicode.com/posts', {
 
    `
   });
+
+// sendBtn.addEventListener ('click', postData)
 
   //todo 4  PUT
   
@@ -103,8 +108,7 @@ fetch('https://jsonplaceholder.typicode.com/posts', {
   // `
   //   })
 
-
-  //todo 5  with function 
+//todo 5  with function 
 
 
 
