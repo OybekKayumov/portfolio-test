@@ -25,19 +25,34 @@
     constructor(owner, currency, pin) {
       this.owner = owner;
       this.currency =currency;
-      this.pin = pin;
-      this.movements = [];
+      // this.pin = pin;
+      //! 10 protect pin
+      this._pin = pin;
+      // this.movements = [];
+      //! 9 PROTECTED property
+      this._movements = [];
+
       // 3
       this.locale = navigator.language;
 
       // 4
       console.log(`Thanks for opening an Account, ${owner}!`);
     }
+    
+    // Public Interface of Object
+
+    // 10
+
+    getMovements() {
+      return this._movements;
+    }
 
     // 6 add method to push POSITIVE value
-    // Public Interface of Object
+    
     deposit(val) {
-      this.movements.push(val)
+      // this.movements.push(val)
+      //! 9 PROTECTED property
+      this._movements.push(val)
     }
 
     // 6.1 add method to push NEGATIVE value
@@ -46,13 +61,13 @@
       this.deposit(-val)
     }
 
-    // 8
-    approveLoan(val) {
+    // 8 //10
+    _approveLoan(val) {
       return true;
     }
 
     requestLoan(val) {
-      if (this.approveLoan(val)) {
+      if (this._approveLoan(val)) {  //* 10
         this.deposit(val);
         console.log('Loan approved');
       }
@@ -107,3 +122,22 @@ console.log('pin: ', account1.pin);
 // 8
 account1.requestLoan(1000);
 //* Loan approved
+
+//! 9 encapsulate and protect data 
+//! _movements don't makes truly private, so we call it PROTECTED
+
+// account1._movements.push(250);
+// account1._movements.push(-150);
+// console.log('account 1: ', account1);
+//* _movements: (5) [350, -140, 1000, 250, -150]
+
+// this property now it not suppose be touched outside of the class
+//! but steel it is a wrong!
+
+// 10 get access to variable
+// correct way to get movements, but cannot override them
+// cannot set movements
+console.log(account1.getMovements() )
+//* [350, -140, 1000]
+
+// 10 protect pin
