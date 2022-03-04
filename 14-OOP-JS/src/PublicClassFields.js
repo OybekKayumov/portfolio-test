@@ -44,11 +44,13 @@ class Account {
   
   deposit(val) {
     this.#movements.push(val)
+    return this;    //! 5
   }
 
   //! we call method DEPOSITE
   withdraw(val) {
     this.deposit(-val)
+    return this;    //! 5
   }
 
   
@@ -58,6 +60,7 @@ class Account {
     if (this._approveLoan(val)) {  
       this.deposit(val);
       console.log('Loan approved');
+      return this;    //! 5
     }
   }
 
@@ -104,3 +107,24 @@ console.log('account 1: ', account1);
 // 4 Static
 Account.helper();
 //* helper
+
+
+//todo 5 Chaining
+account1.deposit(300).deposit(500).withdraw(35).requestLoan(2500).withdraw(4000)
+//! TypeError:
+// Uncaught TypeError: Cannot read properties of undefined (reading 'deposit')
+
+//* output
+// #movements: Array(8)
+// 0: 250
+// 1: -140
+// 2: 1000
+// 3: 300
+// 4: 500
+// 5: -35
+// 6: 2500
+// 7: -4000
+// length: 8
+
+console.log(account1.getMovements());
+// (8) [250, -140, 1000, 300, 500, -35, 2500, -4000]
