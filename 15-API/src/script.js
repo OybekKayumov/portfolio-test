@@ -31,13 +31,25 @@ if (navigator.geolocation)
       attribution:
          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+    
+    //with this function we can take coordinates of pressed point on the map
+    map.on('click', function(mapEvent) {
+      console.log('mapEvent ', mapEvent);
+      const { lat, lng } = mapEvent.latlng; 
+      //latlng: D {lat: 41.30063669634558, lng: 69.22760009765626}
 
-    L.marker(coords).addTo(map)
-      .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+      L.marker([lat, lng]).addTo(map)
+      .bindPopup(L.popup({
+        maxWidth: 350,
+        minWidth: 150,
+        autoClose: false,
+        closeOnClick: false,
+        className: 'running-popup'
+      }))
+      .setPopupContent('Workout')
       .openPopup();
-
-
-
+    
+    })
 
   }, 
   function() {
