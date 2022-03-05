@@ -148,6 +148,11 @@ class App {
     // map.on('click', function(mapEvent) {
       this.#map.on('click', this._showForm.bind(this))
 
+    // render Local Storage  
+      this.#workouts.forEach((work) => {
+        this._renderWorkoutMarker(work);  //todo  now map is already available 
+      })
+
     }
 
   _showForm(mapE) {
@@ -384,6 +389,11 @@ class App {
     this.#workouts.forEach((work) => {
       this._renderWorkout(work);
       // _renderWorkout Method which create html dynamically by JavaScript
+
+
+      // but renderWorkoutMarker doesn't work, bcs map is not loaded yet (#map) we need use async, it take some time 
+      // this._renderWorkoutMarker(work)  //todo moved to up
+      //! Uncaught TypeError: Cannot read properties of undefined (reading 'addLayer')
     })
 
 
