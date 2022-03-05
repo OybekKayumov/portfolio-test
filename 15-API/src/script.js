@@ -244,8 +244,13 @@ class App {
     // Hide Form And Clear Input Fields
     this._hideForm();
     // inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
+
+    
+    //todo Set Local Storage to all workouts
+    this._setLocalStorage();
       
   }
+
   // export its own method
   _renderWorkoutMarker(workout) {
     // L.marker([lat, lng])
@@ -348,6 +353,11 @@ class App {
     // using the public interface //*  prototype chain
     workout.click();
   }
+
+  //todo Set Local Storage
+  _setLocalStorage() {
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+  };
 }  
 
 // create Object                    2
