@@ -396,9 +396,14 @@ class App {
       // this._renderWorkoutMarker(work)  //todo moved to up
       //! Uncaught TypeError: Cannot read properties of undefined (reading 'addLayer')
     })
-
-
   }
+
+  // Empty Local Storage
+  reset() {
+    localStorage.removeItem('workouts');
+    location.reload();
+  }
+
 }  
 
 // create Object                    2
