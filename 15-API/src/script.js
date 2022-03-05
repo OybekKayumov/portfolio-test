@@ -139,6 +139,17 @@ class App {
     inputDistance.focus(); 
   }
 
+  // Form 
+  _hideForm() {
+    // empty inputs
+    inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
+
+    form.style.display = 'none';
+    form.classList.add('hidden');
+
+    setTimeout(() => form.style.display = 'grid', 1000)
+  }
+
   _toggleElevationField() {
     inputElevation
       .closest('.form__row')
@@ -222,7 +233,8 @@ class App {
     this._renderWorkout(workout)
     
     // Hide Form And Clear Input Fields
-    inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
+    this._hideForm();
+    // inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
       
   }
   // export its own method
