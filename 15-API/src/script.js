@@ -92,8 +92,10 @@ class App {
     this._getPosition(); 
     form.addEventListener('submit', this._newWorkout.bind(this ));  // _newWorkout eventHandler function
     
-    //
     inputType.addEventListener('change', this._toggleElevationField)
+
+    // containerWorkouts.addEventListener('click', this._moveToPopup);
+    containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));  // after error we added bind(this)
   }
 
   _getPosition() {
@@ -313,7 +315,23 @@ class App {
     form.insertAdjacentHTML('afterend', html);
   }
 
-}
+  // move map to Popup 
+  _moveToPopup(e) {
+    const workoutEl = e.target.closest('.workout');
+    
+    console.log('workoutEl: ', workoutEl);
+    //* workoutEl:
+    //* <li class=​"workout workout--running" data-id=​"6475721684">​…​</li>​ grid 
+
+    if (!workoutEl) return;
+
+    const workout = this.#workouts.find(work => work.id === workoutEl.dataset.id);
+
+    console.log('workout: ', workout);
+    //! TypeError: Cannot read private member #workouts from an object whose class did not declare it
+    // at HTMLUListElement._moveToPopup  
+  }
+}  
 
 // create Object                    2
 const app = new App()
