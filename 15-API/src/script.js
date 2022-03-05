@@ -373,6 +373,17 @@ class App {
     //todo convert string to object
     const dataLSt = JSON.parse(localStorage.getItem('workouts'));
     console.log('Local Storage getItem PARSED: ', dataLSt);  // we get Array with real objects
+
+    // check Local Storage when loading
+    if (!dataLSt) return;  // if LStorage is empty, we don't want todo anything
+
+    // but we already had some data in LocalStorage, then we SET WORKOUTS ARRAY to the data that we had before
+    this.#workouts = dataLSt;  // restore array from LocalStorage
+
+    // render from LocalStorage
+    
+
+
   }
 }  
 
