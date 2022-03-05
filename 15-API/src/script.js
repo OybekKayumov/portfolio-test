@@ -28,6 +28,9 @@ class Workout {            //    6
 }
 
 // Child Classes          //    7
+class Running extends Workout {}    // 7.1
+
+class Cycling extends Workout {}    // 7.2
 
 class App {
   #map;
