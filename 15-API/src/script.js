@@ -84,6 +84,7 @@ class Cycling extends Workout {           // 7.2
 // APPLICATION ARCHITECTURE
 class App {
   #map;
+  #mapZoomLevel = 13;
   #mapEvent;
   #workouts = [];
 
@@ -121,7 +122,7 @@ class App {
       // create array
       const coords = [latitude, longitude];
 
-      this.#map = L.map('map').setView(coords, 13);
+      this.#map = L.map('map').setView(coords, this.#mapZoomLevel);   // this.#mapZoomLevel = 13
 
       L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
       attribution:
@@ -330,6 +331,13 @@ class App {
     console.log('workout: ', workout);
     //! TypeError: Cannot read private member #workouts from an object whose class did not declare it
     // at HTMLUListElement._moveToPopup  
+
+    this.#map.setView(workout.coords, this.#mapZoomLevel, {  
+       animate: true,   // from documentation leaflet
+       pan: {
+         duration: 1
+       } 
+    }) 
   }
 }  
 
