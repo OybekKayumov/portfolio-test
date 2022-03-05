@@ -381,7 +381,10 @@ class App {
     this.#workouts = dataLSt;  // restore array from LocalStorage
 
     // render from LocalStorage
-    
+    this.#workouts.forEach((work) => {
+      this._renderWorkout(work);
+      // _renderWorkout Method which create html dynamically by JavaScript
+    })
 
 
   }
