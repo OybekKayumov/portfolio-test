@@ -131,22 +131,51 @@ class App {
   _newWorkout(e) {
     e.preventDefault();
 
+    // helper functions for sheck Number and Negative
+    const validInputs = (...inputs) => inputs.every(inp => Number.isFinite(inp));       // if we use (... ) we get an array
+
+    const allPositive = (...inputs) => inputs.every(inp => inp > 0 )  
+
+
+
     // Get data from Form
     const type = inputType.value;
     const distance = +inputDistance.value;  //bcs of it coming String, we convert it to Number
     const duration = +inputDuration.value;  //bcs of it coming String, we convert it to Number
 
 
-    // Check if data is valid
-
+    
     // If workout running, create running Object
     if (type === 'running') {
       const cadence = +inputCadence.value;  // + means convert to Number
+
+      // Check if data is valid   //*
+      // if the distance is no a Number, then we want to return
+      if (
+        // !Number.isFinite(distance) ||
+        // !Number.isFinite(duration) ||
+        // !Number.isFinite(cadence )
+        // same 
+        !validInputs(distance, duration, cadence) ||
+        !allPositive(distance, duration, cadence) 
+        // if all inputs are not Valid OR any Number is not Positive
+
+      ) {
+        return alert('Inputs have to be positive numbers')
+      }
     }
 
     // If workout cycling, create cycling Object
     if (type === 'cycling') {
       const elevation = +inputElevation.value;  // + means convert to Number
+
+      // Check if data is valid    //* 
+      if (
+        !validInputs(distance, duration, elevation) ||
+        !allPositive(distance, duration)    // elevation may be negative -> down from mountain, for example
+      ) {
+        return alert('Inputs have to be positive numbers')
+      }
     }
 
     // Add new Object to ro Workout array
