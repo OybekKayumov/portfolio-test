@@ -198,23 +198,32 @@ class App {
 
     // Render workout on map as marker                //* display marker
     // const { lat, lng } = this.#mapEvent.latlng;    //* move to 8
+     
+    this.renderWorkoutMarker(workout)     
     
-      L.marker([lat, lng]).addTo(this.#map)
+    // Render workout on list
+
+
+    
+    // Hide Form And Clear Input Fields
+    inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
+      
+  }
+  // export its own method
+  renderWorkoutMarker(workout) {
+    L.marker([lat, lng]).addTo(this.#map)
       .bindPopup(L.popup({
         maxWidth: 350,
         minWidth: 150,
         autoClose: false,
         closeOnClick: false,
-        className: 'running-popup'
+        // className: 'running-popup'
+        className: `${type}-popup`
+
       }))
-      .setPopupContent('Workout')
+      // .setPopupContent('Workout')
+      .setPopupContent(workout.distance)
       .openPopup();
-    
-    // Render workout on list
-    
-      // Hide Form And Clear Input Fields
-      inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
-      
   }
 }
 
