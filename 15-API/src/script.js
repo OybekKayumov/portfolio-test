@@ -11,19 +11,25 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
-let map, mapEvent;
+// let map, mapEvent;
 
-// create App class 1
+// implement Parent Class for both Workout types
 class App {
-  constructor() {
+  #map;
+  #mapEvent;
 
+  constructor() {
+    this._getPosition(); 
+    form.addEventListener('submit', this._newWorkout.bind(this ));  // _newWorkout eventHandler function
+    
+    //
+    inputType.addEventListener('change', this._toggleElevationField)
   }
 
   _getPosition() {
     // test browser
     if (navigator.geolocation) 
-    // исползует 2 функции: 1. _loadMap  2 function alert
-    navigator.geolocation.getCurrentPosition(this._loadMap,
+     navigator.geolocation.getCurrentPosition(this._loadMap.bind(this),
         
       function() {
         alert('Could not get your position!')
@@ -43,88 +49,59 @@ class App {
       // create array
       const coords = [latitude, longitude];
 
-      // const map = L.map('map').setView(coords, 13);
-      map = L.map('map').setView(coords, 13);
+      this.#map = L.map('map').setView(coords, 13);
 
       L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+    }).addTo(this.#map);
     
     // with this function we can take coordinates of pressed point on the map
     // Handling clicks on map
     // map.on('click', function(mapEvent) {
-      map.on('click', function(mapE) {
-      mapEvent = mapE;
+      this.#map.on('click', this._showForm.bind(this))
 
-      form.classList.remove('hidden');
-      inputDistance.focus(); 
-  
-  })
-    
-  }
+    }
 
-  _shoForm() {
-    
+  _showForm(mapE) {
+    this.#mapEvent = mapE;
+    form.classList.remove('hidden');
+    inputDistance.focus(); 
   }
 
   _toggleElevationField() {
+    inputElevation
+      .closest('.form__row')
+      .classList.toggle('form__row--hidden')      // select parent, not children
+      inputCadence.closest('.form__row').classList.toggle('form__row--hidden')      // select parent, not children
     
   }
 
-  _newWorkout() {
+  _newWorkout(e) {
+    e.preventDefault();
+    
+      // Clear input fields
+      inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
+    
+      // display marker
+      const { lat, lng } = this.#mapEvent.latlng; 
+    
+      L.marker([lat, lng]).addTo(this.#map)
+      .bindPopup(L.popup({
+        maxWidth: 350,
+        minWidth: 150,
+        autoClose: false,
+        closeOnClick: false,
+        className: 'running-popup'
+      }))
+      .setPopupContent('Workout')
+      .openPopup();
     
   }
 }
 
-
-// position:  
-
-// GeolocationPosition {coords: GeolocationCoordinates, timestamp: 1646402211204}
- 
-// coords: GeolocationCoordinates  //!
-// accuracy: 9053.036283429326
-// altitude: null                   
-// altitudeAccuracy: null
-// heading: null
-// latitude: 41.2994958            //!
-// longitude: 69.2400734           //! 
-// speed: null
-// [[Prototype]]: GeolocationCoordinates
-// timestamp: 1646402178547
-// [[Prototype]]: GeolocationPosition
-// script.js:22 41.2994958 69.2400734
-
-
 // create Object 2
 const app = new App()
 
-
-form.addEventListener('submit', function(e) {
-  e.preventDefault();
-
-  // Clear input fields
-  inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
-
-  // display marker
-  console.log('mapEvent ', mapEvent);
-  const { lat, lng } = mapEvent.latlng; 
-  //latlng: D {lat: 41.30063669634558, lng: 69.22760009765626}
-
-  L.marker([lat, lng]).addTo(map)
-  .bindPopup(L.popup({
-    maxWidth: 350,
-    minWidth: 150,
-    autoClose: false,
-    closeOnClick: false,
-    className: 'running-popup'
-  }))
-  .setPopupContent('Workout')
-  .openPopup();
-})
-
-//
-inputType.addEventListener('change', () => {
-  inputElevation.closest('.form__row').classList.toggle('form__row--hidden')      // select parent, not children
-  inputCadence.closest('.form__row').classList.toggle('form__row--hidden')      // select parent, not children
-})
+// call method from App class 3
+// app._getPosition();
