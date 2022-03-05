@@ -13,17 +13,54 @@ const inputElevation = document.querySelector('.form__input--elevation');
 
 let map, mapEvent;
 
-// create App class
+// create App class 1
 class App {
   constructor() {
 
   }
 
   _getPosition() {
-
+    // test browser
+    if (navigator.geolocation) 
+    // исползует 2 функции: 1. _loadMap  2 function alert
+    navigator.geolocation.getCurrentPosition(this._loadMap,
+        
+      function() {
+        alert('Could not get your position!')
+      })
   }
 
-  _loadMap() {
+  _loadMap(position) {
+
+      console.log('position: ', position); //1
+      // const latitude = position.coords.latitude;
+      const { latitude }  = position.coords;  //* use destructuring
+      const { longitude }  = position.coords;  //* use destructuring
+    
+      console.log(latitude, longitude);
+      console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
+
+      // create array
+      const coords = [latitude, longitude];
+
+      // const map = L.map('map').setView(coords, 13);
+      map = L.map('map').setView(coords, 13);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    
+    // with this function we can take coordinates of pressed point on the map
+    // Handling clicks on map
+    // map.on('click', function(mapEvent) {
+      map.on('click', function(mapE) {
+      mapEvent = mapE;
+
+      form.classList.remove('hidden');
+      inputDistance.focus(); 
+  
+  })
     
   }
 
@@ -40,43 +77,6 @@ class App {
   }
 }
 
-// test browser
-if (navigator.geolocation) 
-  navigator.geolocation.getCurrentPosition(function(position) {
-    console.log('position: ', position); //1
-    // const latitude = position.coords.latitude;
-    const { latitude }  = position.coords;  //* use destructuring
-    const { longitude }  = position.coords;  //* use destructuring
-    
-    console.log(latitude, longitude);
-    console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
-
-    // create array
-    const coords = [latitude, longitude];
-
-    // const map = L.map('map').setView(coords, 13);
-    map = L.map('map').setView(coords, 13);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-      attribution:
-         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-    
-    // with this function we can take coordinates of pressed point on the map
-    // Handling clicks on map
-    // map.on('click', function(mapEvent) {
-    map.on('click', function(mapE) {
-      mapEvent = mapE;
-
-      form.classList.remove('hidden');
-      inputDistance.focus(); 
-    
-    })
-
-  }, 
-  function() {
-    alert('Could not get your position!')
-  })
 
 // position:  
 
@@ -94,6 +94,11 @@ if (navigator.geolocation)
 // timestamp: 1646402178547
 // [[Prototype]]: GeolocationPosition
 // script.js:22 41.2994958 69.2400734
+
+
+// create Object 2
+const app = new App()
+
 
 form.addEventListener('submit', function(e) {
   e.preventDefault();
