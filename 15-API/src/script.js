@@ -58,10 +58,11 @@ class Cycling extends Workout {           // 7.2
   }
 }
 
-const run1  = new Running([39, -12], 5.2, 24, 178)   //* 5.2km, 24min, 178steps per min
-const cycling1  = new Cycling([39, -12], 27, 95, 523)
+//todo test working Classes
+// const run1  = new Running([39, -12], 5.2, 24, 178)   //* 5.2km, 24min, 178steps per min
+// const cycling1  = new Cycling([39, -12], 27, 95, 523)
+// console.log(run1, cycling1);
 
-console.log(run1, cycling1);
 
 // APPLICATION ARCHITECTURE
 class App {
@@ -129,6 +130,16 @@ class App {
 
   _newWorkout(e) {
     e.preventDefault();
+
+    // Get data from Form
+
+    // Check if data is valid
+
+    // If activity running, create running Object
+
+    // If activity cycling, create cycling Object
+
+    // Add new Object to ro Workout array
     
       // Clear input fields
       inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
