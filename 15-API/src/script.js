@@ -18,20 +18,52 @@ class Workout {            //    6
   //for each Workout object we want a Date object is created
   // also we need ID
   date = new Date();
-  id = (new Date() + '').slice(-10) //* 1 take data, 2 convert to string, 3 take last 10 numbers
+  id = (Date.now() + '').slice(-10) //* 1 take data, 2 convert to string, 3 take last 10 numbers
 
   constructor(coords, distance, duration) {
-    this.coords = coords;
+    this.coords = coords;      //  [lat, lng]    
     this.distance = distance;  // in km 
     this.duration = duration;  // in min 
   }
 }
 
-// Child Classes          //    7
-class Running extends Workout {}    // 7.1
+// Child Classes                       //    7
+class Running extends Workout {        // 7.1
+  constructor(coords, distance, duration, cadence) {
+    super(coords, distance, duration);
+    this.cadence = cadence;
+    this.calcPace();            //*  call the method in the constructor to immediately calc the Pace
+  }
 
-class Cycling extends Workout {}    // 7.2
+  // Methods
+  calcPace() {
+    //in min/km
+    this.pace = this.duration / this.distance;
+    return this.pace;
+  }
+} 
 
+class Cycling extends Workout {           // 7.2
+  constructor(coords, distance, duration, elevationGain) {
+    super(coords, distance, duration);
+    this.elevationGain = elevationGain;
+
+    this.calcSpeed();
+  }
+
+  calcSpeed() {
+    // in km/h
+    this.speed = this.distance / (this.duration / 60 )    //* in min
+    return this.speed
+  }
+}
+
+const run1  = new Running([39, -12], 5.2, 24, 178)   //* 5.2km, 24min, 178steps per min
+const cycling1  = new Cycling([39, -12], 27, 95, 523)
+
+console.log(run1, cycling1);
+
+// APPLICATION ARCHITECTURE
 class App {
   #map;
   #mapEvent;
