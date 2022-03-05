@@ -11,9 +11,24 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
-// let map, mapEvent;
+// let map, mapEvent;       //   5
 
 // implement Parent Class for both Workout types
+class Workout {            //    6  
+  //for each Workout object we want a Date object is created
+  // also we need ID
+  date = new Date();
+  id = (new Date() + '').slice(-10) //* 1 take data, 2 convert to string, 3 take last 10 numbers
+
+  constructor(coords, distance, duration) {
+    this.coords = coords;
+    this.distance = distance;  // in km 
+    this.duration = duration;  // in min 
+  }
+}
+
+// Child Classes          //    7
+
 class App {
   #map;
   #mapEvent;
@@ -38,7 +53,7 @@ class App {
 
   _loadMap(position) {
 
-      console.log('position: ', position); //1
+      console.log('position: ', position);      // 1
       // const latitude = position.coords.latitude;
       const { latitude }  = position.coords;  //* use destructuring
       const { longitude }  = position.coords;  //* use destructuring
@@ -100,8 +115,8 @@ class App {
   }
 }
 
-// create Object 2
+// create Object                    2
 const app = new App()
 
-// call method from App class 3
-// app._getPosition();
+// call method from App class       3
+// app._getPosition();  
