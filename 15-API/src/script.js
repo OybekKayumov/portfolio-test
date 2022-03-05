@@ -96,7 +96,15 @@ class App {
 
   constructor() {
     // this.workout = [];
+
+    // Get user's positions
     this._getPosition(); 
+
+    // Get data from localStorage
+    this._getLocalStorage();
+
+
+    // Attach event handlers
     form.addEventListener('submit', this._newWorkout.bind(this ));  // _newWorkout eventHandler function
     
     inputType.addEventListener('change', this._toggleElevationField)
@@ -139,6 +147,11 @@ class App {
     // Handling clicks on map
     // map.on('click', function(mapEvent) {
       this.#map.on('click', this._showForm.bind(this))
+
+    // render Local Storage  
+      this.#workouts.forEach((work) => {
+        this._renderWorkoutMarker(work);  //todo  now map is already available 
+      })
 
     }
 
@@ -244,8 +257,13 @@ class App {
     // Hide Form And Clear Input Fields
     this._hideForm();
     // inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
+
+    
+    //todo Set Local Storage to all workouts
+    this._setLocalStorage();
       
   }
+
   // export its own method
   _renderWorkoutMarker(workout) {
     // L.marker([lat, lng])
@@ -346,8 +364,46 @@ class App {
     });
     
     // using the public interface //*  prototype chain
-    workout.click();
+    // workout.click();  //disabled for functionality counting of clicks
+    //because Objects coming from LocalStorage WILL NOT INHERIT ALL THE METHODS
   }
+
+  //todo Set Local Storage
+  _setLocalStorage() {
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+  };
+
+  _getLocalStorage() {
+    // const dataLSt = localStorage.getItem('workouts');
+    // console.log('Local Storage getItem: ', dataLSt);
+    //todo convert string to object
+    const dataLSt = JSON.parse(localStorage.getItem('workouts'));
+    console.log('Local Storage getItem PARSED: ', dataLSt);  // we get Array with real objects
+
+    // check Local Storage when loading
+    if (!dataLSt) return;  // if LStorage is empty, we don't want todo anything
+
+    // but we already had some data in LocalStorage, then we SET WORKOUTS ARRAY to the data that we had before
+    this.#workouts = dataLSt;  // restore array from LocalStorage
+
+    // render from LocalStorage
+    this.#workouts.forEach((work) => {
+      this._renderWorkout(work);
+      // _renderWorkout Method which create html dynamically by JavaScript
+
+
+      // but renderWorkoutMarker doesn't work, bcs map is not loaded yet (#map) we need use async, it take some time 
+      // this._renderWorkoutMarker(work)  //todo moved to up
+      //! Uncaught TypeError: Cannot read properties of undefined (reading 'addLayer')
+    })
+  }
+
+  // Empty Local Storage
+  reset() {
+    localStorage.removeItem('workouts');
+    location.reload();
+  }
+
 }  
 
 // create Object                    2
