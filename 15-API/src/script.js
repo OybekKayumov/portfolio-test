@@ -132,20 +132,27 @@ class App {
     e.preventDefault();
 
     // Get data from Form
+    const type = inputType.value;
+    const distance = +inputDistance.value;  //bcs of it coming String, we convert it to Number
+    const duration = +inputDuration.value;  //bcs of it coming String, we convert it to Number
+
 
     // Check if data is valid
 
-    // If activity running, create running Object
+    // If workout running, create running Object
+    if (type === 'running') {
+      const cadence = +inputCadence.value;  // + means convert to Number
+    }
 
-    // If activity cycling, create cycling Object
+    // If workout cycling, create cycling Object
+    if (type === 'cycling') {
+      const elevation = +inputElevation.value;  // + means convert to Number
+    }
 
     // Add new Object to ro Workout array
-    
-      // Clear input fields
-      inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
-    
-      // display marker
-      const { lat, lng } = this.#mapEvent.latlng; 
+
+    // Render workout on map as marker                //* display marker
+    const { lat, lng } = this.#mapEvent.latlng; 
     
       L.marker([lat, lng]).addTo(this.#map)
       .bindPopup(L.popup({
@@ -158,6 +165,11 @@ class App {
       .setPopupContent('Workout')
       .openPopup();
     
+    // Render workout on list
+    
+      // Hide Form And Clear Input Fields
+      inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
+      
   }
 }
 
