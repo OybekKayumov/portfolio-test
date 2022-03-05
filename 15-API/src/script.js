@@ -19,6 +19,8 @@ class Workout {            //    6
   date = new Date();
   id = (Date.now() + '').slice(-10) //* 1 take data, 2 convert to string, 3 take last 10 numbers
 
+  clicks = 0; //*property
+
   constructor(coords, distance, duration) {
     this.coords = coords;      //  [lat, lng]    
     this.distance = distance;  // in km 
@@ -32,6 +34,10 @@ class Workout {            //    6
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${months[this.date.getMonth()]} ${this.date.getDate()}`
+  }
+
+  click() {
+    this.clicks++;   // +1
   }
 }
 
@@ -337,7 +343,10 @@ class App {
        pan: {
          duration: 1
        } 
-    }) 
+    });
+    
+    // using the public interface //*  prototype chain
+    workout.click();
   }
 }  
 
