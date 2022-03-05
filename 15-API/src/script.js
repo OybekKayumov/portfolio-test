@@ -364,7 +364,8 @@ class App {
     });
     
     // using the public interface //*  prototype chain
-    workout.click();
+    // workout.click();  //disabled for functionality counting of clicks
+    //because Objects coming from LocalStorage WILL NOT INHERIT ALL THE METHODS
   }
 
   //todo Set Local Storage
