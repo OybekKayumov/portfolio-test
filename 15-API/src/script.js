@@ -68,8 +68,10 @@ class Cycling extends Workout {           // 7.2
 class App {
   #map;
   #mapEvent;
+  #workouts = [];
 
   constructor() {
+    // this.workout = [];
     this._getPosition(); 
     form.addEventListener('submit', this._newWorkout.bind(this ));  // _newWorkout eventHandler function
     
@@ -131,7 +133,7 @@ class App {
   _newWorkout(e) {
     e.preventDefault();
 
-    // helper functions for sheck Number and Negative
+    //! helper functions for check Number and Negative
     const validInputs = (...inputs) => inputs.every(inp => Number.isFinite(inp));       // if we use (... ) we get an array
 
     const allPositive = (...inputs) => inputs.every(inp => inp > 0 )  
@@ -143,6 +145,9 @@ class App {
     const distance = +inputDistance.value;  //bcs of it coming String, we convert it to Number
     const duration = +inputDuration.value;  //bcs of it coming String, we convert it to Number
 
+    const { lat, lng } = this.#mapEvent.latlng;    //* from (move to 8) 
+
+    let workout; // to be available outside of BLOCK
 
     
     // If workout running, create running Object
@@ -158,11 +163,18 @@ class App {
         // same 
         !validInputs(distance, duration, cadence) ||
         !allPositive(distance, duration, cadence) 
-        // if all inputs are not Valid OR any Number is not Positive
+        // if all inputs are not Valid OR any Number is not Positive 
 
       ) {
         return alert('Inputs have to be positive numbers')
       }
+
+      // const workout = new Running([lat, lng], distance, duration, cadence);   
+      workout = new Running([lat, lng], distance, duration, cadence);   // to be available outside of BLOCK, we remove const, and redefined it
+        // 1st argument: this.#mapEvent.latlng - Object - changed to [lat, lng]
+        // 2,3,4th arguments: distance, duration, cadence
+
+      // this.#workouts.push(workout) 
     }
 
     // If workout cycling, create cycling Object
@@ -176,12 +188,16 @@ class App {
       ) {
         return alert('Inputs have to be positive numbers')
       }
+      workout = new Cycling([lat, lng], distance, duration, elevation); 
     }
 
-    // Add new Object to ro Workout array
+    // Add new Object to ro Workout array 
+    this.#workouts.push(workout)
+    console.log('workout: ', workout);  // check workout
+    console.log('workouts: ', this.#workouts);  // check array
 
     // Render workout on map as marker                //* display marker
-    const { lat, lng } = this.#mapEvent.latlng; 
+    // const { lat, lng } = this.#mapEvent.latlng;    //* move to 8
     
       L.marker([lat, lng]).addTo(this.#map)
       .bindPopup(L.popup({
