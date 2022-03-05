@@ -1,7 +1,6 @@
 'use strict';
 
-// prettier-ignore
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 
 const form = document.querySelector('.form');
 const containerWorkouts = document.querySelector('.workouts');
@@ -24,6 +23,15 @@ class Workout {            //    6
     this.coords = coords;      //  [lat, lng]    
     this.distance = distance;  // in km 
     this.duration = duration;  // in min 
+    // this._setDescription();
+  }
+
+  // workout date
+  _setDescription() {
+    // prettier-ignore
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    this.description = `${this.type[0].toUppercase()}${this.type.slice(1)} on ${months[this.date.getMonth()]} ${this.date.getDate()}`
   }
 }
 
@@ -37,6 +45,7 @@ class Running extends Workout {        // 7.1
     // this.type = 'running';    //same : type = 'running'
 
     this.calcPace();            //*  call the method in the constructor to immediately calc the Pace
+    this._setDescription();
   }
 
   // Methods
@@ -56,6 +65,7 @@ class Cycling extends Workout {           // 7.2
     // this.type = 'cycling'    // same: type = 'cycling'
 
     this.calcSpeed();
+    this._setDescription();
   }
 
   calcSpeed() {
@@ -206,18 +216,17 @@ class App {
     // Render workout on map as marker                //* display marker
     // const { lat, lng } = this.#mapEvent.latlng;    //* move to 8
      
-    this.renderWorkoutMarker(workout)     
+    this._renderWorkoutMarker(workout)     
     
     // Render workout on list
-
-
+    this._renderWorkout(workout)
     
     // Hide Form And Clear Input Fields
     inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
       
   }
   // export its own method
-  renderWorkoutMarker(workout) {
+  _renderWorkoutMarker(workout) {
     // L.marker([lat, lng])
     L.marker(workout.coords)
       .addTo(this.#map)
@@ -235,6 +244,28 @@ class App {
       // .setPopupContent(workout.distance)
       .openPopup();
   }
+
+  //rendering workout
+  _renderWorkout(workout) {
+    const html = `
+          <li class="workout workout--${workout.type}" data-id="${workout.id}">
+            <h2 class="workout__title">Running on ${workout.description}</h2>
+            <div class="workout__details">
+              <span class="workout__icon">${
+                workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'
+              }</span>
+              <span class="workout__value">${workout.distance}</span>
+              <span class="workout__unit">km</span>
+            </div>
+            <div class="workout__details">
+              <span class="workout__icon">⏱</span>
+              <span class="workout__value">${workout.duration}</span>
+              <span class="workout__unit">min</span>
+            </div>
+
+    `
+  }
+
 }
 
 // create Object                    2
