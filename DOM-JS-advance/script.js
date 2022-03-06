@@ -276,18 +276,34 @@ document.querySelector('.nav').addEventListener('click', function(e) {
 // even though the CLICK only HAPPENED on ONE element (Feature button here)
 
 
-// Page navigation
-document.querySelectorAll('.nav__link').forEach
-  (function(el) {
-    el.addEventListener('click', function(e) {
-      e.preventDefault();
-      const id = this.getAttribute('href')
+//TODO Page navigation
+// document.querySelectorAll('.nav__link').forEach
+//   (function(el) {
+//     el.addEventListener('click', function(e) {
+//       e.preventDefault();
+//       const id = this.getAttribute('href')
 
-      console.log(id);
-      document.querySelector(id).scrollIntoView({behavior: 'smooth'})       
-    })
-  })
+//       console.log(id);
+//       document.querySelector(id).scrollIntoView({behavior: 'smooth'})       
+//     })
+//   })
 
-//  Event Delegation
+
+
+//TODO  Event Delegation
+// we need 2 steps
+// 1. Add eventListener to common parent element
+// 2. Determine what element originated the event
+
+document.querySelector('.nav__links')
+      .addEventListener('click', function(e) {
+        console.log('e.target: ', e.target);
+
+  // Matching strategy
+  if(e.target.classList.contains('nav__link')) {
+    console.log('LINK');
+  }
+
+})
 
  
