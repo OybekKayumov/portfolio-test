@@ -85,16 +85,39 @@ message.style.backgroundColor = '#37383d'
 message.style.width = '120%'
 message.style.marginLeft = '20px'
 
-console.log(message.style.height);  //? empty line
-console.log(message.style.backgroundColor);  //? not empty
+// console.log(message.style.height);  //? empty line
+// console.log(message.style.backgroundColor);  //? not empty
 
 // console.log(getComputedStyle(message));
-console.log(getComputedStyle(message).color);
-console.log(getComputedStyle(message).height);  //* 49px
+// console.log(getComputedStyle(message).color);
+// console.log(getComputedStyle(message).height);  //* 49px
 
 message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 40 + 'px';
-console.log(getComputedStyle(message).height);   //* 89px
+// console.log(getComputedStyle(message).height);   //* 89px
 
 document.documentElement.style.setProperty('--color-primary', 'orangered')
                               //* set       name of property     value
-                              
+
+
+// Attributes
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src);
+console.log(logo.className);
+
+
+// Non standard: doesn't work like standard (undefined)
+console.log(logo.designer);                   //* undefined
+//we can get using getAttribute:
+console.log(logo.getAttribute('designer'));   //* Jonas
+
+logo.alt = 'Beautiful minimalist logo';
+
+//setAttribute
+logo.setAttribute('company', 'Bankist')
+
+//! Absolute URL
+// http://127.0.0.1:5501/DOM-JS-advance/img/logo.png
+
+//! Relative URL to folder o the folder, in which "index.html" is located
+// src="img/logo.png"
