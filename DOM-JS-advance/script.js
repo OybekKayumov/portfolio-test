@@ -371,13 +371,16 @@ tabsContainer.addEventListener('click', function(e) {
   //! Guard clause
   if (!clicked) return  //* no Error but null
 
-  //todo buttons down
+  //todo ACTIVE TAB : buttons DOWN
   tabs.forEach(t => t.classList.remove('operations__tab--active'))
   //todo buttons UP
   // if (clicked) {  //* old scholl
     clicked.classList.add('operations__tab--active')
   // }               //* old scholl 
   
+  //todo ACTIVATE CONTENT ARE
+  console.log(clicked.dataset.tab);
+  document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active')
   
 
 })
