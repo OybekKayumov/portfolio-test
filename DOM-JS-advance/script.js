@@ -187,3 +187,15 @@ btnScrollTo.addEventListener('click', (e) =>{
   section1.scrollIntoView({behavior: 'smooth'})
 
 })
+
+//todo Events
+
+const h1 = document.querySelector('h1');
+h1.addEventListener('mouseenter', (e) =>{
+  // alert('addEventListener: Great! You are reading the heading :D' );
+  // console.log('addEventListener: Great! You are reading the heading :D' );
+})
+
+h1.onmouseenter = () => {
+  // alert('addEventListener: Great! You are reading the heading' );
+}
