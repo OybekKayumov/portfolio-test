@@ -95,5 +95,6 @@ console.log(getComputedStyle(message).height);  //* 49px
 message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 40 + 'px';
 console.log(getComputedStyle(message).height);   //* 89px
 
-
-
+document.documentElement.style.setProperty('--color-primary', 'orangered')
+                              //* set       name of property     value
+                              
