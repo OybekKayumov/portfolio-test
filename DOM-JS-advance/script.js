@@ -101,9 +101,9 @@ document.documentElement.style.setProperty('--color-primary', 'orangered')
 
 // Attributes
 const logo = document.querySelector('.nav__logo');
-console.log(logo.alt);
-console.log(logo.src);
-console.log(logo.className);
+// console.log(logo.alt);
+// console.log(logo.src);
+// console.log(logo.className);
 
 
 // Non standard: doesn't work like standard (undefined)
@@ -117,7 +117,34 @@ logo.alt = 'Beautiful minimalist logo';
 logo.setAttribute('company', 'Bankist')
 
 //! Absolute URL
-// http://127.0.0.1:5501/DOM-JS-advance/img/logo.png
+// http://127.0.0.1:5501/folder-name/img/logo.png
 
 //! Relative URL to folder o the folder, in which "index.html" is located
 // src="img/logo.png"
+
+console.log(logo.src); 
+console.log(logo.getAttribute('src'));   //* img/logo.png
+
+const link = document.querySelector('.twitter-link');
+console.log(link.href);
+console.log(link.getAttribute('href'));
+
+// but
+const link2 = document.querySelector('.nav__link--btn');
+console.log(link2.href);
+console.log(link2.getAttribute('href'));
+
+// Data attributes
+console.log(logo.dataset.versionNumber);
+//* 3.0 from index.html, line 25.
+
+
+// Classes, use these
+logo.classList.add('name', 'name1', 'name2')
+logo.classList.remove('name')
+logo.classList.toggle('name')
+logo.classList.contains('name')   // not includes
+
+// don't use, because it will override all existing classes
+// and allows to put only ONE class on element
+logo.className = 'jonas'
