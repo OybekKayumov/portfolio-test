@@ -328,5 +328,27 @@ h11.closest('h1').style.background = '#39b385'
 //! closest finds Parents
 //! querySelectorAll finds chields
 
-// Going sideways: selecting siblings
+
+
+//TODO Going sideways: selecting siblings
+
+console.log(h11.previousElementSibling); //* null
+console.log(h11.nextElementSibling);    //* h4
+
+console.log(h11.previousSibling);     //* #text
+console.log(h11.nextSibling);     //* #text
+
+// all siblings
+console.log(h1.parentElement.children);
+
+//html collection is not an array, but we can iterate, spread into an array:
+[...h11.parentElement.children].forEach(function(el) {
+  // if Element is different or equal then h1, we will change the style
+  if (el !== h1) {
+    el.style.transform = 'scale(0.7)'
+  }
+
+})
+
+
 
