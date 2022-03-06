@@ -225,30 +225,30 @@ const randomColor = () => {
   `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`
 }
 
-console.log(randomInt);
-console.log(randomColor(0, 255));
-
 document.querySelector('.nav__link').addEventListener('click', function(e) {
-  this.style.backgroundColor = 'red';
-  console.log('LINK', e.target, e.currentTarget);
+  // this.style.backgroundColor = 'red';
+  // console.log('LINK', e.target, e.currentTarget);
 
-  console.log( e.currentTarget === this )  //* true
+  // console.log( e.currentTarget === this )  //* true
 
   // Stop propagation: not goog idea
   // e.stopPropagation();
 })
 
 document.querySelector('.nav__links').addEventListener('click', function(e) {
-  this.style.backgroundColor = 'green';
-  console.log('CONTAINER', e.target, e.currentTarget);
-  console.log( e.currentTarget === this )  //* true
+  // this.style.backgroundColor = 'green';
+  // console.log('CONTAINER', e.target, e.currentTarget);
+  // console.log( e.currentTarget === this )  //* true
 })
 
 document.querySelector('.nav').addEventListener('click', function(e) {
-  this.style.backgroundColor = 'blue';
-  console.log('NAV', e.target, e.currentTarget);
-  console.log( e.currentTarget === this )  //* true
-})
+  // this.style.backgroundColor = 'blue';
+  // console.log('NAV', e.target, e.currentTarget);
+  // console.log( e.currentTarget === this )  //* true
+},
+  false //* capture event by DEFAULT is set to false
+  // true   //* capture event: starts from NAV-->LINK-->CONTAINER, see consol
+)
 
 //! console.log('NAV', e.target);
 //* output is same : e.target - bubbles from child --> parent --> parent
@@ -272,3 +272,22 @@ document.querySelector('.nav').addEventListener('click', function(e) {
   </ul>
 </nav> */}
 
+// understanding why THREE boxes GET THREE different background colors
+// even though the CLICK only HAPPENED on ONE element (Feature button here)
+
+
+// Page navigation
+document.querySelectorAll('.nav__link').forEach
+  (function(el) {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      const id = this.getAttribute('href')
+
+      console.log(id);
+      document.querySelector(id).scrollIntoView({behavior: 'smooth'})       
+    })
+  })
+
+//  Event Delegation
+
+ 
