@@ -191,11 +191,22 @@ btnScrollTo.addEventListener('click', (e) =>{
 //todo Events
 
 const h1 = document.querySelector('h1');
-h1.addEventListener('mouseenter', (e) =>{
+// h1.addEventListener('mouseenter', (e) =>{
   // alert('addEventListener: Great! You are reading the heading :D' );
   // console.log('addEventListener: Great! You are reading the heading :D' );
-})
+// })
 
-h1.onmouseenter = () => {
+// h1.onmouseenter = () => {
   // alert('addEventListener: Great! You are reading the heading' );
+// }
+
+//todo Remove event
+const alertH1 = () => {
+  // alert('addEventListener: Great! You are reading the heading :D' ); //* only ONCE
+
+  // h1.removeEventListener('mouseenter', alertH1)
 }
+
+h1.addEventListener('mouseenter', alertH1)
+
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 2000)
