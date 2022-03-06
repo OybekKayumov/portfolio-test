@@ -78,3 +78,22 @@ document.querySelector('.btn--close-cookie').addEventListener('click', () =>{
   message.remove(); //* new
   // message.parentElement.removeChild(message); //* old
 })  
+
+//todo Styles
+
+message.style.backgroundColor = '#37383d'
+message.style.width = '120%'
+message.style.marginLeft = '20px'
+
+console.log(message.style.height);  //? empty line
+console.log(message.style.backgroundColor);  //? not empty
+
+// console.log(getComputedStyle(message));
+console.log(getComputedStyle(message).color);
+console.log(getComputedStyle(message).height);  //* 49px
+
+message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 40 + 'px';
+console.log(getComputedStyle(message).height);   //* 89px
+
+
+
