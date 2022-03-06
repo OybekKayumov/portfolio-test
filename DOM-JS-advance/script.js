@@ -107,9 +107,9 @@ const logo = document.querySelector('.nav__logo');
 
 
 // Non standard: doesn't work like standard (undefined)
-console.log(logo.designer);                   //* undefined
+// console.log(logo.designer);                   //* undefined
 //we can get using getAttribute:
-console.log(logo.getAttribute('designer'));   //* Jonas
+// console.log(logo.getAttribute('designer'));   //* Jonas
 
 logo.alt = 'Beautiful minimalist logo';
 
@@ -122,20 +122,20 @@ logo.setAttribute('company', 'Bankist')
 //! Relative URL to folder o the folder, in which "index.html" is located
 // src="img/logo.png"
 
-console.log(logo.src); 
-console.log(logo.getAttribute('src'));   //* img/logo.png
+// console.log(logo.src); 
+// console.log(logo.getAttribute('src'));   //* img/logo.png
 
 const link = document.querySelector('.twitter-link');
-console.log(link.href);
-console.log(link.getAttribute('href'));
+// console.log(link.href);
+// console.log(link.getAttribute('href'));
 
 // but
 const link2 = document.querySelector('.nav__link--btn');
-console.log(link2.href);
-console.log(link2.getAttribute('href'));
+// console.log(link2.href);
+// console.log(link2.getAttribute('href'));
 
 // Data attributes
-console.log(logo.dataset.versionNumber);
+// console.log(logo.dataset.versionNumber);
 //* 3.0 from index.html, line 25.
 
 
@@ -148,3 +148,21 @@ logo.classList.contains('name')   // not includes
 // don't use, because it will override all existing classes
 // and allows to put only ONE class on element
 logo.className = 'jonas'
+
+
+// Scrolling
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', (e) =>{
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+
+  console.log(e.target.getBoundingClientRect());
+
+  console.log('Current scroll (X / Y): ', window.pageXOffset, pageYOffset);
+
+  console.log('height/width', 
+      document.documentElement.clientHeight,
+      document.documentElement.clientWidth );
+})
