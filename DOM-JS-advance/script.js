@@ -310,17 +310,16 @@ document.querySelector('.nav__links')
 })
 
 const h11 = document.querySelector('h1')
-console.log(h11.querySelectorAll('.highlight'));
-// console.log(document.querySelectorAll('.highlight'));
-console.log(h11.childNodes);
-console.log(h11.children);
+// console.log(h11.querySelectorAll('.highlight'));
+// console.log(h11.childNodes);
+// console.log(h11.children);
 
 h11.firstElementChild.style.color = 'white';
 h11.lastElementChild.style.color = 'orangered';
 
-// Going upwards: parents
-console.log(h11.parentNode);
-console.log(h11.parentElement);
+//todo Going upwards: parents
+// console.log(h11.parentNode);
+// console.log(h11.parentElement);
 
 h11.closest('.header').style.background = '#ffb003'
 h11.closest('h1').style.background = '#39b385'
@@ -332,23 +331,52 @@ h11.closest('h1').style.background = '#39b385'
 
 //TODO Going sideways: selecting siblings
 
-console.log(h11.previousElementSibling); //* null
-console.log(h11.nextElementSibling);    //* h4
+// console.log(h11.previousElementSibling); //* null
+// console.log(h11.nextElementSibling);    //* h4
 
-console.log(h11.previousSibling);     //* #text
-console.log(h11.nextSibling);     //* #text
+// console.log(h11.previousSibling);     //* #text
+// console.log(h11.nextSibling);     //* #text
 
-// all siblings
-console.log(h1.parentElement.children);
+//todo all siblings
+// console.log(h1.parentElement.children);
 
 //html collection is not an array, but we can iterate, spread into an array:
-[...h11.parentElement.children].forEach(function(el) {
+// [...h11.parentElement.children].forEach(function(el) {
   // if Element is different or equal then h1, we will change the style
-  if (el !== h1) {
-    el.style.transform = 'scale(0.7)'
-  }
+  // if (el !== h1) {
+    // el.style.transform = 'scale(0.7)'
+  // }
+// })
+
+
+//TODO TABBED COMPONENT
+const tabs= document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+// tabs.forEach(tab => tab.addEventListener('click', () => {
+//   console.log('TAB');
+// }))
+// bad practice, if we had many tabs, we would have copy this callback function
+
+// we will use event delegation
+// For eventDelegation we need to attach the event handler on common parent element of all the elements that we're interested in
+// here it is "tabsContainer"
+
+tabsContainer.addEventListener('click', function(e) {
+  // const clicked = e.target.parentElement;
+  const clicked = e.target.closest('.operations__tab'); // span-->button
+  console.log(clicked);
+
+  //! Guard clause
+  if (!clicked) return  //* no Error but null
+
+  //todo buttons UP
+  // if (clicked) {  //* old scholl
+    clicked.classList.add('operations__tab--active')
+  // }               //* old scholl 
+  
+  //todo buttons UP
+  
 
 })
-
-
-
