@@ -297,13 +297,36 @@ document.querySelector('.nav').addEventListener('click', function(e) {
 
 document.querySelector('.nav__links')
       .addEventListener('click', function(e) {
-        console.log('e.target: ', e.target);
+        // console.log('e.target: ', e.target);
+        e.preventDefault();
 
   // Matching strategy
   if(e.target.classList.contains('nav__link')) {
     console.log('LINK');
+    const id = e.target.getAttribute('href');
+    // console.log('id: ', id);
+    document.querySelector(id).scrollIntoView({behavior: 'smooth'})
   }
-
 })
 
- 
+const h11 = document.querySelector('h1')
+console.log(h11.querySelectorAll('.highlight'));
+// console.log(document.querySelectorAll('.highlight'));
+console.log(h11.childNodes);
+console.log(h11.children);
+
+h11.firstElementChild.style.color = 'white';
+h11.lastElementChild.style.color = 'orangered';
+
+// Going upwards: parents
+console.log(h11.parentNode);
+console.log(h11.parentElement);
+
+h11.closest('.header').style.background = '#ffb003'
+h11.closest('h1').style.background = '#39b385'
+
+//! closest finds Parents
+//! querySelectorAll finds chields
+
+// Going sideways: selecting siblings
+
