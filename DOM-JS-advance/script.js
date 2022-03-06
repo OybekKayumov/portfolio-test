@@ -366,21 +366,20 @@ const tabsContent = document.querySelectorAll('.operations__content');
 tabsContainer.addEventListener('click', function(e) {
   // const clicked = e.target.parentElement;
   const clicked = e.target.closest('.operations__tab'); // span-->button
-  console.log(clicked);
 
   //! Guard clause
   if (!clicked) return  //* no Error but null
 
-  //todo ACTIVE TAB : buttons DOWN
+  //todo Remove active classes: buttons DOWN
   tabs.forEach(t => t.classList.remove('operations__tab--active'))
-  //todo buttons UP
+  tabsContent.forEach((c) => c.classList.remove('operations__content--active'))
+
+  //todo ACTIVATE TAB: buttons UP
   // if (clicked) {  //* old scholl
     clicked.classList.add('operations__tab--active')
   // }               //* old scholl 
   
   //todo ACTIVATE CONTENT ARE
-  console.log(clicked.dataset.tab);
   document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active')
-  
 
 })
