@@ -231,7 +231,11 @@ console.log(randomColor(0, 255));
 document.querySelector('.nav__link').addEventListener('click', function(e) {
   this.style.backgroundColor = 'red';
   console.log('LINK', e.target, e.currentTarget);
+
   console.log( e.currentTarget === this )  //* true
+
+  // Stop propagation: not goog idea
+  // e.stopPropagation();
 })
 
 document.querySelector('.nav__links').addEventListener('click', function(e) {
