@@ -229,14 +229,42 @@ console.log(randomInt);
 console.log(randomColor(0, 255));
 
 document.querySelector('.nav__link').addEventListener('click', function(e) {
-  console.log('LINK');
   this.style.backgroundColor = 'red';
+  console.log('LINK', e.target, e.currentTarget);
+  console.log( e.currentTarget === this )  //* true
 })
 
 document.querySelector('.nav__links').addEventListener('click', function(e) {
   this.style.backgroundColor = 'green';
+  console.log('CONTAINER', e.target, e.currentTarget);
+  console.log( e.currentTarget === this )  //* true
 })
 
 document.querySelector('.nav').addEventListener('click', function(e) {
   this.style.backgroundColor = 'blue';
+  console.log('NAV', e.target, e.currentTarget);
+  console.log( e.currentTarget === this )  //* true
 })
+
+//! console.log('NAV', e.target);
+//* output is same : e.target - bubbles from child --> parent --> parent
+{/* <a class="nav__link" href="#" style="background-color: red;">Features</a>
+<a class="nav__link" href="#" style="background-color: red;">Features</a>
+<a class="nav__link" href="#" style="background-color: red;">Features</a> */}
+
+//! e.currentTarget: ELEMENT, ON WHICH THE EVENT IS ATTACHED
+
+//! parent 1
+{/* <a class="nav__link" href="#" style="background-color: red;">Features</a> */}
+{/* <ul class="nav__links" style="background-color: green;"></ul> */}
+
+
+//! parent 2
+{/* <nav class="nav" style="background-color: blue;">   
+  <ul class="nav__links" style="background-color: green;">   
+    <li class="nav__item">
+     <a class="nav__link" href="#" style="background-color: red;  ">Features</a>                                           
+    </li>       
+  </ul>
+</nav> */}
+
