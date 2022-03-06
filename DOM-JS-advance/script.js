@@ -175,11 +175,15 @@ btnScrollTo.addEventListener('click', (e) =>{
   //   s1coords.left + window.pageXOffset,
   //   s1coords.top + window.pageYOffset)    //* works correctly
 
-  //todo Add animation
-  window.scrollTo({
-    left: s1coords.left + window.pageXOffset,
-    top: s1coords.top + window.pageYOffset,
-    behavior: 'smooth'
-  })  
+  //todo Add animation (Old school)
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth'
+  // })
+  
+  //todo Add animation (Modern school)
+  // section1.scrollIntoView({behavior: 'auto'})
+  section1.scrollIntoView({behavior: 'smooth'})
 
 })
