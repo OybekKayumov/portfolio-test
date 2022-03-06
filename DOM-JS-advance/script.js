@@ -371,12 +371,13 @@ tabsContainer.addEventListener('click', function(e) {
   //! Guard clause
   if (!clicked) return  //* no Error but null
 
+  //todo buttons down
+  tabs.forEach(t => t.classList.remove('operations__tab--active'))
   //todo buttons UP
   // if (clicked) {  //* old scholl
     clicked.classList.add('operations__tab--active')
   // }               //* old scholl 
   
-  //todo buttons UP
   
 
 })
