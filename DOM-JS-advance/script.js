@@ -160,9 +160,26 @@ btnScrollTo.addEventListener('click', (e) =>{
 
   console.log(e.target.getBoundingClientRect());
 
-  console.log('Current scroll (X / Y): ', window.pageXOffset, pageYOffset);
+  console.log('Current scroll (X / Y): ',
+           window.pageXOffset,
+           window.pageYOffset);
 
   console.log('height/width', 
       document.documentElement.clientHeight,
       document.documentElement.clientWidth );
+
+  // Scrolling
+  // window.scrollTo(s1coords.left, s1coords.top)    //* works correctly ONLY from top of page
+
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset)    //* works correctly
+
+  //todo Add animation
+  window.scrollTo({
+    left: s1coords.left + window.pageXOffset,
+    top: s1coords.top + window.pageYOffset,
+    behavior: 'smooth'
+  })  
+
 })
