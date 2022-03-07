@@ -392,7 +392,7 @@ const nav = document.querySelector('.nav');
 // refactoring mouseover and mouseout
 const handleHover = function(e) {
 
-  console.log('this: ', this, e.currentTarget);
+  // console.log('this: ', this, e.currentTarget);
 
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
@@ -465,3 +465,21 @@ nav.addEventListener('mouseout', handleHover.bind(1));   // opacity = 1
   //   logo.style.opacity = 1;
   // }      
 // })
+
+
+
+//TODO STICKY NAVIGATION
+
+// find section1 coords
+const initialCoords = section1.getBoundingClientRect();
+console.log(initialCoords);
+
+window.addEventListener('scroll', function() {
+    console.log(window.scrollY);
+
+    if (this.window.scrollY > initialCoords.top) {
+      nav.classList.add('sticky')
+    } else {
+      nav.classList.remove('sticky')
+    }
+})
