@@ -390,7 +390,10 @@ tabsContainer.addEventListener('click', function(e) {
 const nav = document.querySelector('.nav');
 
 // refactoring mouseover and mouseout
-const handleHover = function(e, opacity) {
+const handleHover = function(e) {
+
+  console.log('this: ', this, e.currentTarget);
+
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
@@ -398,20 +401,29 @@ const handleHover = function(e, opacity) {
 
     siblings.forEach((el) => {
       if (el !== link) {
-        el.style.opacity = opacity;
+        // el.style.opacity = opacity;
+        el.style.opacity = this;      //! this = opacity
       }        
     });
-    logo.style.opacity = opacity;
+    // logo.style.opacity = opacity;
+    logo.style.opacity = this;        //! this = opacity
   }    
 }
 
 //! mouseover:
 // nav.addEventListener('mouseover', handleHover(e, 0.5)); //* will not work 
 
-nav.addEventListener('mouseover', function(e) {   //* will work 
-  handleHover(e, 0.5);   
-})
+// refactoring 1
+// nav.addEventListener('mouseover', function(e) {   //* will work 
+//   handleHover(e, 0.5);   
+// })
 
+// refactoring 2
+// Passing "argument" into handler
+nav.addEventListener('mouseover', handleHover.bind(0.5));   // opacity = 0.5
+
+
+// 1
 // nav.addEventListener('mouseover', function(e) {
     // if (e.target.classList.contains('nav__link')) {
     //   const link = e.target;
@@ -430,10 +442,15 @@ nav.addEventListener('mouseover', function(e) {   //* will work
 //! opposite of mouseover is: mouseout
 // nav.addEventListener('mouseout', handleHover(e, 1)); //* will not work
 
-nav.addEventListener('mouseout', function(e) {   //* will work 
-  handleHover(e, 1);   
-})
+// refactoring 1
+// nav.addEventListener('mouseout', function(e) {   //* will work 
+//   handleHover(e, 1);   
+// })
 
+// refactoring 2
+nav.addEventListener('mouseout', handleHover.bind(1));   // opacity = 1
+
+// 1
 // nav.addEventListener('mouseout', function(e) {
   // if (e.target.classList.contains('nav__link')) {
   //   const link = e.target;
