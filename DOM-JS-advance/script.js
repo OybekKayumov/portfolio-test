@@ -383,3 +383,21 @@ tabsContainer.addEventListener('click', function(e) {
   document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active')
 
 })
+
+
+
+//TODO FADE ANIMATION MENU
+const nav = document.querySelector('.nav');
+
+nav.addEventListener('mouseover', function(e) {
+    if (e.target.classList.contains('nav__link')) {
+      const link = e.target;
+      const siblings = link.closest('.nav').querySelector('.nav__link');
+      const logo = link.closest('.nav').querySelector('img');
+    }    
+})
+
+// opposite of mouseover is:
+nav.addEventListener('mouseout', function(e) {
+  
+})
