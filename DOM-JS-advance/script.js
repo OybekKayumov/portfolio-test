@@ -511,8 +511,10 @@ const stickyNav = function(entries) {
 
   if (!entry.isIntersecting) {
     nav.classList.add('sticky');
-  } 
-  
+  } else {
+    nav.classList.remove('sticky');
+  }
+
 }
 
 const headerObserver = new IntersectionObserver(stickyNav, {
