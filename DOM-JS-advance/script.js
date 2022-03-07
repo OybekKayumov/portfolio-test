@@ -503,11 +503,13 @@ nav.addEventListener('mouseout', handleHover.bind(1));   // opacity = 1
 // observer.observe(section1);
 
 const headerObs = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+// console.log(navHeight);  //* =90px
 
 const stickyNav = function(entries) {
   // using destructuring to get the first element out of entries
-  const [entry] = entries;   //*  same as entries[0]
-  console.log(entry)
+  const [entry] = entries;   //*  same as entries[0]  
+  // console.log(entry)
 
   if (!entry.isIntersecting) {
     nav.classList.add('sticky');
@@ -519,7 +521,9 @@ const stickyNav = function(entries) {
 
 const headerObserver = new IntersectionObserver(stickyNav, {
   root: null,
-  threshold: 0      //* when visible is 0%  :  
+  threshold: 0,      //* when visible is 0%  :
+  // rootMargin: '-90px'     //* box of 90px that will be applied outside of target element(header here)  
+  rootMargin: `-${navHeight}px`     //* create height dynamically  
 
 });
 headerObserver.observe(headerObs);
