@@ -314,15 +314,15 @@ const h11 = document.querySelector('h1')
 // console.log(h11.childNodes);
 // console.log(h11.children);
 
-h11.firstElementChild.style.color = 'white';
-h11.lastElementChild.style.color = 'orangered';
+// h11.firstElementChild.style.color = 'white';
+// h11.lastElementChild.style.color = 'orangered';
 
 //todo Going upwards: parents
 // console.log(h11.parentNode);
 // console.log(h11.parentElement);
 
-h11.closest('.header').style.background = '#ffb003'
-h11.closest('h1').style.background = '#39b385'
+// h11.closest('.header').style.background = '#ffb003'
+// h11.closest('h1').style.background = '#39b385'
 
 //! closest finds Parents
 //! querySelectorAll finds chields
@@ -406,7 +406,12 @@ const handleHover = function(e, opacity) {
 }
 
 //! mouseover:
-nav.addEventListener('mouseover', handleHover(e, 0.5)); //* will not work 
+// nav.addEventListener('mouseover', handleHover(e, 0.5)); //* will not work 
+
+nav.addEventListener('mouseover', function(e) {   //* will work 
+  handleHover(e, 0.5);   
+})
+
 // nav.addEventListener('mouseover', function(e) {
     // if (e.target.classList.contains('nav__link')) {
     //   const link = e.target;
@@ -424,6 +429,10 @@ nav.addEventListener('mouseover', handleHover(e, 0.5)); //* will not work
 
 //! opposite of mouseover is: mouseout
 // nav.addEventListener('mouseout', handleHover(e, 1)); //* will not work
+
+nav.addEventListener('mouseout', function(e) {   //* will work 
+  handleHover(e, 1);   
+})
 
 // nav.addEventListener('mouseout', function(e) {
   // if (e.target.classList.contains('nav__link')) {
