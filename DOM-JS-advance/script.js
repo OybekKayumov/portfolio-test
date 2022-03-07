@@ -507,7 +507,12 @@ const headerObs = document.querySelector('.header');
 const stickyNav = function(entries) {
   // using destructuring to get the first element out of entries
   const [entry] = entries;   //*  same as entries[0]
-  console.log(entry) 
+  console.log(entry)
+
+  if (!entry.isIntersecting) {
+    nav.classList.add('sticky');
+  } 
+  
 }
 
 const headerObserver = new IntersectionObserver(stickyNav, {
