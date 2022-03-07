@@ -314,15 +314,15 @@ const h11 = document.querySelector('h1')
 // console.log(h11.childNodes);
 // console.log(h11.children);
 
-h11.firstElementChild.style.color = 'white';
-h11.lastElementChild.style.color = 'orangered';
+// h11.firstElementChild.style.color = 'white';
+// h11.lastElementChild.style.color = 'orangered';
 
 //todo Going upwards: parents
 // console.log(h11.parentNode);
 // console.log(h11.parentElement);
 
-h11.closest('.header').style.background = '#ffb003'
-h11.closest('h1').style.background = '#39b385'
+// h11.closest('.header').style.background = '#ffb003'
+// h11.closest('h1').style.background = '#39b385'
 
 //! closest finds Parents
 //! querySelectorAll finds chields
@@ -383,3 +383,148 @@ tabsContainer.addEventListener('click', function(e) {
   document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active')
 
 })
+
+
+
+//TODO FADE ANIMATION MENU
+const nav = document.querySelector('.nav');
+
+// refactoring mouseover and mouseout
+const handleHover = function(e) {
+
+  // console.log('this: ', this, e.currentTarget);
+
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach((el) => {
+      if (el !== link) {
+        // el.style.opacity = opacity;
+        el.style.opacity = this;      //! this = opacity
+      }        
+    });
+    // logo.style.opacity = opacity;
+    logo.style.opacity = this;        //! this = opacity
+  }    
+}
+
+//! mouseover:
+// nav.addEventListener('mouseover', handleHover(e, 0.5)); //* will not work 
+
+// refactoring 1
+// nav.addEventListener('mouseover', function(e) {   //* will work 
+//   handleHover(e, 0.5);   
+// })
+
+// refactoring 2
+// Passing "argument" into handler
+nav.addEventListener('mouseover', handleHover.bind(0.5));   // opacity = 0.5
+
+
+// 1
+// nav.addEventListener('mouseover', function(e) {
+    // if (e.target.classList.contains('nav__link')) {
+    //   const link = e.target;
+    //   const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    //   const logo = link.closest('.nav').querySelector('img');
+
+    //   siblings.forEach((el) => {
+    //     if (el !== link) {
+    //       el.style.opacity = 0.5;
+    //     }        
+    //   });
+    //   logo.style.opacity = 0.5;
+    // }    
+// })
+
+//! opposite of mouseover is: mouseout
+// nav.addEventListener('mouseout', handleHover(e, 1)); //* will not work
+
+// refactoring 1
+// nav.addEventListener('mouseout', function(e) {   //* will work 
+//   handleHover(e, 1);   
+// })
+
+// refactoring 2
+nav.addEventListener('mouseout', handleHover.bind(1));   // opacity = 1
+
+// 1
+// nav.addEventListener('mouseout', function(e) {
+  // if (e.target.classList.contains('nav__link')) {
+  //   const link = e.target;
+  //   const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+  //   const logo = link.closest('.nav').querySelector('img');
+
+  //   siblings.forEach((el) => {
+  //     if (el !== link) {
+  //       el.style.opacity = 1;
+  //     }        
+  //   });
+  //   logo.style.opacity = 1;
+  // }      
+// })
+
+
+
+//TODO STICKY NAVIGATION 1.1 : window.scroll
+
+// find section1 coords
+
+// const initialCoords = section1.getBoundingClientRect();
+// console.log(initialCoords);
+
+// window.addEventListener('scroll', function() {
+//     console.log(window.scrollY);
+
+//     if (this.window.scrollY > initialCoords.top) {
+//       nav.classList.add('sticky')
+//     } else {
+//       nav.classList.remove('sticky')
+//     }
+// })
+
+//TODO STICKY NAVIGATION 1.2 : Intersection Observer API
+
+// const obsCallback = function(entries, observer) {
+//   entries.forEach(entry => {
+//     console.log('entry: ', entry);
+//   })
+// }
+
+// const obsOptions = {
+//   root: null,
+//   // threshold: 0.1      //* 10%
+//   threshold: [0, 0.2]      //* 0 and 20%  :  SEE CONSOL
+// }
+
+// const observer = new IntersectionObserver(obsCallback, obsOptions);
+// observer.observe(section1);
+
+const headerObs = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+// console.log(navHeight);  //* =90px
+
+const stickyNav = function(entries) {
+  // using destructuring to get the first element out of entries
+  const [entry] = entries;   //*  same as entries[0]  
+  // console.log(entry)
+
+  if (!entry.isIntersecting) {
+    nav.classList.add('sticky');
+  } else {
+    nav.classList.remove('sticky');
+  }
+
+}
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,      //* when visible is 0%  :
+  // rootMargin: '-90px'     //* box of 90px that will be applied outside of target element(header here)  
+  rootMargin: `-${navHeight}px`     //* create height dynamically  
+
+});
+headerObserver.observe(headerObs);
+
