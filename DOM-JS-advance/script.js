@@ -487,19 +487,33 @@ nav.addEventListener('mouseout', handleHover.bind(1));   // opacity = 1
 
 //TODO STICKY NAVIGATION 1.2 : Intersection Observer API
 
-const obsCallback = function(entries, observer) {
-  entries.forEach(entry => {
-    console.log('entry: ', entry);
-  })
+// const obsCallback = function(entries, observer) {
+//   entries.forEach(entry => {
+//     console.log('entry: ', entry);
+//   })
+// }
+
+// const obsOptions = {
+//   root: null,
+//   // threshold: 0.1      //* 10%
+//   threshold: [0, 0.2]      //* 0 and 20%  :  SEE CONSOL
+// }
+
+// const observer = new IntersectionObserver(obsCallback, obsOptions);
+// observer.observe(section1);
+
+const headerObs = document.querySelector('.header');
+
+const stickyNav = function(entries) {
+  // using destructuring to get the first element out of entries
+  const [entry] = entries;   //*  same as entries[0]
+  console.log(entry) 
 }
 
-const obsOptions = {
+const headerObserver = new IntersectionObserver(stickyNav, {
   root: null,
-  // threshold: 0.1      //* 10%
-  threshold: [0, 0.2]      //* 0 and 20%  :  SEE CONSOL
-}
+  threshold: 0      //* when visible is 0%  :  
 
-const observer = new IntersectionObserver(obsCallback, obsOptions);
-observer.observe(section1);
-
+});
+headerObserver.observe(headerObs);
 
