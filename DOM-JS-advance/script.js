@@ -468,18 +468,38 @@ nav.addEventListener('mouseout', handleHover.bind(1));   // opacity = 1
 
 
 
-//TODO STICKY NAVIGATION
+//TODO STICKY NAVIGATION 1.1 : window.scroll
 
 // find section1 coords
-const initialCoords = section1.getBoundingClientRect();
-console.log(initialCoords);
 
-window.addEventListener('scroll', function() {
-    console.log(window.scrollY);
+// const initialCoords = section1.getBoundingClientRect();
+// console.log(initialCoords);
 
-    if (this.window.scrollY > initialCoords.top) {
-      nav.classList.add('sticky')
-    } else {
-      nav.classList.remove('sticky')
-    }
-})
+// window.addEventListener('scroll', function() {
+//     console.log(window.scrollY);
+
+//     if (this.window.scrollY > initialCoords.top) {
+//       nav.classList.add('sticky')
+//     } else {
+//       nav.classList.remove('sticky')
+//     }
+// })
+
+//TODO STICKY NAVIGATION 1.2 : Intersection Observer API
+
+const obsCallback = function(entries, observer) {
+  entries.forEach(entry => {
+    console.log('entry: ', entry);
+  })
+}
+
+const obsOptions = {
+  root: null,
+  // threshold: 0.1      //* 10%
+  threshold: [0, 0.2]      //* 0 and 20%  :  SEE CONSOL
+}
+
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(section1);
+
+
