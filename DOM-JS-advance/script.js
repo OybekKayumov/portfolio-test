@@ -604,21 +604,56 @@ const slider = document.querySelector('.slider');
 slider.style.transform = 'scale(0.4) translateX(-850px)';
 slider.style.overflow = 'visible';
 
-slides.forEach((s, i) => s.style.transform = `translateX(${100 * i}%)`)
+// C
+// slides.forEach((s, i) => s.style.transform = `translateX(${100 * i}%)`)
 //translateX will move:  1st: to 0%, 2nd: 100%, 3d: 200%, 4th: 300%,  
 
+//! refactor code B:
+const goToSlide = function(slide) {
+  slides.forEach((s, i) => s.style.transform = `translateX(${100 * (i - slide)}%)`)
+}
+
+// D
+goToSlide(0)
+
 //todo slide move to right: NEXT SLIDE
-btnRight.addEventListener('click', function() {
-  
-  if (curSlide === maxSlide) {
+// E 
+const nextSlide = function() {
+  if (curSlide === maxSlide - 1) {  //* avoid EMPTY last slide 
     curSlide = 0
   } else {
     curSlide++;  //* +1
   }
-   
+
+  goToSlide(curSlide)
+}
+
+// E
+const prevSlide = function() {
+  curSlide--;
+  goToSlide(curSlide)
+}
+
+// F
+btnRight.addEventListener('click', nextSlide);
+// G
+btnLeft.addEventListener('click', prevSlide);
+
+
+// 1
+// btnRight.addEventListener('click', function() {
   
-  slides.forEach((s, i) => s.style.transform = `translateX(${100 * (i - curSlide)}%)`)
+  // if (curSlide === maxSlide - 1) {  //* avoid EMPTY last slide 
+  //   curSlide = 0
+  // } else {
+  //   curSlide++;  //* +1
+  // }
+// B: continue
+  // goToSlide(curSlide);
+   
+  // A : DRY
+  // slides.forEach((s, i) => s.style.transform = `translateX(${100 * (i - curSlide)}%)`)
   // we should do  1st: to    0%, 2nd: 100%, 3d: 200%, 4th: 300%,  
   // curSlide = 1: 1st: to -100%, 2nd:   0%, 3d: 100%, 4th: 200%,  
 
-})
+// })
