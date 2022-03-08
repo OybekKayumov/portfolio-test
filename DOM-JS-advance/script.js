@@ -625,7 +625,8 @@ const nextSlide = function() {
     curSlide++;  //* +1
   }
 
-  goToSlide(curSlide)
+  goToSlide(curSlide);
+  activateDot(curSlide);
 }
 
 // H
@@ -637,7 +638,8 @@ const prevSlide = function() {
     curSlide--;
   }
 
-  goToSlide(curSlide)
+  goToSlide(curSlide);
+  activateDot(curSlide);
 }
 
 // F
@@ -693,10 +695,59 @@ createDots();
 // go to current dot
 dotContainer.addEventListener('click', function(e) {
    if (e.target.classList.contains('dots__dot')) {
-     console.log('DOT');
+    //  console.log('DOT');
     //  const slide = e.target.dataset.slide;
      const {slide} = e.target.dataset;  // * destructuring
-     goToSlide(slide)
+     
+     goToSlide(slide);
+     activateDot(curSlide);
 
    }
 })
+
+// add different color to active dot
+const activateDot = function(slide) {
+  // select all dots
+  document.querySelectorAll('.dots__dot').
+      forEach(dot => dot.classList.remove('dots__dot--active'))
+  
+  // how do we select one that we are interested in
+  document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot')
+
+}
+
+activateDot(0);
+
+// refactoring
+
+// const init = function() {
+//   goToSlide();
+//   createDots();
+//   activateDot();
+// }
+
+// init();
+
+//TODO LIFECYCLE DOM
+
+//todo HTML and JS need to be loaded, NOT wait for images and other external resources to load
+document.addEventListener('DOMContentLoaded', function(e) {
+  
+  console.log('HTML parsed and DOM tree is built!', e);
+
+})
+
+//todo HTML, CSS and JS , images and other external resources are LOADED
+
+window.addEventListener('load', function(e) {
+  console.log('Page fully loaded: ', e);
+})
+
+
+//todo MESSAGE ON CLOSE PAGE
+
+// window.addEventListener('beforeunload', function(e) {
+//   e.preventDefault();
+//   console.log('e ', e);
+//   e.returnValue = '';
+// })
