@@ -528,3 +528,252 @@ const headerObserver = new IntersectionObserver(stickyNav, {
 });
 headerObserver.observe(headerObs);
 
+ 
+
+//TODO REVEAL SECTIONS  
+const allSections2= document.querySelectorAll('.section');
+
+const revealSection = function(entries, observer) {
+  const [entry] = entries; //* destructuring  entries[0]
+  // console.log(entry);
+  
+  if (!entry.isIntersecting) return;
+
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target);
+}
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15       //* 15%
+});
+
+allSections2.forEach(function(section) {
+  sectionObserver.observe(section);
+  // section.classList.add('section--hidden');
+})
+
+
+//TODO LAZY LOADING IMAGES
+// we select all images which have the property of "data-src"
+const imgTargets = document.querySelectorAll('img[data-src]')
+// console.log(imgTargets);
+
+//* NodeList(3) [img.features__img.lazy-img, img.features__img.lazy-img, img.features__img.lazy-img]
+// 0: img.features__img.lazy-img
+// 1: img.features__img.lazy-img
+// 2: img.features__img.lazy-img
+// length: 3
+
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
+  // console.log(entry);
+
+  if (!entry.isIntersecting) return;
+
+  // Replace src with data-src
+  entry.target.src = entry.target.dataset.src;
+  
+  entry.target.addEventListener('load', function() {
+    entry.target.classList.remove('lazy-img');
+  })
+
+  observer.unobserve(entry.target);
+
+}
+
+const imObserver = new IntersectionObserver(loadImg, {
+    root: null,
+    threshold: 0,
+    rootMargin: '-200px'  //  if +200px, then img should start loading, and we don't see any delay in loading when we bowse the page: imgs already fully downloaded
+});
+
+imgTargets.forEach(img => imObserver.observe(img));
+
+
+//TODO BUILDING A SLIDER COMPONENT
+
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left')
+const btnRight = document.querySelector('.slider__btn--right')
+
+let curSlide = 0;
+const maxSlide = slides.length;
+
+// const slider = document.querySelector('.slider');
+// slider.style.transform = 'scale(0.4) translateX(-850px)';
+// slider.style.overflow = 'visible';
+
+// C
+// slides.forEach((s, i) => s.style.transform = `translateX(${100 * i}%)`)
+//translateX will move:  1st: to 0%, 2nd: 100%, 3d: 200%, 4th: 300%,  
+
+//! refactor code B:
+const goToSlide = function(slide) {
+  slides.forEach((s, i) => s.style.transform = `translateX(${100 * (i - slide)}%)`)
+}
+
+// D
+goToSlide(0)
+
+//todo slide move to right: NEXT SLIDE
+// E 
+const nextSlide = function() {
+  if (curSlide === maxSlide - 1) {  //* avoid EMPTY last slide 
+    curSlide = 0
+  } else {
+    curSlide++;  //* +1
+  }
+
+  goToSlide(curSlide);
+  activateDot(curSlide);
+}
+
+// H
+const prevSlide = function() {
+
+  if (curSlide === 0) {
+    curSlide = maxSlide - 1; 
+  } else {
+    curSlide--;
+  }
+
+  goToSlide(curSlide);
+  activateDot(curSlide);
+}
+
+// F
+btnRight.addEventListener('click', nextSlide);
+// G
+btnLeft.addEventListener('click', prevSlide);
+
+
+// 1
+// btnRight.addEventListener('click', function() {
+  
+  // if (curSlide === maxSlide - 1) {  //* avoid EMPTY last slide 
+  //   curSlide = 0
+  // } else {
+  //   curSlide++;  //* +1
+  // }
+// B: continue
+  // goToSlide(curSlide);
+   
+  // A : DRY
+  // slides.forEach((s, i) => s.style.transform = `translateX(${100 * (i - curSlide)}%)`)
+  // we should do  1st: to    0%, 2nd: 100%, 3d: 200%, 4th: 300%,  
+  // curSlide = 1: 1st: to -100%, 2nd:   0%, 3d: 100%, 4th: 200%,  
+
+// })
+
+//TODO BUILDING A SLIDER COMPONENT : left and right keys
+
+document.addEventListener('keydown', function(e) {
+  console.log('e: ', e);  //* ArrowRight  ArrowLeft
+  if (e.key === 'ArrowLeft') prevSlide();  //* the reason why create separated functions
+  e.key === 'ArrowRight' && nextSlide();  //? short-circuit
+
+})
+
+//todo add dots
+const dotContainer = document.querySelector('.dots')
+
+const createDots = function() {
+  // slides.forEach((s, i) => {
+  slides.forEach(function (_, i) {    //* _ variable we don't need
+    dotContainer.insertAdjacentHTML(
+      'beforeend',
+      `
+        <button class="dots__dot" data-slide="${i}"></button>
+      `
+    )
+  })
+}
+
+createDots();
+
+// go to current dot
+dotContainer.addEventListener('click', function(e) {
+   if (e.target.classList.contains('dots__dot')) {
+    //  console.log('DOT');
+    //  const slide = e.target.dataset.slide;
+     const {slide} = e.target.dataset;  // * destructuring
+     
+     goToSlide(slide);
+     activateDot(curSlide);
+
+   }
+})
+
+// add different color to active dot
+const activateDot = function(slide) {
+  // select all dots
+  document.querySelectorAll('.dots__dot').
+      forEach(dot => dot.classList.remove('dots__dot--active'))
+  
+  // how do we select one that we are interested in
+  document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot')
+
+}
+
+activateDot(0);
+
+// refactoring
+
+// const init = function() {
+//   goToSlide();
+//   createDots();
+//   activateDot();
+// }
+
+// init();
+
+//TODO LIFECYCLE DOM
+
+//todo HTML and JS need to be loaded, NOT wait for images and other external resources to load
+document.addEventListener('DOMContentLoaded', function(e) {
+  
+  console.log('HTML parsed and DOM tree is built!', e);
+
+})
+
+//todo HTML, CSS and JS , images and other external resources are LOADED
+
+window.addEventListener('load', function(e) {
+  console.log('Page fully loaded: ', e);
+})
+
+
+//todo MESSAGE ON CLOSE PAGE
+
+// window.addEventListener('beforeunload', function(e) {
+//   e.preventDefault();
+//   console.log('e ', e);
+//   e.returnValue = '';
+// })
+
+
+//TODO EFFICIENT SCRIPT LOADING: DEFER AND SYNC
+// 1 regular
+{/* <script src="name.js"></script> */}
+
+//! these attributes are gonna influence the way, in which JS file is FETCHed,
+//! which basically means download and then executed
+
+// When script is placed in the HEAD, 
+// script will actually executed before DOM ready
+// never do this, never include script in the HEAD
+
+// When script is placed in the END of BODY, 
+// All the HTML is already parsed, and finally reaches the script tag,
+// script is fetched, and script get executed
+
+//! async
+// Scripts are fetched asynchronously and executed immediately
+
+//! defer
+// Scripts are fetched asynchronously and after the HTML is completely parsed
+// BEST SOLUTION 
+
+
+//supported by modern browsers and will get ignored in older browsers
