@@ -672,3 +672,21 @@ document.addEventListener('keydown', function(e) {
   e.key === 'ArrowRight' && nextSlide();  //? short-circuit
 
 })
+
+//todo add dots
+const dotContainer = document.querySelector('.dots')
+
+const createDots = function() {
+  // slides.forEach((s, i) => {
+  slides.forEach(function (_, i) {    //* _ variable we don't need
+    dotContainer.insertAdjacentHTML(
+      'beforeend',
+      `
+        <button class="dots__dot" data-slide="${i}"></button>
+      `
+    )
+
+  })
+}
+
+createDots();
