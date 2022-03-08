@@ -550,14 +550,14 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 
 allSections2.forEach(function(section) {
   sectionObserver.observe(section);
-  section.classList.add('section--hidden');
+  // section.classList.add('section--hidden');
 })
 
 
 //TODO LAZY LOADING IMAGES
 // we select all images which have the property of "data-src"
 const imgTargets = document.querySelectorAll('img[data-src]')
-console.log(imgTargets);
+// console.log(imgTargets);
 
 //* NodeList(3) [img.features__img.lazy-img, img.features__img.lazy-img, img.features__img.lazy-img]
 // 0: img.features__img.lazy-img
@@ -592,3 +592,11 @@ imgTargets.forEach(img => imObserver.observe(img));
 
 
 //TODO BUILDING A SLIDER COMPONENT
+
+const slides = document.querySelectorAll('.slide');
+const slider = document.querySelector('.slider');
+slider.style.transform = 'scale(0.5)';
+slider.style.overflow = 'visible';
+
+slides.forEach((s, i) => s.style.transform = `translateX(${100 * i}%)`)
+//translateX will move:  1st: to 0%, 2nd: 100%, 3d: 200%, 4th: 300%,  
