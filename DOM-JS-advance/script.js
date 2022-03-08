@@ -552,3 +552,39 @@ allSections2.forEach(function(section) {
   sectionObserver.observe(section);
   section.classList.add('section--hidden');
 })
+
+
+//TODO LAZY LOADING IMAGES
+// we select all images which have the property of "data-src"
+const imgTargets = document.querySelectorAll('img[data-src]')
+console.log(imgTargets);
+
+//* NodeList(3) [img.features__img.lazy-img, img.features__img.lazy-img, img.features__img.lazy-img]
+// 0: img.features__img.lazy-img
+// 1: img.features__img.lazy-img
+// 2: img.features__img.lazy-img
+// length: 3
+
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
+  // console.log(entry);
+
+  if (!entry.isIntersecting) return;
+
+  // Replace src with data-src
+  entry.target.src = entry.target.dataset.src;
+  
+  entry.target.addEventListener('load', function() {
+    entry.target.classList.remove('lazy-img');
+  })
+
+  observer.unobserve(entry.target);
+
+}
+
+const imObserver = new IntersectionObserver(loadImg, {
+    root: null,
+    threshold: 0
+});
+
+imgTargets.forEach(img => imObserver.observe(img));
