@@ -600,9 +600,9 @@ const btnRight = document.querySelector('.slider__btn--right')
 let curSlide = 0;
 const maxSlide = slides.length;
 
-const slider = document.querySelector('.slider');
-slider.style.transform = 'scale(0.4) translateX(-850px)';
-slider.style.overflow = 'visible';
+// const slider = document.querySelector('.slider');
+// slider.style.transform = 'scale(0.4) translateX(-850px)';
+// slider.style.overflow = 'visible';
 
 // C
 // slides.forEach((s, i) => s.style.transform = `translateX(${100 * i}%)`)
@@ -628,9 +628,15 @@ const nextSlide = function() {
   goToSlide(curSlide)
 }
 
-// E
+// H
 const prevSlide = function() {
-  curSlide--;
+
+  if (curSlide === 0) {
+    curSlide = maxSlide - 1; 
+  } else {
+    curSlide--;
+  }
+
   goToSlide(curSlide)
 }
 
