@@ -663,3 +663,12 @@ btnLeft.addEventListener('click', prevSlide);
   // curSlide = 1: 1st: to -100%, 2nd:   0%, 3d: 100%, 4th: 200%,  
 
 // })
+
+//TODO BUILDING A SLIDER COMPONENT : left and right keys
+
+document.addEventListener('keydown', function(e) {
+  console.log('e: ', e);  //* ArrowRight  ArrowLeft
+  if (e.key === 'ArrowLeft') prevSlide();  //* the reason why create separated functions
+  e.key === 'ArrowRight' && nextSlide();  //? short-circuit
+
+})
