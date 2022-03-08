@@ -685,8 +685,18 @@ const createDots = function() {
         <button class="dots__dot" data-slide="${i}"></button>
       `
     )
-
   })
 }
 
 createDots();
+
+// go to current dot
+dotContainer.addEventListener('click', function(e) {
+   if (e.target.classList.contains('dots__dot')) {
+     console.log('DOT');
+    //  const slide = e.target.dataset.slide;
+     const {slide} = e.target.dataset;  // * destructuring
+     goToSlide(slide)
+
+   }
+})
