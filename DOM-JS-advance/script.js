@@ -594,9 +594,23 @@ imgTargets.forEach(img => imObserver.observe(img));
 //TODO BUILDING A SLIDER COMPONENT
 
 const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left')
+const btnRight = document.querySelector('.slider__btn--right')
+
+let curSlide = 0;
+
 const slider = document.querySelector('.slider');
 slider.style.transform = 'scale(0.4) translateX(-850px)';
 slider.style.overflow = 'visible';
 
 slides.forEach((s, i) => s.style.transform = `translateX(${100 * i}%)`)
 //translateX will move:  1st: to 0%, 2nd: 100%, 3d: 200%, 4th: 300%,  
+
+//todo slide move to right: NEXT SLIDE
+btnRight.addEventListener('click', function() {
+  curSlide++;  //* +1
+  slides.forEach((s, i) => s.style.transform = `translateX(${100 * (i - curSlide)}%)`)
+  // we should do  1st: to    0%, 2nd: 100%, 3d: 200%, 4th: 300%,  
+  // curSlide = 1: 1st: to -100%, 2nd:   0%, 3d: 100%, 4th: 200%,  
+
+})
