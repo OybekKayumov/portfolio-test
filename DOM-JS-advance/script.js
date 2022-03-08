@@ -584,7 +584,11 @@ const loadImg = function (entries, observer) {
 
 const imObserver = new IntersectionObserver(loadImg, {
     root: null,
-    threshold: 0
+    threshold: 0,
+    rootMargin: '-200px'  //  if +200px, then img should start loading, and we don't see any delay in loading when we bowse the page: imgs already fully downloaded
 });
 
 imgTargets.forEach(img => imObserver.observe(img));
+
+
+//TODO BUILDING A SLIDER COMPONENT
