@@ -528,3 +528,21 @@ const headerObserver = new IntersectionObserver(stickyNav, {
 });
 headerObserver.observe(headerObs);
 
+ 
+
+//TODO REVEAL SECTIONS  
+const allSections2= document.querySelectorAll('.section');
+
+const revealSection = function(entries, observer) {
+     
+}
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15       //* 15%
+});
+
+allSections2.forEach(function(section) {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+})
