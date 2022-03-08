@@ -751,3 +751,29 @@ window.addEventListener('load', function(e) {
 //   console.log('e ', e);
 //   e.returnValue = '';
 // })
+
+
+//TODO EFFICIENT SCRIPT LOADING: DEFER AND SYNC
+// 1 regular
+{/* <script src="name.js"></script> */}
+
+//! these attributes are gonna influence the way, in which JS file is FETCHed,
+//! which basically means download and then executed
+
+// When script is placed in the HEAD, 
+// script will actually executed before DOM ready
+// never do this, never include script in the HEAD
+
+// When script is placed in the END of BODY, 
+// All the HTML is already parsed, and finally reaches the script tag,
+// script is fetched, and script get executed
+
+//! async
+// Scripts are fetched asynchronously and executed immediately
+
+//! defer
+// Scripts are fetched asynchronously and after the HTML is completely parsed
+// BEST SOLUTION 
+
+
+//supported by modern browsers and will get ignored in older browsers
