@@ -154,6 +154,8 @@ const getCountryDataV2 = function (country) {
             +data.population / 1000000
           ).toFixed(1)} people</p>
           <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
+          <p class="country__row"><span>✈</span>${data.nativeName}</p>
+          <p class="country__row"><span>✈</span>${data.region}</p>
           <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
         </div>
       </article>
