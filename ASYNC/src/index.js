@@ -174,9 +174,9 @@ const getCountryDataV2 = function (country) {
 // TODO GET COUNTRY AND NEIGHBOUR
 
 // 2
-const renderCountry = function(data) {
+const renderCountry = function(data, className = '') {
   const html = `
-      <article class="country">
+      <article class="country ${className}">
         <img class="country__img" src="${data.flag}" />
         <div class="country__data">
           <h3 class="country__name">${data.name}</h3>
@@ -230,9 +230,32 @@ const getCountryAndNeighbourV2 = function (country) {
       const data2 = JSON = JSON.parse(this.responseText)
       console.log(data2);
 
-      renderCountry(data2)
+      renderCountry(data2, 'neighbour')
     })
   });
 };
 
-getCountryAndNeighbourV2('portugal')
+// getCountryAndNeighbourV2('portugal')
+// getCountryAndNeighbourV2('uzbekistan')
+
+// we have nested callbacks : "callback hell" 
+// what if we need to see neighbour of neighbour
+
+//? "callback hell" is Easy to identify by triangular shape, formed at the and of function
+//? it makes code harder to maintain and very difficult to understand and difficult to reason about
+//! RULE: that code hard to understand is basically bad code, because it will have more bugs, more difficult to add new features and more functionality to the app 
+setTimeout(() => {
+  console.log('1 sec. passed');
+  // new timer 
+  setTimeout(() => {                   //*\\ triangular
+    console.log('2 seconds passed');    //*\\ triangular
+    setTimeout(() => {                   //*\\ triangular
+      console.log('3 seconds passed');    //*\\ triangular
+    }, 1000)                                 //* triangular
+  }, 1000)                                  //* triangular
+}, 1000)                                   //* triangular
+ 
+
+
+//TODO PROMISES : fetch
+
