@@ -39,7 +39,7 @@ const countriesContainer = document.querySelector('.countries');
 // catch error function
 const renderError = (msg) => {
   countriesContainer.insertAdjacentText('beforeend', msg);
-  countriesContainer.style.opacity = 1;
+  // countriesContainer.style.opacity = 1;  //* go to finally method
 } 
 
 
@@ -200,7 +200,7 @@ const renderCountry = function(data, className = '') {
     `;
 
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1; 
+  // countriesContainer.style.opacity = 1;    //* go to finally method
 
 }
 
@@ -407,6 +407,9 @@ const getCountryDataFetch = (country) => {
 
       renderError(`Error 👆👆👆 ${err.message}`)
     })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;  //* 
+    })
 }
 
 // getCountryDataFetch('portugal');
@@ -427,6 +430,11 @@ btn.addEventListener('click', () => {
 // chains stop here when error handles
 // catch error after each Promise
 
-
 //? 2. handle all errors  no matter where they are appeared, catch at the end of the chain by adding CATH method
+//! CATH also return Promise, this is a reason why FINALLY method works
 
+//? FINALLY method
+// we use this method for smth that always needs to happen no matter the result of Promise
+// show spinner
+
+getCountryDataFetch('hjkhkjhkl')
