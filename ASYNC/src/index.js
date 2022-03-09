@@ -31,4 +31,27 @@
 
 //! JSON is basically JavaScript Object, but converted to a String
 
-// alert('1')
+'use strict'
+
+const btn = document.querySelector('.btn-country');
+const countriesContainer = document.querySelector('.countries');
+
+// XMLHttpRequest();           //* old school
+
+const request = new XMLHttpRequest();
+
+//CORS : cross origin resource sharing
+// type of request(GET) and string(url) : SEND REQUEST
+request.open('GET', 'https://restcountries.com/v3.1/name/portugal') 
+// data = request.send();
+request.send();           //*  SEND REQUEST
+
+// get result
+// console.log('request resText: ', request.responseText);  //* same, but not works
+
+request.addEventListener('load', function() {
+  console.log('request resText: ', this.responseText);
+})
+
+
+
