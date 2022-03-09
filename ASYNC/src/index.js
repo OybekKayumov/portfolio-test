@@ -82,13 +82,38 @@ request.addEventListener('load', function() {
   countriesContainer.insertAdjacentHTML('beforeend', html);
   countriesContainer.style.opacity = 1;
   
-  
+  console.log(data.altSpellings[2]);
+  console.log(data.translations.ara.official);
+  console.log(data.translations.rus.official);
+  console.log(data.translations.rus.common);
+
 })
 
-// how to take data from array 
-// ${data.currencies[0].name} means we
-// currencies: {EUR: {…}}
+//todo How to take data from Array and Object
+// ${data.currencies[0].name} : means we take 1st element in array and send it's name to HTML
+
+//* example: an array name: altSpellings: with four elements (4)
+// ['PT', 'Portuguesa', 'Portuguese Republic', 'República Portuguesa']
+// to take 'Portuguese Republic'
+//todo console.log(data.altSpellings[2]);
+//* Portuguese Republic
+
+//! OBJECT
+// translations: {ara: {…}, ces: {…}, cym: {…}, deu: {…}, est: {…}, …}
+
 //? INSIDE
-// currencies:
-// EUR: {name: 'Euro', symbol: '€'}
-// [[Prototype]]: Object
+// translations:
+// ara: {official: 'الجمهورية البرتغالية', common: 'البرتغال'}
+// ces: {official: 'Portugalská republika', common: 'Portugalsko'}
+// cym: {official: 'Portuguese Republic', common: 'Portugal'}
+// deu: {official: 'Portugiesische Republik', common: 'Portugal'}
+// ...
+
+// we write:
+// console.log(data.translations.ara.official);
+// console.log(data.translations.rus.official);
+// console.log(data.translations.rus.common);
+
+//*  الجمهورية البرتغالية
+//*  Португальская Республика
+//*  Португалия
