@@ -296,22 +296,22 @@ const request = fetch('https://restcountries.com/v3.1/name/portugal')
 
 // get data using promise
 // 1
-const getCountryDataFetch = function(country) {
+// const getCountryDataFetch = function(country) {
   // fetch(`https://restcountries.com/v3.1/name/${country}`)
-  fetch(`https://restcountries.com/v2/name/${country}`)
-    .then((res) => {
+  // fetch(`https://restcountries.com/v2/name/${country}`)
+    // .then((res) => {
       // console.log('response: ', res);
-      return res.json()
-    })
-    .then((data) => {
-      console.log('data: ', data);
+      // return res.json()
+//     })
+//     .then((data) => {
+//       console.log('data: ', data);
 
-      renderCountry(data[0])
-    })
-}
+//       renderCountry(data[0])
+//     })
+// }
 
-getCountryDataFetch('portugal');
-getCountryDataFetch('uzbekistan');
+// getCountryDataFetch('portugal');
+// getCountryDataFetch('uzbekistan');
 
 
 // v3.1
@@ -358,3 +358,37 @@ getCountryDataFetch('uzbekistan');
 // now we are back to having the same data, that we already had before
 // but this time using Promise (2 promises)
 
+
+// TODO CHAINING PROMISES 
+
+const getCountryDataFetch = (country) => {
+
+  // Country 1
+  // fetch(`https://restcountries.com/v3.1/name/${country}`)
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then((res) => {
+      // console.log('response: ', res);
+      return res.json()
+    })
+    .then((data) => {                 //! returns Promise
+      console.log('data: ', data);
+
+      renderCountry(data[0])
+
+      // SECOND FETCH:  Country 2
+      const neighbour = data[0].borders[0]
+
+      if (!neighbour) return;
+
+      return fetch(`https://restcountries.com/v2/alpha/${neighbour}`)
+      // return 24;   //* example returning promise
+    })
+    // .then(data => alert(data)); //* example returning promise: 24
+    .then(res => res.json())
+    .then(data => {
+      renderCountry(data, 'neighbour')
+    })
+}
+
+getCountryDataFetch('portugal');
+// getCountryDataFetch('uzbekistan');
