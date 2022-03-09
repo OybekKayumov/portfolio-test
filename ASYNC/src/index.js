@@ -277,4 +277,16 @@ console.log('request: ', request);
 // future value example is the RESPONSE coming from AJAX call
 // by using Promise - 1. we no longer need to rely on events and callback functions, 2. we can chain Promises for a sequence of asynchronous operations
 
-// Promises can be in different states
+// Promises can be in different states - LIFECYCLE 
+// pending
+//! settled: 2 types
+    // 1. fulfilled    --> successfully resulted in a value we expected
+    // 2. rejected     --> there has been an error during asynchronous task
+//! but impossible to change that state
+// consume a promise : get a result of Promise
+
+// fetch function BUILDS the Promise and return it for us to CONSUME
+
+
+//TODO CONSUMING PROMISES
+
