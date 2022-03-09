@@ -36,6 +36,13 @@
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
+// catch error function
+const renderError = (msg) => {
+  countriesContainer.insertAdjacentText('beforeend', msg);
+  // countriesContainer.style.opacity = 1;  //* go to finally method
+} 
+
+
 // XMLHttpRequest();           //* old school
 
 // 2 for multiple countries
@@ -186,12 +193,14 @@ const renderCountry = function(data, className = '') {
           ).toFixed(1)} people</p>
           <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
           <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
+          <p class="country__row"><span>⌚</span>${data.timezones}</p>
+          <p class="country__row"><span>🌎</span>${data.latlng}</p>
         </div>
       </article>
     `;
 
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1; 
+  // countriesContainer.style.opacity = 1;    //* go to finally method
 
 }
 
@@ -268,8 +277,10 @@ const getCountryAndNeighbourV2 = function (country) {
 //! fetch('https://restcountries.com/v3.1/name/portugal')
 
 // 2
+
 const request = fetch('https://restcountries.com/v3.1/name/portugal')
-console.log('request: ', request);  
+// console.log('request: ', request);  
+
 //? returns Promise {pending}
 // as soon as we started to request, we stored the result of that into 'request' variable 
 // our Promise is stored on 'request' variable 
@@ -290,3 +301,140 @@ console.log('request: ', request);
 
 //TODO CONSUMING PROMISES
 
+// get data using promise
+// 1
+// const getCountryDataFetch = function(country) {
+  // fetch(`https://restcountries.com/v3.1/name/${country}`)
+  // fetch(`https://restcountries.com/v2/name/${country}`)
+    // .then((res) => {
+      // console.log('response: ', res);
+      // return res.json()
+//     })
+//     .then((data) => {
+//       console.log('data: ', data);
+
+//       renderCountry(data[0])
+//     })
+// }
+
+// getCountryDataFetch('portugal');
+// getCountryDataFetch('uzbekistan');
+
+
+// v3.1
+//* Response {type: 'cors', url: 'https://restcountries.com/v3.1/name/portugal', redirected: false, status: 200, ok: true, …}
+// v2
+//* Response {type: 'cors', url: 'https://restcountries.com/v2/name/portugal', redirected: false, status: 200, ok: true, …}
+
+
+// let assume success state of Promise : fulfilled, and we have a value available to work with.
+// to handle this fulfilled state we can use THEN method, which available on all promises
+// So, Fetch will return Promise
+// and on all promises we can call the THEN method
+
+// into THEN method we need to pass a callback function that we want to be executed as soon as the promise is fulfilled
+// as soon as THE RESULT is available
+// this function will receive one argument - is resulting value of the fulfilled promise.
+// res 
+// and we can use this response  --> console.log('');
+// we interested in  data is in the RESPONSE BODY  
+
+// Response {type: 'cors', url: 'https://restcountries.com/v2/name/portugal', redirected: false, status: 200, ok: true, …}
+// body: (...)      //!  *** click  body: ReadableStream
+// bodyUsed: false
+// headers: Headers {}
+// ok: true
+// redirected: false
+// status: 200
+// statusText: "OK"
+// type: "cors"
+// url: "https://restcountries.com/v2/name/portugal"
+// [[Prototype]]: Response
+
+// to read data from the BODY we need to call JSON method on the response
+// available on all of the response objects that is coming from fetch function
+
+// response.json() also return a new Promise
+// so we need to return it 
+// return response.json()
+
+// and we need to handle this promise as well
+// the way to do that is to call another THAN
+//like
+// then(data => console.log(data))
+// now we are back to having the same data, that we already had before
+// but this time using Promise (2 promises)
+
+
+// TODO CHAINING PROMISES 
+
+ 
+
+
+const getCountryDataFetch = (country) => {
+
+  // Country 1
+  // fetch(`https://restcountries.com/v3.1/name/${country}`)
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then(
+      (response) => response.json(),
+      // err => alert(err)   //* cath error 1st promise
+    )    
+    .then((data) => {                 //! returns Promise
+      console.log('data: ', data);
+
+      renderCountry(data[0])
+
+      // SECOND FETCH:  Country 2
+      const neighbour = data[0].borders[0]
+
+      if (!neighbour) return;
+
+      return fetch(`https://restcountries.com/v2/alpha/${neighbour}`)
+                      // .then(res => res.json())  //! Error, don't do this. Mistake of beginners, always handle it outside 
+      // return 24;   //* example returning promise
+    })
+    // .then(data => alert(data)); //* example returning promise: 24
+      .then(
+        res => res.json(),    //! correct, handle it outside by simply continuing chain like this    
+        // err => alert(err)   //* cath error 2nd promise
+    )   
+    .then(data => {
+      renderCountry(data, 'neighbour')
+    })
+    .catch(err => {
+      console.error(`${err} 💥💥💥`)   //* cath error 
+
+      renderError(`Error 👆👆👆 ${err.message}`)
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;  //* 
+    })
+}
+
+// getCountryDataFetch('portugal');
+// getCountryDataFetch('uzbekistan');
+// getCountryDataFetch('spain');
+// getCountryDataFetch('philippines');
+
+
+//TODO Promise : REJECTED STATE 
+
+btn.addEventListener('click', () => {
+  getCountryDataFetch('portugal');  
+
+})
+
+//! there are 2 ways to handling(CATCHING) rejections:
+//? 1. to pass a second callback function into the THEN method
+// chains stop here when error handles
+// catch error after each Promise
+
+//? 2. handle all errors  no matter where they are appeared, catch at the end of the chain by adding CATH method
+//! CATH also return Promise, this is a reason why FINALLY method works
+
+//? FINALLY method
+// we use this method for smth that always needs to happen no matter the result of Promise
+// show spinner
+
+getCountryDataFetch('hjkhkjhkl')
