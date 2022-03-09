@@ -268,8 +268,10 @@ const getCountryAndNeighbourV2 = function (country) {
 //! fetch('https://restcountries.com/v3.1/name/portugal')
 
 // 2
+
 const request = fetch('https://restcountries.com/v3.1/name/portugal')
 console.log('request: ', request);  
+
 //? returns Promise {pending}
 // as soon as we started to request, we stored the result of that into 'request' variable 
 // our Promise is stored on 'request' variable 
@@ -290,3 +292,25 @@ console.log('request: ', request);
 
 //TODO CONSUMING PROMISES
 
+// get data using promise
+// 1
+const getCountryDataFetch = function(country) {
+  // fetch(`https://restcountries.com/v3.1/name/${country}`)
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then((res) => {
+      console.log('response: ', res);
+      return res.json()
+    })
+    .then((data) => {
+      console.log('data: ', data);
+
+      renderCountry(data[0])
+    })
+}
+
+getCountryDataFetch('portugal');
+
+// v3.1
+//* Response {type: 'cors', url: 'https://restcountries.com/v3.1/name/portugal', redirected: false, status: 200, ok: true, …}
+// v2
+//* Response {type: 'cors', url: 'https://restcountries.com/v2/name/portugal', redirected: false, status: 200, ok: true, …}
