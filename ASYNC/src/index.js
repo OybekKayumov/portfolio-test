@@ -244,18 +244,37 @@ const getCountryAndNeighbourV2 = function (country) {
 //? "callback hell" is Easy to identify by triangular shape, formed at the and of function
 //? it makes code harder to maintain and very difficult to understand and difficult to reason about
 //! RULE: that code hard to understand is basically bad code, because it will have more bugs, more difficult to add new features and more functionality to the app 
-setTimeout(() => {
-  console.log('1 sec. passed');
-  // new timer 
-  setTimeout(() => {                   //*\\ triangular
-    console.log('2 seconds passed');    //*\\ triangular
-    setTimeout(() => {                   //*\\ triangular
-      console.log('3 seconds passed');    //*\\ triangular
-    }, 1000)                                 //* triangular
-  }, 1000)                                  //* triangular
-}, 1000)                                   //* triangular
+
+// setTimeout(() => {
+//   console.log('1 sec. passed');
+//   // new timer 
+//   setTimeout(() => {                   //*\\ triangular
+//     console.log('2 seconds passed');    //*\\ triangular
+//     setTimeout(() => {                   //*\\ triangular
+//       console.log('3 seconds passed');    //*\\ triangular
+//     }, 1000)                                 //* triangular
+//   }, 1000)                                  //* triangular
+// }, 1000)                                   //* triangular
  
 
 
 //TODO PROMISES : fetch
 
+// const request = new XMLHttpRequest();
+//   request.open('GET', `https://restcountries.com/v2/name/${country}`);
+//   request.send();
+
+// 1
+//! fetch('https://restcountries.com/v3.1/name/portugal')
+
+// 2
+const request = fetch('https://restcountries.com/v3.1/name/portugal')
+console.log('request: ', request);  
+//? returns Promise {pending}
+// as soon as we started to request, we stored the result of that into 'request' variable 
+// our Promise is stored on 'request' variable 
+//! Promise is a container or a placeholder for a future value, 
+// future value example is the RESPONSE coming from AJAX call
+// by using Promise - 1. we no longer need to rely on events and callback functions, 2. we can chain Promises for a sequence of asynchronous operations
+
+// Promises can be in different states
