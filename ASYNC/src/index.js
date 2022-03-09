@@ -36,6 +36,13 @@
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
+// catch error function
+const renderError = (msg) => {
+  countriesContainer.insertAdjacentText('beforeend', msg);
+  countriesContainer.style.opacity = 1;
+} 
+
+
 // XMLHttpRequest();           //* old school
 
 // 2 for multiple countries
@@ -361,15 +368,18 @@ const request = fetch('https://restcountries.com/v3.1/name/portugal')
 
 // TODO CHAINING PROMISES 
 
+ 
+
+
 const getCountryDataFetch = (country) => {
 
   // Country 1
   // fetch(`https://restcountries.com/v3.1/name/${country}`)
   fetch(`https://restcountries.com/v2/name/${country}`)
-    .then((res) => {
-      // console.log('response: ', res);
-      return res.json()
-    })
+    .then(
+      (response) => response.json(),
+      // err => alert(err)   //* cath error 1st promise
+    )    
     .then((data) => {                 //! returns Promise
       console.log('data: ', data);
 
@@ -385,15 +395,38 @@ const getCountryDataFetch = (country) => {
       // return 24;   //* example returning promise
     })
     // .then(data => alert(data)); //* example returning promise: 24
-    .then(res => res.json())    //! correct, handle it outside by simply continuing chain like this 
+      .then(
+        res => res.json(),    //! correct, handle it outside by simply continuing chain like this    
+        // err => alert(err)   //* cath error 2nd promise
+    )   
     .then(data => {
       renderCountry(data, 'neighbour')
     })
+    .catch(err => {
+      console.error(`${err} 💥💥💥`)   //* cath error 
+
+      renderError(`Error 👆👆👆 ${err.message}`)
+    })
 }
 
-getCountryDataFetch('portugal');
+// getCountryDataFetch('portugal');
 // getCountryDataFetch('uzbekistan');
 // getCountryDataFetch('spain');
 // getCountryDataFetch('philippines');
 
+
+//TODO Promise : REJECTED STATE 
+
+btn.addEventListener('click', () => {
+  getCountryDataFetch('portugal');  
+
+})
+
+//! there are 2 ways to handling(CATCHING) rejections:
+//? 1. to pass a second callback function into the THEN method
+// chains stop here when error handles
+// catch error after each Promise
+
+
+//? 2. handle all errors  no matter where they are appeared, catch at the end of the chain by adding CATH method
 
