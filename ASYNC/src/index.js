@@ -381,10 +381,11 @@ const getCountryDataFetch = (country) => {
       if (!neighbour) return;
 
       return fetch(`https://restcountries.com/v2/alpha/${neighbour}`)
+                      // .then(res => res.json())  //! Error, don't do this. Mistake of beginners, always handle it outside 
       // return 24;   //* example returning promise
     })
     // .then(data => alert(data)); //* example returning promise: 24
-    .then(res => res.json())
+    .then(res => res.json())    //! correct, handle it outside by simply continuing chain like this 
     .then(data => {
       renderCountry(data, 'neighbour')
     })
@@ -392,3 +393,7 @@ const getCountryDataFetch = (country) => {
 
 getCountryDataFetch('portugal');
 // getCountryDataFetch('uzbekistan');
+// getCountryDataFetch('spain');
+// getCountryDataFetch('philippines');
+
+
