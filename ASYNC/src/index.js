@@ -197,6 +197,8 @@ const renderCountry = function(data) {
 
 // 1
 const getCountryAndNeighbourV2 = function (country) {
+
+  // AJAX call country 1
   const request = new XMLHttpRequest();
   request.open('GET', `https://restcountries.com/v2/name/${country}`);
   request.send();
@@ -205,9 +207,32 @@ const getCountryAndNeighbourV2 = function (country) {
     const [data] = JSON.parse(this.responseText);
     console.log('data: ', data);
 
+    // Render country 1
     renderCountry(data)
+
+    // Get neighbour country(2)
+    // const neighbour = data.borders
+    const [neighbour] = data.borders      //* take FIRST element from array : destructuring
+
+    // if NO neighbour(island maybe) = borders: [] empty --> RETURN    //* borders: ['ESP']
+    if (!neighbour) return
+
+    // if has neighbour, create AJAX call 2 : search by CODE
+    const request2 = new XMLHttpRequest();
+    request2.open('GET', `https://restcountries.com/v2/alpha/${neighbour}`);
+    request2.send();
     
-  })
-}
+    request2.addEventListener('load', function() {
+
+      // console.log(request2.responseText);  // get info about Spain
+      console.log(this.responseText);  // get info about Spain NO JSON yet
+
+      const data2 = JSON = JSON.parse(this.responseText)
+      console.log(data2);
+
+      renderCountry(data2)
+    })
+  });
+};
 
 getCountryAndNeighbourV2('portugal')
