@@ -63,8 +63,23 @@ request.addEventListener('load', function() {
   // const [data] = JSON.parse(this.responseText)[0]  //! same
   const [data] = JSON.parse(this.responseText)
   console.log('data: ', data);                 //* see consol : data:  [{…}]
+  
+  // Build a card component
+  const html = `
+        <article class="country">
+            <img class="country__img" src="" alt="" srcset="">
+            <div class="country__data">
+              <h3 class="country__name">COUNTRY</h3>
+              <h3 class="country__region">REGION</h3>
+              <p class="country__row"><span>👫</span>POP people</p>
+              <p class="country__row"><span>🗣️</span>LANG</p>
+              <p class="country__row"><span>💰</span>CUR</p>
+            </div>
+        </article>
+        
+  
+  `  
+  
+  
+  
 })
-
-
-
-
