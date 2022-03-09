@@ -38,56 +38,66 @@ const countriesContainer = document.querySelector('.countries');
 
 // XMLHttpRequest();           //* old school
 
-const request = new XMLHttpRequest();
+// 2 for multiple countries
+const getCountryData = function(country) { 
 
-//CORS : cross origin resource sharing
-// type of request(GET) and string(url) : SEND REQUEST
-request.open('GET', 'https://restcountries.com/v3.1/name/portugal') 
-// data = request.send();
-request.send();           //*  SEND REQUEST
+  const request = new XMLHttpRequest();
 
-// get result
-// console.log('request resText: ', request.responseText);  //* same, but not works
+  //CORS : cross origin resource sharing
+  // type of request(GET) and string(url) : SEND REQUEST
+  // request.open('GET', 'https://restcountries.com/v3.1/name/portugal') 
+  
+  // 2
+  request.open('GET', `https://restcountries.com/v3.1/name/${country}`) 
+  
+  // data = request.send();
+  request.send();           //*  SEND REQUEST
 
-request.addEventListener('load', function() {
-  // console.log('request resText: ', this.responseText); //* see consol NO JSON
-  
-  // we need to convert this data to an actual JS object, 
-  // because what we have here right now is JSON - big string of text
-  
-  // const data = JSON.parse(this.responseText)
-  // console.log('data: ', data);                 //* see consol : data:  [{…}]
-  
-  // destructure code
-  
-  // const [data] = JSON.parse(this.responseText)[0]  //! same
-  const [data] = JSON.parse(this.responseText)
-  console.log('data: ', data);                 //* see consol : data:  [{…}]
-  
-  // Build a card component
-  const html = `
-        <article class="country">
-            <img class="country__img" src="${data.flags.svg}" alt="" srcset="">
-            <div class="country__data">
-              <h3 class="country__name">${data.name}</h3>
-              <h3 class="country__region">${data.region}</h3>
-              <p class="country__row"><span>👫</span>${(+data.population / 1000000).toFixed(2)}</p>
-              <p class="country__row"><span>🗣️</span>${data.languages.por}</p>
-              <p class="country__row"><span>💰</span>${data.currencies.EUR.name}</p>
-            </div>
-        </article>       
-  
-  `;
-  
-  countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
-  
-  console.log(data.altSpellings[2]);
-  console.log(data.translations.ara.official);
-  console.log(data.translations.rus.official);
-  console.log(data.translations.rus.common);
+  // get result
+  // console.log('request resText: ', request.responseText);  //* same, but not works
 
-})
+  request.addEventListener('load', function() {
+    // console.log('request resText: ', this.responseText); //* see consol NO JSON
+    
+    // we need to convert this data to an actual JS object, 
+    // because what we have here right now is JSON - big string of text
+    
+    // const data = JSON.parse(this.responseText)
+    // console.log('data: ', data);                 //* see consol : data:  [{…}]
+    
+    // destructure code
+    
+    // const [data] = JSON.parse(this.responseText)[0]  //! same
+    const [data] = JSON.parse(this.responseText)
+    console.log('data: ', data);                 //* see consol : data:  [{…}]
+    
+    // Build a card component
+    const html = `
+          <article class="country">
+              <img class="country__img" src="${data.flags.svg}" alt="" srcset="">
+              <div class="country__data">
+                <h3 class="country__name">${data.name}</h3>
+                <h3 class="country__region">${data.region}</h3>
+                <p class="country__row"><span>👫</span>${(+data.population / 1000000).toFixed(2)}</p>
+                <p class="country__row"><span>🗣️</span>${data.languages.por}</p>
+                <p class="country__row"><span>💰</span>${data.currencies.EUR.name}</p>
+              </div>
+          </article>       
+    
+    `;
+    
+    countriesContainer.insertAdjacentHTML('beforeend', html);
+    countriesContainer.style.opacity = 1;
+    
+    console.log(data.altSpellings[2]);
+    console.log(data.translations.ara.official);
+    console.log(data.translations.rus.official);
+    console.log(data.translations.rus.common);
+
+  });
+//2 end
+}
+
 
 //todo How to take data from Array and Object
 // ${data.currencies[0].name} : means we take 1st element in array and send it's name to HTML
@@ -117,3 +127,41 @@ request.addEventListener('load', function() {
 //*  الجمهورية البرتغالية
 //*  Португальская Республика
 //*  Португалия
+
+//TODO 2: Reuse code to create an element for multiple countries
+getCountryData('portugal')
+// getCountryData('uzbekistan')
+
+
+// create function for v.2
+
+// const getCountryDataV2 = function (country) {
+//   const request = new XMLHttpRequest();
+//   request.open('GET', `https://restcountries.eu/rest/v2/name/${country}`);
+//   request.send();
+  
+//   request.addEventListener('load', function() {
+//     const [data] = JSON.parse(this.responseText);
+//     console.log('data: ', data);
+
+//     const html = `
+//       <article class="country">
+//         <img class="country__img" src="${data.flag}" />
+//         <div class="country__data">
+//           <h3 class="country__name">${data.name}</h3>
+//           <h4 class="country__region">${data.region}</h4>
+//           <p class="country__row"><span>👫</span>${(
+//             +data.population / 1000000
+//           ).toFixed(1)} people</p>
+//           <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
+//           <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
+//         </div>
+//       </article>
+//     `;
+
+//     countriesContainer.insertAdjacentHTML('beforeend', html);
+//     countriesContainer.style.opacity = 1;    
+//   })
+// }
+
+// getCountryDataV2('portugal')
