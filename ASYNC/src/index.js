@@ -67,19 +67,28 @@ request.addEventListener('load', function() {
   // Build a card component
   const html = `
         <article class="country">
-            <img class="country__img" src="" alt="" srcset="">
+            <img class="country__img" src="${data.flags.svg}" alt="" srcset="">
             <div class="country__data">
-              <h3 class="country__name">COUNTRY</h3>
-              <h3 class="country__region">REGION</h3>
-              <p class="country__row"><span>👫</span>POP people</p>
-              <p class="country__row"><span>🗣️</span>LANG</p>
-              <p class="country__row"><span>💰</span>CUR</p>
+              <h3 class="country__name">${data.name}</h3>
+              <h3 class="country__region">${data.region}</h3>
+              <p class="country__row"><span>👫</span>${(+data.population / 1000000).toFixed(2)}</p>
+              <p class="country__row"><span>🗣️</span>${data.languages.por}</p>
+              <p class="country__row"><span>💰</span>${data.currencies.EUR.name}</p>
             </div>
-        </article>
-        
+        </article>       
   
-  `  
+  `;
   
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  countriesContainer.style.opacity = 1;
   
   
 })
+
+// how to take data from array 
+// ${data.currencies[0].name} means we
+// currencies: {EUR: {…}}
+//? INSIDE
+// currencies:
+// EUR: {name: 'Euro', symbol: '€'}
+// [[Prototype]]: Object
