@@ -186,6 +186,8 @@ const renderCountry = function(data, className = '') {
           ).toFixed(1)} people</p>
           <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
           <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
+          <p class="country__row"><span>⌚</span>${data.timezones}</p>
+          <p class="country__row"><span>🌎</span>${data.latlng}</p>
         </div>
       </article>
     `;
@@ -270,7 +272,7 @@ const getCountryAndNeighbourV2 = function (country) {
 // 2
 
 const request = fetch('https://restcountries.com/v3.1/name/portugal')
-console.log('request: ', request);  
+// console.log('request: ', request);  
 
 //? returns Promise {pending}
 // as soon as we started to request, we stored the result of that into 'request' variable 
@@ -298,7 +300,7 @@ const getCountryDataFetch = function(country) {
   // fetch(`https://restcountries.com/v3.1/name/${country}`)
   fetch(`https://restcountries.com/v2/name/${country}`)
     .then((res) => {
-      console.log('response: ', res);
+      // console.log('response: ', res);
       return res.json()
     })
     .then((data) => {
@@ -309,8 +311,50 @@ const getCountryDataFetch = function(country) {
 }
 
 getCountryDataFetch('portugal');
+getCountryDataFetch('uzbekistan');
+
 
 // v3.1
 //* Response {type: 'cors', url: 'https://restcountries.com/v3.1/name/portugal', redirected: false, status: 200, ok: true, …}
 // v2
 //* Response {type: 'cors', url: 'https://restcountries.com/v2/name/portugal', redirected: false, status: 200, ok: true, …}
+
+
+// let assume success state of Promise : fulfilled, and we have a value available to work with.
+// to handle this fulfilled state we can use THEN method, which available on all promises
+// So, Fetch will return Promise
+// and on all promises we can call the THEN method
+
+// into THEN method we need to pass a callback function that we want to be executed as soon as the promise is fulfilled
+// as soon as THE RESULT is available
+// this function will receive one argument - is resulting value of the fulfilled promise.
+// res 
+// and we can use this response  --> console.log('');
+// we interested in  data is in the RESPONSE BODY  
+
+// Response {type: 'cors', url: 'https://restcountries.com/v2/name/portugal', redirected: false, status: 200, ok: true, …}
+// body: (...)      //!  *** click  body: ReadableStream
+// bodyUsed: false
+// headers: Headers {}
+// ok: true
+// redirected: false
+// status: 200
+// statusText: "OK"
+// type: "cors"
+// url: "https://restcountries.com/v2/name/portugal"
+// [[Prototype]]: Response
+
+// to read data from the BODY we need to call JSON method on the response
+// available on all of the response objects that is coming from fetch function
+
+// response.json() also return a new Promise
+// so we need to return it 
+// return response.json()
+
+// and we need to handle this promise as well
+// the way to do that is to call another THAN
+//like
+// then(data => console.log(data))
+// now we are back to having the same data, that we already had before
+// but this time using Promise (2 promises)
+
