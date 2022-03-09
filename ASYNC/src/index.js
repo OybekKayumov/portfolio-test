@@ -50,8 +50,21 @@ request.send();           //*  SEND REQUEST
 // console.log('request resText: ', request.responseText);  //* same, but not works
 
 request.addEventListener('load', function() {
-  console.log('request resText: ', this.responseText);
+  // console.log('request resText: ', this.responseText); //* see consol NO JSON
+  
+  // we need to convert this data to an actual JS object, 
+  // because what we have here right now is JSON - big string of text
+  
+  // const data = JSON.parse(this.responseText)
+  // console.log('data: ', data);                 //* see consol : data:  [{…}]
+  
+  // destructure code
+  
+  // const [data] = JSON.parse(this.responseText)[0]  //! same
+  const [data] = JSON.parse(this.responseText)
+  console.log('data: ', data);                 //* see consol : data:  [{…}]
 })
+
 
 
 
