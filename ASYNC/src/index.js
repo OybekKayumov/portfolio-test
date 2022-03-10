@@ -443,4 +443,20 @@ btn.addEventListener('click', () => {
 // we use this method for smth that always needs to happen no matter the result of Promise
 // show spinner
 
+// Analize what happens here 
 getCountryDataFetch('hjkhkjhkl')
+
+//* if (!response.ok) { //* if OK is false
+//*   throw new Error(`Country not found 
+//*         ${response.status},
+//*         ${response.statusText},
+//*         ok: ${response.ok} `)  
+//* } 
+
+// we created new Error using Constructor function, and pass in a message
+// which gonna be the error message,
+// then we use THROW keyword which will immediately terminate the current function just like RETURN does it
+// promise will immediately reject, Promise will be Rejected Promise
+// and that Rejected Promise will propagate all the way down to the CATCH handler
+
+// always use CATCH, and if necessary, you can use Finally
