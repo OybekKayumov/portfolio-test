@@ -485,7 +485,10 @@ const getJSON = function(url, errorMsg = "Something went wrong") {
 }
 
 const getCountryDataWithErr = function(country) {
-  getJSON(`https://restcountries.com/v2/name/${country}`, 'Country not found')
+  getJSON(
+      `https://restcountries.com/v2/name/${country}`,
+      'Country not found'
+    )
     .then(data => {
       renderCountry(data[0]);
       const neighbour = data[0].borders[0]
@@ -495,7 +498,10 @@ const getCountryDataWithErr = function(country) {
       if (!neighbour) return;
 
       // Country 2
-      return getJSON(`https://restcountries.com/v2/name/${neighbour}`, 'Country not found')
+       return getJSON(
+          `https://restcountries.com/v2/alpha/${neighbour}`,
+          'Country not found'
+       );
     })
     .then(data => renderCountry(data, 'neighbour'))
     .catch(err => {
