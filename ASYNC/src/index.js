@@ -39,7 +39,7 @@ const countriesContainer = document.querySelector('.countries');
 // catch error function
 const renderError = (msg) => {
   countriesContainer.insertAdjacentText('beforeend', msg);
-  // countriesContainer.style.opacity = 1;  //* go to finally method
+  countriesContainer.style.opacity = 1;  //* go to finally method
 } 
 
 
@@ -193,56 +193,57 @@ const renderCountry = function(data, className = '') {
           ).toFixed(1)} people</p>
           <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
           <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
-          <p class="country__row"><span>⌚</span>${data.timezones}</p>
-          <p class="country__row"><span>🌎</span>${data.latlng}</p>
         </div>
       </article>
     `;
 
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  // countriesContainer.style.opacity = 1;    //* go to finally method
+  countriesContainer.style.opacity = 1;    //* go to finally method
 
 }
 
+{/* <p class="country__row"><span>⌚</span>${data.timezones}</p>
+<p class="country__row"><span>🌎</span>${data.latlng}</p> */}
+
 // 1
-const getCountryAndNeighbourV2 = function (country) {
+// const getCountryAndNeighbourV2 = function (country) {
 
-  // AJAX call country 1
-  const request = new XMLHttpRequest();
-  request.open('GET', `https://restcountries.com/v2/name/${country}`);
-  request.send();
+//   // AJAX call country 1
+//   const request = new XMLHttpRequest();
+//   request.open('GET', `https://restcountries.com/v2/name/${country}`);
+//   request.send();
   
-  request.addEventListener('load', function() {
-    const [data] = JSON.parse(this.responseText);
-    console.log('data: ', data);
+//   request.addEventListener('load', function() {
+//     const [data] = JSON.parse(this.responseText);
+//     console.log('data: ', data);
 
-    // Render country 1
-    renderCountry(data)
+//     // Render country 1
+//     renderCountry(data)
 
-    // Get neighbour country(2)
-    // const neighbour = data.borders
-    const [neighbour] = data.borders      //* take FIRST element from array : destructuring
+//     // Get neighbour country(2)
+//     // const neighbour = data.borders
+//     const [neighbour] = data.borders      //* take FIRST element from array : destructuring
 
-    // if NO neighbour(island maybe) = borders: [] empty --> RETURN    //* borders: ['ESP']
-    if (!neighbour) return
+//     // if NO neighbour(island maybe) = borders: [] empty --> RETURN    //* borders: ['ESP']
+//     if (!neighbour) return
 
-    // if has neighbour, create AJAX call 2 : search by CODE
-    const request2 = new XMLHttpRequest();
-    request2.open('GET', `https://restcountries.com/v2/alpha/${neighbour}`);
-    request2.send();
+//     // if has neighbour, create AJAX call 2 : search by CODE
+//     const request2 = new XMLHttpRequest();
+//     request2.open('GET', `https://restcountries.com/v2/alpha/${neighbour}`);
+//     request2.send();
     
-    request2.addEventListener('load', function() {
+//     request2.addEventListener('load', function() {
 
-      // console.log(request2.responseText);  // get info about Spain
-      console.log(this.responseText);  // get info about Spain NO JSON yet
+//       // console.log(request2.responseText);  // get info about Spain
+//       console.log(this.responseText);  // get info about Spain NO JSON yet
 
-      const data2 = JSON = JSON.parse(this.responseText)
-      console.log(data2);
+//       const data2 = JSON = JSON.parse(this.responseText)
+//       console.log(data2);
 
-      renderCountry(data2, 'neighbour')
-    })
-  });
-};
+//       renderCountry(data2, 'neighbour')
+//     })
+//   });
+// };
 
 // getCountryAndNeighbourV2('portugal')
 // getCountryAndNeighbourV2('uzbekistan')
@@ -368,49 +369,57 @@ const request = fetch('https://restcountries.com/v3.1/name/portugal')
 
 // TODO CHAINING PROMISES 
 
- 
-
-
-const getCountryDataFetch = (country) => {
+// const getCountryDataFetch = (country) => {
 
   // Country 1
   // fetch(`https://restcountries.com/v3.1/name/${country}`)
-  fetch(`https://restcountries.com/v2/name/${country}`)
-    .then(
-      (response) => response.json(),
-      // err => alert(err)   //* cath error 1st promise
-    )    
-    .then((data) => {                 //! returns Promise
-      console.log('data: ', data);
+  // fetch(`https://restcountries.com/v2/name/${country}`)
+  //   .then(
+  //     (response) => {
+  //       console.log('response: ', response);
+        
+  //       if (!response.ok) { //* if OK is false
+  //         throw new Error(`Country not found ${response.status}, ${response.statusText}, ok: ${response.ok} `)  
+  //       }  
+  //       return response.json()
+  //       // err => alert(err)   //* cath error 1st promise
+  //     })    
+  //   .then((data) => {                 //! returns Promise
+  //     console.log('data: ', data);
 
-      renderCountry(data[0])
+  //     renderCountry(data[0])
 
       // SECOND FETCH:  Country 2
-      const neighbour = data[0].borders[0]
+      // const neighbour = data[0].borders[0] //? if error in Second Promise
+    //   const neighbour = 'hjghjdfhgfd'  // which doesn't exist
 
-      if (!neighbour) return;
+    //   if (!neighbour) return;
 
-      return fetch(`https://restcountries.com/v2/alpha/${neighbour}`)
-                      // .then(res => res.json())  //! Error, don't do this. Mistake of beginners, always handle it outside 
-      // return 24;   //* example returning promise
-    })
+    //   return fetch(`https://restcountries.com/v2/alpha/${neighbour}`)
+    //                   // .then(res => res.json())  //! Error, don't do this. Mistake of beginners, always handle it outside 
+    //   // return 24;   //* example returning promise
+    // })
     // .then(data => alert(data)); //* example returning promise: 24
-      .then(
-        res => res.json(),    //! correct, handle it outside by simply continuing chain like this    
-        // err => alert(err)   //* cath error 2nd promise
-    )   
-    .then(data => {
-      renderCountry(data, 'neighbour')
-    })
-    .catch(err => {
-      console.error(`${err} 💥💥💥`)   //* cath error 
+//       .then( response => {
 
-      renderError(`Error 👆👆👆 ${err.message}`)
-    })
-    .finally(() => {
-      countriesContainer.style.opacity = 1;  //* 
-    })
-}
+//           if (!response.ok) { //* if OK is false
+//             throw new Error(`Country not found ${response.status}, ${response.statusText}, ok: ${response.ok} `)  
+//           }  
+//           return response.json()    //! correct, handle it outside by simply continuing chain like this    
+//         // err => alert(err)   //* cath error 2nd promise
+//       })   
+//     .then(data => {
+//       renderCountry(data, 'neighbour')
+//     })
+//     .catch(err => {
+//       console.error(`${err} 💥💥💥`)   //* cath error 
+
+//       renderError(`Error 👆👆👆 ${err.message}`)
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;  //* 
+//     })
+// }
 
 // getCountryDataFetch('portugal');
 // getCountryDataFetch('uzbekistan');
@@ -420,10 +429,10 @@ const getCountryDataFetch = (country) => {
 
 //TODO Promise : REJECTED STATE 
 
-btn.addEventListener('click', () => {
-  getCountryDataFetch('portugal');  
+// btn.addEventListener('click', () => {
+//   getCountryDataFetch('portugal');  
 
-})
+// })
 
 //! there are 2 ways to handling(CATCHING) rejections:
 //? 1. to pass a second callback function into the THEN method
@@ -437,4 +446,255 @@ btn.addEventListener('click', () => {
 // we use this method for smth that always needs to happen no matter the result of Promise
 // show spinner
 
-getCountryDataFetch('hjkhkjhkl')
+
+//? IF ERROR in First Promise:
+// Analize what happens here 
+// getCountryDataFetch('hjkhkjhkl')  //? turn of to catch error in Second Promise 
+
+//* if (!response.ok) { //* if OK is false
+//*   throw new Error(`Country not found 
+//*         ${response.status},
+//*         ${response.statusText},
+//*         ok: ${response.ok} `)  
+//* } 
+
+
+// we created new Error using Constructor function, and pass in a message
+// which gonna be the error message,
+// then we use THROW keyword which will immediately terminate the current function just like RETURN does it
+// promise will immediately reject, Promise will be Rejected Promise
+// and that Rejected Promise will propagate all the way down to the CATCH handler
+
+// always use CATCH, and if necessary, you can use Finally
+
+//? IF ERROR in Second Promise:
+//same code to catch error
+
+
+//! create helper function, gets data and converts to JSON 
+
+const getJSON = function (url, errorMsg = "Something went wrong") {
+   return fetch(url).then(response => {
+        if (!response.ok) throw new Error (`${errorMsg} (${response.status})`) 
+        
+        return response.json()
+      });
+
+}
+
+const getCountryDataWithErr = function(country) {
+  getJSON(
+      `https://restcountries.com/v2/name/${country}`,
+      'Country not found'
+    )
+    .then(data => {
+      renderCountry(data[0]);
+      const neighbour = data[0].borders[0]
+      // const neighbour = 'dssfdfffg';   //! error 400
+      console.log("neighbour: ", neighbour);
+
+      // if (!neighbour) return;
+      if (!neighbour) throw new Error ("No neighbour found!");
+
+      // Country 2
+       return getJSON(
+          `https://restcountries.com/v2/alpha/${neighbour}`,
+          'Country not found'
+       );
+    })
+    .then(data => renderCountry(data, 'neighbour'))
+    .catch(err => {
+      console.error(`${err} 💥💥💥`);
+      renderError(`Something went wrong 💥💥 ${err.message}. Try again!`)
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
+};
+
+btn.addEventListener('click', () => {
+  getCountryDataWithErr('portugal');  
+
+})
+
+// getCountryDataWithErr('australia')  //! doesnt work
+
+
+//TODO EVENT LOOP IN PRACTICE
+
+// console.log('Test start');
+// setTimeout(() => console.log('0 sec timer'), 0)
+    // after 0 sec this callback will be put on the callback queue
+    // Promise
+// Promise.resolve('Resolved promise 1')
+  // .then(res => console.log('res: ', res))
+
+// Promise.resolve('Resolved promise 2')
+  // .then(res => {
+    // for (let i = 0; i < 100000000; i++) {}
+    // console.log('res: ', res)
+  // }) 
+
+// console.log('Test end');
+
+
+
+// what order these four messages will be logged to the consol?
+// code outside of any callback will run first
+// 1,2 console.log('');
+// both timer and a Promise will finish same time, right after 0 seconds
+// Promise immediately become resolved
+
+//* Test start
+// Test end
+// res:  Resolved promise 1
+//! 0 sec timer
+
+// после добавления 2го Promise, setTimeout все равно появляетя последним
+//* Test start
+// Test end
+// res:  Resolved promise 1
+//* res:  Resolved promise 2
+//! 0 sec timer
+
+// только после всех "0 sec timer" СООБЩЕНИЕ ПОЯВЛЯЕТСЯ
+// this 0 sec timeout is not garantee 
+//! this means that you cannot really do high precision things using JS timers
+// высокоточные вещи
+// keep that in mind, whenever you are working with promises
+// basically with mikro-tasks and with timers at the same time 
+
+
+
+//TODO BUILDING A SIMPLE PROMISE
+//! Promises are a special kind of Object in JavaScript
+//? Promise constructor takes exactly ONE argument, called "executed function"
+// it will automatically execute this executor function by passing in 2 other arguments: RESOLVE and REJECT 
+// if fulfilled we call resolve function
+// whatever value we pass into the resolve function, is gonna be the result of the promise will be available in the THEN handler
+
+// const lotteryPromise = new Promise(function(resolve, reject) {
+//   if (Math.random() >= 0.5) {
+//     resolve('You WIN 💰💰');
+//   } else {
+//     reject('You lost 😒💪')
+//   }
+// }) 
+
+//* We created an executor function which will be called by Promise constructor as soon as it runs, immediately
+//* Then the Promise calls function and passes in the resolve and reject functions
+//* so that we can use them
+
+//! CONSUMING PROMISE
+
+// lotteryPromise
+//   .then(res => {
+//     console.log('res: ', res);    //* if fulfilled
+//   })
+//   .catch(err => {
+//     console.error('err: ', err);  //* if rejected
+//   })
+
+//! simulate this function by adding a simple timer
+// it will simulate time data is passed between buying the lottery ticket and getting the result
+
+const lotteryPromise = new Promise(function(resolve, reject) {
+    
+    console.log('Lottery draw is happening 🔮');
+    setTimeout(() => {
+      if (Math.random() >= 0.5) {
+        resolve('You WIN 💰💰');
+      } else {
+        reject(new Error ('You lost 😒💪'))
+      }  
+    }, 2000);
+  })
+
+lotteryPromise
+  .then(res => {
+    console.log('res: ', res);    //* if fulfilled
+  })
+  .catch(err => {
+    console.error('err: ', err);  //* if rejected
+  })
+
+
+//! CREAT A WAIT FUNCTION
+const wait = function(seconds) {
+  return new Promise(function(resolve) {
+    setTimeout(resolve, seconds * 1000)
+  })
+}
+
+wait(2).
+  then(() =>{
+    console.log('I waited for 2 seconds');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('I waited for 1 seconds');
+  })
+
+
+  //
+wait(1)
+  .then(() =>{
+    console.log('1 second passed');
+    return wait(1);
+  })
+  .then(() =>{
+    console.log('2 second passed');
+    return wait(1);
+  })
+  .then(() =>{
+    console.log('3 second passed');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('4 second passed');
+  })
+
+//!COMPARE
+
+  // setTimeout(() => {
+//   console.log('1 second passed');
+//   // new timer 
+//   setTimeout(() => {                   //*\\ triangular
+//     console.log('2 second passed');     //*\\ triangular
+//     setTimeout(() => {                   //*\\ triangular
+//       console.log('3 second passed');     //*\\ triangular
+        //  setTimeout(() => {                //*\\ triangular
+          // console.log('4 second passed');     //* triangular
+        //  }, 1000)                            //* triangular
+//     }, 1000)                                //* triangular
+//   }, 1000)                                 //* triangular
+// }, 1000)  
+
+
+//TODO EASY WAY TO CREATE A FULFILLED OR REJECTED PROMISE IMMEDIATELY
+
+// .resolve is a static method on the Promise constructor
+// Promise.resolve(pass resolve value)
+Promise.resolve('abc')
+    .then(x => console.log('x: ', x))
+
+Promise.reject(new Error('Problem!'))
+    .catch(x => console.error('x: ', x))
+// no necessary THEN, because there will be no resolved value anyway
+//! AND THESE TWO SHOULD NOW APPEAR AT THE VERY BEGINNING 
+
+// Lottery draw is happening 🔮  //* COMES FROM PREVIOUS pROMISE
+// x:  abc              //! comes first
+// x:  Error: Problem!  //! comes first
+// (anonymous) @ index.js:682
+// Promise.catch (async)
+// (anonymous) @ index.js:682
+// 1 second passed
+// res:  You WIN 💰💰
+// I waited for 2 seconds
+// 2 second passed
+// I waited for 1 seconds
+// 3 second passed
+// 4 second passed
+
+
