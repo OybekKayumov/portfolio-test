@@ -598,61 +598,61 @@ btn.addEventListener('click', () => {
 //! simulate this function by adding a simple timer
 // it will simulate time data is passed between buying the lottery ticket and getting the result
 
-const lotteryPromise = new Promise(function(resolve, reject) {
-    
-    console.log('Lottery draw is happening 🔮');
-    setTimeout(() => {
-      if (Math.random() >= 0.5) {
-        resolve('You WIN 💰💰');
-      } else {
-        reject(new Error ('You lost 😒💪'))
-      }  
-    }, 2000);
-  })
+    // const lotteryPromise = new Promise(function(resolve, reject) {
+        
+    //     console.log('Lottery draw is happening 🔮');
+    //     setTimeout(() => {
+    //       if (Math.random() >= 0.5) {
+    //         resolve('You WIN 💰💰');
+    //       } else {
+    //         reject(new Error ('You lost 😒💪'))
+    //       }  
+    //     }, 2000);
+    //   })
 
-lotteryPromise
-  .then(res => {
-    console.log('res: ', res);    //* if fulfilled
-  })
-  .catch(err => {
-    console.error('err: ', err);  //* if rejected
-  })
+    // lotteryPromise
+    //   .then(res => {
+    //     console.log('res: ', res);    //* if fulfilled
+    //   })
+    //   .catch(err => {
+    //     console.error('err: ', err);  //* if rejected
+    //   })
 
 
 //! CREAT A WAIT FUNCTION
-const wait = function(seconds) {
-  return new Promise(function(resolve) {
-    setTimeout(resolve, seconds * 1000)
-  })
-}
+    // const wait = function(seconds) {
+    //   return new Promise(function(resolve) {
+    //     setTimeout(resolve, seconds * 1000)
+    //   })
+    // }
 
-wait(2).
-  then(() =>{
-    console.log('I waited for 2 seconds');
-    return wait(1);
-  })
-  .then(() => {
-    console.log('I waited for 1 seconds');
-  })
+    // wait(2).
+    //   then(() =>{
+    //     console.log('I waited for 2 seconds');
+    //     return wait(1);
+    //   })
+    //   .then(() => {
+    //     console.log('I waited for 1 seconds');
+    //   })
 
 
-  //
-wait(1)
-  .then(() =>{
-    console.log('1 second passed');
-    return wait(1);
-  })
-  .then(() =>{
-    console.log('2 second passed');
-    return wait(1);
-  })
-  .then(() =>{
-    console.log('3 second passed');
-    return wait(1);
-  })
-  .then(() => {
-    console.log('4 second passed');
-  })
+    //   //
+    // wait(1)
+    //   .then(() =>{
+    //     console.log('1 second passed');
+    //     return wait(1);
+    //   })
+    //   .then(() =>{
+    //     console.log('2 second passed');
+    //     return wait(1);
+    //   })
+    //   .then(() =>{
+    //     console.log('3 second passed');
+    //     return wait(1);
+    //   })
+    //   .then(() => {
+    //     console.log('4 second passed');
+    //   })
 
 //!COMPARE
 
@@ -675,15 +675,17 @@ wait(1)
 
 // .resolve is a static method on the Promise constructor
 // Promise.resolve(pass resolve value)
-Promise.resolve('abc')
-    .then(x => console.log('x: ', x))
 
-Promise.reject(new Error('Problem!'))
-    .catch(x => console.error('x: ', x))
-// no necessary THEN, because there will be no resolved value anyway
+    // Promise.resolve('abc')
+    //     .then(x => console.log('x: ', x))
+
+    // Promise.reject(new Error('Problem!'))
+    //     .catch(x => console.error('x: ', x))
+
+    // no necessary THEN, because there will be no resolved value anyway
 //! AND THESE TWO SHOULD NOW APPEAR AT THE VERY BEGINNING 
 
-// Lottery draw is happening 🔮  //* COMES FROM PREVIOUS pROMISE
+// Lottery draw is happening 🔮  //* COMES FROM PREVIOUS PROMISE
 // x:  abc              //! comes first
 // x:  Error: Problem!  //! comes first
 // (anonymous) @ index.js:682
@@ -698,3 +700,20 @@ Promise.reject(new Error('Problem!'))
 // 4 second passed
 
 
+
+//TODO Promisifying the Geolocation
+
+// navigator.geolocation.getCurrentPosition(1stArgument, 2ndArgument) 
+
+  navigator.geolocation.getCurrentPosition(position => {    //* 1st argument
+  console.log('position: ', position);
+},
+  err => {                                                //* 2nd argument      
+    console.error('err: ', err);
+  }
+)
+
+console.log('Getting Position...');  //! will be consoled FIRST
+//? because script will start with navigator... , offloaded its work to the background to Browser API and immediately moves to next command line
+
+const 
