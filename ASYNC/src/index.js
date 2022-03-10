@@ -705,15 +705,33 @@ btn.addEventListener('click', () => {
 
 // navigator.geolocation.getCurrentPosition(1stArgument, 2ndArgument) 
 
-  navigator.geolocation.getCurrentPosition(position => {    //* 1st argument
-  console.log('position: ', position);
-},
-  err => {                                                //* 2nd argument      
-    console.error('err: ', err);
-  }
-)
+//   navigator.geolocation.getCurrentPosition(position => {    //* 1st argument
+//   console.log('position: ', position);
+// },
+//   err => {                                            //* 2nd argument      
+//     console.error('err: ', err);
+//   }
+// )
 
 console.log('Getting Position...');  //! will be consoled FIRST
 //? because script will start with navigator... , offloaded its work to the background to Browser API and immediately moves to next command line
 
-const 
+const getPosition = function() {
+  return new Promise(function(resolve, reject) {
+
+    // navigator.geolocation.getCurrentPosition(position => { 
+    //   console.log('position: ', position);
+    //   resolve(position);
+    // },
+    //   err => {                        
+    //     console.error('err: ', err);
+    //     reject(err);
+    //   }
+    // )
+
+    navigator.geolocation.getCurrentPosition(resolve, reject) 
+    
+  })
+}
+
+getPosition().then(pos => console.log('position: ', pos))
