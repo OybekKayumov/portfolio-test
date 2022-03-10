@@ -392,7 +392,8 @@ const getCountryDataFetch = (country) => {
       renderCountry(data[0])
 
       // SECOND FETCH:  Country 2
-      const neighbour = data[0].borders[0]
+      // const neighbour = data[0].borders[0] //? if error in Second Promise
+      const neighbour = 'hjghjdfhgfd'  // which doesn't exist
 
       if (!neighbour) return;
 
@@ -401,10 +402,14 @@ const getCountryDataFetch = (country) => {
       // return 24;   //* example returning promise
     })
     // .then(data => alert(data)); //* example returning promise: 24
-      .then(
-        res => res.json(),    //! correct, handle it outside by simply continuing chain like this    
+      .then( response => {
+
+          if (!response.ok) { //* if OK is false
+            throw new Error(`Country not found ${response.status}, ${response.statusText}, ok: ${response.ok} `)  
+          }  
+          return response.json()    //! correct, handle it outside by simply continuing chain like this    
         // err => alert(err)   //* cath error 2nd promise
-    )   
+      })   
     .then(data => {
       renderCountry(data, 'neighbour')
     })
@@ -443,8 +448,10 @@ btn.addEventListener('click', () => {
 // we use this method for smth that always needs to happen no matter the result of Promise
 // show spinner
 
+
+//? IF ERROR in First Promise:
 // Analize what happens here 
-getCountryDataFetch('hjkhkjhkl')
+// getCountryDataFetch('hjkhkjhkl')  //? turn of to catch error in Second Promise 
 
 //* if (!response.ok) { //* if OK is false
 //*   throw new Error(`Country not found 
@@ -453,6 +460,7 @@ getCountryDataFetch('hjkhkjhkl')
 //*         ok: ${response.ok} `)  
 //* } 
 
+
 // we created new Error using Constructor function, and pass in a message
 // which gonna be the error message,
 // then we use THROW keyword which will immediately terminate the current function just like RETURN does it
@@ -460,3 +468,7 @@ getCountryDataFetch('hjkhkjhkl')
 // and that Rejected Promise will propagate all the way down to the CATCH handler
 
 // always use CATCH, and if necessary, you can use Finally
+
+//? IF ERROR in Second Promise:
+
+
