@@ -522,20 +522,22 @@ btn.addEventListener('click', () => {
 
 //TODO EVENT LOOP IN PRACTICE
 
-console.log('Test start');
-setTimeout(() => console.log('0 sec timer'), 0)
-// after 0 sec this callback will be put on the callback queue
-// Promise
-Promise.resolve('Resolved promise 1')
-  .then(res => console.log('res: ', res))
+// console.log('Test start');
+// setTimeout(() => console.log('0 sec timer'), 0)
+    // after 0 sec this callback will be put on the callback queue
+    // Promise
+// Promise.resolve('Resolved promise 1')
+  // .then(res => console.log('res: ', res))
 
-Promise.resolve('Resolved promise 2')
-  .then(res => {
-    for (let i = 0; i < 100000000; i++) {}
-    console.log('res: ', res)
-  }) 
+// Promise.resolve('Resolved promise 2')
+  // .then(res => {
+    // for (let i = 0; i < 100000000; i++) {}
+    // console.log('res: ', res)
+  // }) 
 
-console.log('Test end');
+// console.log('Test end');
+
+
 
 // what order these four messages will be logged to the consol?
 // code outside of any callback will run first
@@ -570,15 +572,51 @@ console.log('Test end');
 // it will automatically execute this executor function by passing in 2 other arguments: RESOLVE and REJECT 
 // if fulfilled we call resolve function
 // whatever value we pass into the resolve function, is gonna be the result of the promise will be available in the THEN handler
-const lotteryPromise = new Promise(function(resolve, reject) {
-  if (Math.random() >= 0.5) {
-    resolve('You WIN 💰💰');
-  } else {
-    reject('You lost 😒')
-  }
-}) 
+
+// const lotteryPromise = new Promise(function(resolve, reject) {
+//   if (Math.random() >= 0.5) {
+//     resolve('You WIN 💰💰');
+//   } else {
+//     reject('You lost 😒💪')
+//   }
+// }) 
 
 //* We created an executor function which will be called by Promise constructor as soon as it runs, immediately
 //* Then the Promise calls function and passes in the resolve and reject functions
 //* so that we can use them
 
+//! CONSUMING PROMISE
+
+// lotteryPromise
+//   .then(res => {
+//     console.log('res: ', res);    //* if fulfilled
+//   })
+//   .catch(err => {
+//     console.error('err: ', err);  //* if rejected
+//   })
+
+//! simulate this function by adding a simple timer
+// it will simulate time data is passed between buying the lottery ticket and getting the result
+
+const lotteryPromise = new Promise(function(resolve, reject) {
+    
+    console.log('Lottery draw is happening 🔮');
+    setTimeout(() => {
+      if (Math.random() >= 0.5) {
+        resolve('You WIN 💰💰');
+      } else {
+        reject(new Error ('You lost 😒💪'))
+      }  
+    }, 2000);
+  })
+
+lotteryPromise
+  .then(res => {
+    console.log('res: ', res);    //* if fulfilled
+  })
+  .catch(err => {
+    console.error('err: ', err);  //* if rejected
+  })
+
+
+  //CREAT A WAIT FUNCTION
