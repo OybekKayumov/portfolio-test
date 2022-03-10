@@ -193,8 +193,6 @@ const renderCountry = function(data, className = '') {
           ).toFixed(1)} people</p>
           <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
           <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
-          <p class="country__row"><span>⌚</span>${data.timezones}</p>
-          <p class="country__row"><span>🌎</span>${data.latlng}</p>
         </div>
       </article>
     `;
@@ -203,6 +201,9 @@ const renderCountry = function(data, className = '') {
   // countriesContainer.style.opacity = 1;    //* go to finally method
 
 }
+
+{/* <p class="country__row"><span>⌚</span>${data.timezones}</p>
+<p class="country__row"><span>🌎</span>${data.latlng}</p> */}
 
 // 1
 // const getCountryAndNeighbourV2 = function (country) {
@@ -473,9 +474,9 @@ const request = fetch('https://restcountries.com/v3.1/name/portugal')
 //same code to catch error
 
 
-// create helper function, gets data and converts to JSON 
+//! create helper function, gets data and converts to JSON 
 
-const getJSON = function(url, errorMsg = "Something went wrong") {
+const getJSON = function (url, errorMsg = "Something went wrong") {
    return fetch(url).then(response => {
         if (!response.ok) throw new Error (`${errorMsg} (${response.status})`) 
         
@@ -492,10 +493,11 @@ const getCountryDataWithErr = function(country) {
     .then(data => {
       renderCountry(data[0]);
       const neighbour = data[0].borders[0]
-      // const neighbour = 'dssfdfffg';
+      // const neighbour = 'dssfdfffg';   //! error 400
       console.log("neighbour: ", neighbour);
 
-      if (!neighbour) return;
+      // if (!neighbour) return;
+      if (!neighbour) throw new Error ("No neighbour found!");
 
       // Country 2
        return getJSON(
