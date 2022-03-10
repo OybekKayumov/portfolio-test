@@ -619,4 +619,82 @@ lotteryPromise
   })
 
 
-  //CREAT A WAIT FUNCTION
+//! CREAT A WAIT FUNCTION
+const wait = function(seconds) {
+  return new Promise(function(resolve) {
+    setTimeout(resolve, seconds * 1000)
+  })
+}
+
+wait(2).
+  then(() =>{
+    console.log('I waited for 2 seconds');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('I waited for 1 seconds');
+  })
+
+
+  //
+wait(1)
+  .then(() =>{
+    console.log('1 second passed');
+    return wait(1);
+  })
+  .then(() =>{
+    console.log('2 second passed');
+    return wait(1);
+  })
+  .then(() =>{
+    console.log('3 second passed');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('4 second passed');
+  })
+
+//!COMPARE
+
+  // setTimeout(() => {
+//   console.log('1 second passed');
+//   // new timer 
+//   setTimeout(() => {                   //*\\ triangular
+//     console.log('2 second passed');     //*\\ triangular
+//     setTimeout(() => {                   //*\\ triangular
+//       console.log('3 second passed');     //*\\ triangular
+        //  setTimeout(() => {                //*\\ triangular
+          // console.log('4 second passed');     //* triangular
+        //  }, 1000)                            //* triangular
+//     }, 1000)                                //* triangular
+//   }, 1000)                                 //* triangular
+// }, 1000)  
+
+
+//TODO EASY WAY TO CREATE A FULFILLED OR REJECTED PROMISE IMMEDIATELY
+
+// .resolve is a static method on the Promise constructor
+// Promise.resolve(pass resolve value)
+Promise.resolve('abc')
+    .then(x => console.log('x: ', x))
+
+Promise.reject(new Error('Problem!'))
+    .catch(x => console.error('x: ', x))
+// no necessary THEN, because there will be no resolved value anyway
+//! AND THESE TWO SHOULD NOW APPEAR AT THE VERY BEGINNING 
+
+// Lottery draw is happening 🔮  //* COMES FROM PREVIOUS pROMISE
+// x:  abc              //! comes first
+// x:  Error: Problem!  //! comes first
+// (anonymous) @ index.js:682
+// Promise.catch (async)
+// (anonymous) @ index.js:682
+// 1 second passed
+// res:  You WIN 💰💰
+// I waited for 2 seconds
+// 2 second passed
+// I waited for 1 seconds
+// 3 second passed
+// 4 second passed
+
+
