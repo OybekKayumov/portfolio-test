@@ -205,44 +205,44 @@ const renderCountry = function(data, className = '') {
 }
 
 // 1
-const getCountryAndNeighbourV2 = function (country) {
+// const getCountryAndNeighbourV2 = function (country) {
 
-  // AJAX call country 1
-  const request = new XMLHttpRequest();
-  request.open('GET', `https://restcountries.com/v2/name/${country}`);
-  request.send();
+//   // AJAX call country 1
+//   const request = new XMLHttpRequest();
+//   request.open('GET', `https://restcountries.com/v2/name/${country}`);
+//   request.send();
   
-  request.addEventListener('load', function() {
-    const [data] = JSON.parse(this.responseText);
-    console.log('data: ', data);
+//   request.addEventListener('load', function() {
+//     const [data] = JSON.parse(this.responseText);
+//     console.log('data: ', data);
 
-    // Render country 1
-    renderCountry(data)
+//     // Render country 1
+//     renderCountry(data)
 
-    // Get neighbour country(2)
-    // const neighbour = data.borders
-    const [neighbour] = data.borders      //* take FIRST element from array : destructuring
+//     // Get neighbour country(2)
+//     // const neighbour = data.borders
+//     const [neighbour] = data.borders      //* take FIRST element from array : destructuring
 
-    // if NO neighbour(island maybe) = borders: [] empty --> RETURN    //* borders: ['ESP']
-    if (!neighbour) return
+//     // if NO neighbour(island maybe) = borders: [] empty --> RETURN    //* borders: ['ESP']
+//     if (!neighbour) return
 
-    // if has neighbour, create AJAX call 2 : search by CODE
-    const request2 = new XMLHttpRequest();
-    request2.open('GET', `https://restcountries.com/v2/alpha/${neighbour}`);
-    request2.send();
+//     // if has neighbour, create AJAX call 2 : search by CODE
+//     const request2 = new XMLHttpRequest();
+//     request2.open('GET', `https://restcountries.com/v2/alpha/${neighbour}`);
+//     request2.send();
     
-    request2.addEventListener('load', function() {
+//     request2.addEventListener('load', function() {
 
-      // console.log(request2.responseText);  // get info about Spain
-      console.log(this.responseText);  // get info about Spain NO JSON yet
+//       // console.log(request2.responseText);  // get info about Spain
+//       console.log(this.responseText);  // get info about Spain NO JSON yet
 
-      const data2 = JSON = JSON.parse(this.responseText)
-      console.log(data2);
+//       const data2 = JSON = JSON.parse(this.responseText)
+//       console.log(data2);
 
-      renderCountry(data2, 'neighbour')
-    })
-  });
-};
+//       renderCountry(data2, 'neighbour')
+//     })
+//   });
+// };
 
 // getCountryAndNeighbourV2('portugal')
 // getCountryAndNeighbourV2('uzbekistan')
@@ -371,57 +371,57 @@ const request = fetch('https://restcountries.com/v3.1/name/portugal')
  
 
 
-const getCountryDataFetch = (country) => {
+// const getCountryDataFetch = (country) => {
 
   // Country 1
   // fetch(`https://restcountries.com/v3.1/name/${country}`)
-  fetch(`https://restcountries.com/v2/name/${country}`)
-    .then(
-      (response) => {
-        console.log('response: ', response);
+  // fetch(`https://restcountries.com/v2/name/${country}`)
+  //   .then(
+  //     (response) => {
+  //       console.log('response: ', response);
         
-        if (!response.ok) { //* if OK is false
-          throw new Error(`Country not found ${response.status}, ${response.statusText}, ok: ${response.ok} `)  
-        }  
-        return response.json()
-        // err => alert(err)   //* cath error 1st promise
-      })    
-    .then((data) => {                 //! returns Promise
-      console.log('data: ', data);
+  //       if (!response.ok) { //* if OK is false
+  //         throw new Error(`Country not found ${response.status}, ${response.statusText}, ok: ${response.ok} `)  
+  //       }  
+  //       return response.json()
+  //       // err => alert(err)   //* cath error 1st promise
+  //     })    
+  //   .then((data) => {                 //! returns Promise
+  //     console.log('data: ', data);
 
-      renderCountry(data[0])
+  //     renderCountry(data[0])
 
       // SECOND FETCH:  Country 2
       // const neighbour = data[0].borders[0] //? if error in Second Promise
-      const neighbour = 'hjghjdfhgfd'  // which doesn't exist
+    //   const neighbour = 'hjghjdfhgfd'  // which doesn't exist
 
-      if (!neighbour) return;
+    //   if (!neighbour) return;
 
-      return fetch(`https://restcountries.com/v2/alpha/${neighbour}`)
-                      // .then(res => res.json())  //! Error, don't do this. Mistake of beginners, always handle it outside 
-      // return 24;   //* example returning promise
-    })
+    //   return fetch(`https://restcountries.com/v2/alpha/${neighbour}`)
+    //                   // .then(res => res.json())  //! Error, don't do this. Mistake of beginners, always handle it outside 
+    //   // return 24;   //* example returning promise
+    // })
     // .then(data => alert(data)); //* example returning promise: 24
-      .then( response => {
+//       .then( response => {
 
-          if (!response.ok) { //* if OK is false
-            throw new Error(`Country not found ${response.status}, ${response.statusText}, ok: ${response.ok} `)  
-          }  
-          return response.json()    //! correct, handle it outside by simply continuing chain like this    
-        // err => alert(err)   //* cath error 2nd promise
-      })   
-    .then(data => {
-      renderCountry(data, 'neighbour')
-    })
-    .catch(err => {
-      console.error(`${err} 💥💥💥`)   //* cath error 
+//           if (!response.ok) { //* if OK is false
+//             throw new Error(`Country not found ${response.status}, ${response.statusText}, ok: ${response.ok} `)  
+//           }  
+//           return response.json()    //! correct, handle it outside by simply continuing chain like this    
+//         // err => alert(err)   //* cath error 2nd promise
+//       })   
+//     .then(data => {
+//       renderCountry(data, 'neighbour')
+//     })
+//     .catch(err => {
+//       console.error(`${err} 💥💥💥`)   //* cath error 
 
-      renderError(`Error 👆👆👆 ${err.message}`)
-    })
-    .finally(() => {
-      countriesContainer.style.opacity = 1;  //* 
-    })
-}
+//       renderError(`Error 👆👆👆 ${err.message}`)
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;  //* 
+//     })
+// }
 
 // getCountryDataFetch('portugal');
 // getCountryDataFetch('uzbekistan');
@@ -431,10 +431,10 @@ const getCountryDataFetch = (country) => {
 
 //TODO Promise : REJECTED STATE 
 
-btn.addEventListener('click', () => {
-  getCountryDataFetch('portugal');  
+// btn.addEventListener('click', () => {
+//   getCountryDataFetch('portugal');  
 
-})
+// })
 
 //! there are 2 ways to handling(CATCHING) rejections:
 //? 1. to pass a second callback function into the THEN method
@@ -470,5 +470,46 @@ btn.addEventListener('click', () => {
 // always use CATCH, and if necessary, you can use Finally
 
 //? IF ERROR in Second Promise:
+//same code to catch error
 
 
+// create helper function, gets data and converts to JSON 
+
+const getJSON = function(url, errorMsg = "Something went wrong") {
+   return fetch(url).then(response => {
+        if (!response.ok) throw new Error (`${errorMsg} (${response.status})`) 
+        
+        return response.json()
+      });
+
+}
+
+const getCountryDataWithErr = function(country) {
+  getJSON(`https://restcountries.com/v2/name/${country}`, 'Country not found')
+    .then(data => {
+      renderCountry(data[0]);
+      const neighbour = data[0].borders[0]
+      // const neighbour = 'dssfdfffg';
+      console.log("neighbour: ", neighbour);
+
+      if (!neighbour) return;
+
+      // Country 2
+      return getJSON(`https://restcountries.com/v2/name/${neighbour}`, 'Country not found')
+    })
+    .then(data => renderCountry(data, 'neighbour'))
+    .catch(err => {
+      console.error(`${err} 💥💥💥`);
+      renderError(`Something went wrong 💥💥 ${err.message}. Try again!`)
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
+};
+
+btn.addEventListener('click', () => {
+  getCountryDataWithErr('portugal');  
+
+})
+
+// getCountryDataWithErr('australia')
