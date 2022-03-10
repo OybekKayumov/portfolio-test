@@ -381,7 +381,7 @@ const getCountryDataFetch = (country) => {
         console.log('response: ', response);
         
         if (!response.ok) { //* if OK is false
-          throw new Error(`Country not found`)  
+          throw new Error(`Country not found ${response.status}, ${response.statusText}, ok: ${response.ok} `)  
         }  
         return response.json()
         // err => alert(err)   //* cath error 1st promise
