@@ -377,9 +377,15 @@ const getCountryDataFetch = (country) => {
   // fetch(`https://restcountries.com/v3.1/name/${country}`)
   fetch(`https://restcountries.com/v2/name/${country}`)
     .then(
-      (response) => response.json(),
-      // err => alert(err)   //* cath error 1st promise
-    )    
+      (response) => {
+        console.log('response: ', response);
+        
+        if (!response.ok) { //* if OK is false
+          throw new Error(`Country not found`)  
+        }  
+        return response.json()
+        // err => alert(err)   //* cath error 1st promise
+      })    
     .then((data) => {                 //! returns Promise
       console.log('data: ', data);
 
