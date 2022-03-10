@@ -39,7 +39,7 @@ const countriesContainer = document.querySelector('.countries');
 // catch error function
 const renderError = (msg) => {
   countriesContainer.insertAdjacentText('beforeend', msg);
-  // countriesContainer.style.opacity = 1;  //* go to finally method
+  countriesContainer.style.opacity = 1;  //* go to finally method
 } 
 
 
@@ -198,7 +198,7 @@ const renderCountry = function(data, className = '') {
     `;
 
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  // countriesContainer.style.opacity = 1;    //* go to finally method
+  countriesContainer.style.opacity = 1;    //* go to finally method
 
 }
 
@@ -369,9 +369,6 @@ const request = fetch('https://restcountries.com/v3.1/name/portugal')
 
 // TODO CHAINING PROMISES 
 
- 
-
-
 // const getCountryDataFetch = (country) => {
 
   // Country 1
@@ -505,7 +502,7 @@ const getCountryDataWithErr = function(country) {
           'Country not found'
        );
     })
-    .then(data => renderCountry(data, 'neighbour'))
+    .then(data => renderCountry(data[0], 'neighbour'))
     .catch(err => {
       console.error(`${err} 💥💥💥`);
       renderError(`Something went wrong 💥💥 ${err.message}. Try again!`)
