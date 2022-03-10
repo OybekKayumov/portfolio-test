@@ -523,3 +523,42 @@ btn.addEventListener('click', () => {
 //TODO EVENT LOOP IN PRACTICE
 
 console.log('Test start');
+setTimeout(() => console.log('0 sec timer'), 0)
+// after 0 sec this callback will be put on the callback queue
+// Promise
+Promise.resolve('Resolved promise 1')
+  .then(res => console.log('res: ', res))
+
+Promise.resolve('Resolved promise 2')
+  .then(res => {
+    for (let i = 0; i < 100000000; i++) {}
+    console.log('res: ', res)
+  }) 
+
+console.log('Test end');
+
+// what order these four messages will be logged to the consol?
+// code outside of any callback will run first
+// 1,2 console.log('');
+// both timer and a Promise will finish same time, right after 0 seconds
+// Promise immediately become resolved
+
+//* Test start
+// Test end
+// res:  Resolved promise 1
+//! 0 sec timer
+
+// после добавления 2го Promise, setTimeout все равно появляетя последним
+//* Test start
+// Test end
+// res:  Resolved promise 1
+//* res:  Resolved promise 2
+//! 0 sec timer
+
+// только после всех "0 sec timer" СООБЩЕНИЕ ПОЯВЛЯЕТСЯ
+// this 0 sec timeout is not garantee 
+//! this means that you cannot really do high precision things using JS timers
+// высокоточные вещи
+// keep that in mind, whenever you are working with promises
+// basically with mikro-tasks and with timers at the same time 
+
