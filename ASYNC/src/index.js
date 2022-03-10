@@ -562,3 +562,23 @@ console.log('Test end');
 // keep that in mind, whenever you are working with promises
 // basically with mikro-tasks and with timers at the same time 
 
+
+
+//TODO BUILDING A SIMPLE PROMISE
+//! Promises are a special kind of Object in JavaScript
+//? Promise constructor takes exactly ONE argument, called "executed function"
+// it will automatically execute this executor function by passing in 2 other arguments: RESOLVE and REJECT 
+// if fulfilled we call resolve function
+// whatever value we pass into the resolve function, is gonna be the result of the promise will be available in the THEN handler
+const lotteryPromise = new Promise(function(resolve, reject) {
+  if (Math.random() >= 0.5) {
+    resolve('You WIN 💰💰');
+  } else {
+    reject('You lost 😒')
+  }
+}) 
+
+//* We created an executor function which will be called by Promise constructor as soon as it runs, immediately
+//* Then the Promise calls function and passes in the resolve and reject functions
+//* so that we can use them
+
