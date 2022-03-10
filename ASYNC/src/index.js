@@ -502,7 +502,7 @@ const getCountryDataWithErr = function(country) {
           'Country not found'
        );
     })
-    .then(data => renderCountry(data[0], 'neighbour'))
+    .then(data => renderCountry(data, 'neighbour'))
     .catch(err => {
       console.error(`${err} 💥💥💥`);
       renderError(`Something went wrong 💥💥 ${err.message}. Try again!`)
@@ -517,4 +517,9 @@ btn.addEventListener('click', () => {
 
 })
 
-// getCountryDataWithErr('australia')
+// getCountryDataWithErr('australia')  //! doesnt work
+
+
+//TODO EVENT LOOP IN PRACTICE
+
+console.log('Test start');
