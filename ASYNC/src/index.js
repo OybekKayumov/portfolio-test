@@ -866,6 +866,9 @@ const getPosition = function() {
      console.error('err: ', err);
 
      renderError(` 💥 ${err.message}`)
+
+     // Reject promise returned from async function
+     throw err;
    }
   }
 
@@ -877,10 +880,9 @@ console.log('1: will get location');
 
 // 2
 whereAmIAsync()
-  .then(city => console.log('city: ', city))
-  .catch(err => console.error(`${err.message}`))
-
-console.log('3: finished getting location');
+  .then(city => console.log(`2: ${city}`))
+  .catch(err => console.error(`2: ${err.message} 💥`))
+  .finally(() => console.log('3: finished getting location'))
 
 //todo  try catch 
 
@@ -894,5 +896,24 @@ console.log('3: finished getting location');
 
 //TODO returning values from Async functions 
 
+// convert to async await
+//! IIFE : immediately-invoked function expressions --> create example
+(function() {
+  // body
+})();
+// function, body, and at the and call it 
 
+// also we can create async
+(async function() {
+  // body
+})();
+
+//
+(async function() {
+  try {
+
+  } catch(err) {
+    
+  }
+})();
 
