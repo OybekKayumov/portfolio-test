@@ -991,7 +991,7 @@ const get3Countries = async function(c1, c2, c3)  {
 //! PROMISE.ALL combinator : combain multiple Promises
 
 // OTHER PROMISE combinators: 
-//!PROMISE.race 
+//! PROMISE.race 
 // first settled promise (resolve or reject) wins the race
 
 (async function() {
@@ -1021,7 +1021,7 @@ Promise.race([
   .catch(err => console.log(err))
 
 
-//!PROMISE.allSettled 
+//! PROMISE.allSettled 
 // return array of all the settled promises
 // return all the results of all the promises
 
@@ -1032,3 +1032,15 @@ Promise.allSettled()([
 ])
 .then(res => console.log('res allSettled: ', res))
 
+
+//! PROMISE.any [ES2021]
+// return the first fulfilled promise and ignore rejected promises
+
+
+Promise.any()([
+  Promise.resolve('Success'),
+  Promise.reject('ERROR'),
+  Promise.resolve('Another success'),
+])
+.then(res => console.log('res allSettled: ', res))
+.catch(err => console.log(err))
