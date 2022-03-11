@@ -858,7 +858,10 @@ const getPosition = function() {
       const data =  await res.json()    //* will return new  Promise
       console.log('data: ', data);
 
-      renderCountry(data[0])
+      renderCountry(data[0]);
+
+      return `You are in ${dataGeo.city}, ${dataGeo.country}`
+      
    } catch(err) {
      console.error('err: ', err);
 
@@ -866,11 +869,20 @@ const getPosition = function() {
    }
   }
 
-  whereAmIAsync()
-  console.log('will display First');
+console.log('1: will get location');
+// whereAmIAsync()
+// 1
+// const city =  whereAmIAsync()
+// console.log('city: ', city);
 
+// 2
+whereAmIAsync()
+  .then(city => console.log('city: ', city))
+  .catch(err => console.error(`${err.message}`))
 
-  //todo  try catch 
+console.log('3: finished getting location');
+
+//todo  try catch 
 
   // try {
   //   let y = 1;
@@ -879,6 +891,8 @@ const getPosition = function() {
   // } catch (err) {
   //   console.log('err: ', err);
   // }
+
+//TODO returning values from Async functions 
 
 
 
