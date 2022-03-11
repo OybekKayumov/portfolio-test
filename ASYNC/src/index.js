@@ -513,7 +513,7 @@ const getCountryDataWithErr = function(country) {
 };
 
 btn.addEventListener('click', () => {
-  getCountryDataWithErr('portugal');  
+  // getCountryDataWithErr('portugal');  
 
 })
 
@@ -598,61 +598,61 @@ btn.addEventListener('click', () => {
 //! simulate this function by adding a simple timer
 // it will simulate time data is passed between buying the lottery ticket and getting the result
 
-const lotteryPromise = new Promise(function(resolve, reject) {
-    
-    console.log('Lottery draw is happening 🔮');
-    setTimeout(() => {
-      if (Math.random() >= 0.5) {
-        resolve('You WIN 💰💰');
-      } else {
-        reject(new Error ('You lost 😒💪'))
-      }  
-    }, 2000);
-  })
+    // const lotteryPromise = new Promise(function(resolve, reject) {
+        
+    //     console.log('Lottery draw is happening 🔮');
+    //     setTimeout(() => {
+    //       if (Math.random() >= 0.5) {
+    //         resolve('You WIN 💰💰');
+    //       } else {
+    //         reject(new Error ('You lost 😒💪'))
+    //       }  
+    //     }, 2000);
+    //   })
 
-lotteryPromise
-  .then(res => {
-    console.log('res: ', res);    //* if fulfilled
-  })
-  .catch(err => {
-    console.error('err: ', err);  //* if rejected
-  })
+    // lotteryPromise
+    //   .then(res => {
+    //     console.log('res: ', res);    //* if fulfilled
+    //   })
+    //   .catch(err => {
+    //     console.error('err: ', err);  //* if rejected
+    //   })
 
 
 //! CREAT A WAIT FUNCTION
-const wait = function(seconds) {
-  return new Promise(function(resolve) {
-    setTimeout(resolve, seconds * 1000)
-  })
-}
+    // const wait = function(seconds) {
+    //   return new Promise(function(resolve) {
+    //     setTimeout(resolve, seconds * 1000)
+    //   })
+    // }
 
-wait(2).
-  then(() =>{
-    console.log('I waited for 2 seconds');
-    return wait(1);
-  })
-  .then(() => {
-    console.log('I waited for 1 seconds');
-  })
+    // wait(2).
+    //   then(() =>{
+    //     console.log('I waited for 2 seconds');
+    //     return wait(1);
+    //   })
+    //   .then(() => {
+    //     console.log('I waited for 1 seconds');
+    //   })
 
 
-  //
-wait(1)
-  .then(() =>{
-    console.log('1 second passed');
-    return wait(1);
-  })
-  .then(() =>{
-    console.log('2 second passed');
-    return wait(1);
-  })
-  .then(() =>{
-    console.log('3 second passed');
-    return wait(1);
-  })
-  .then(() => {
-    console.log('4 second passed');
-  })
+    //   //
+    // wait(1)
+    //   .then(() =>{
+    //     console.log('1 second passed');
+    //     return wait(1);
+    //   })
+    //   .then(() =>{
+    //     console.log('2 second passed');
+    //     return wait(1);
+    //   })
+    //   .then(() =>{
+    //     console.log('3 second passed');
+    //     return wait(1);
+    //   })
+    //   .then(() => {
+    //     console.log('4 second passed');
+    //   })
 
 //!COMPARE
 
@@ -675,15 +675,17 @@ wait(1)
 
 // .resolve is a static method on the Promise constructor
 // Promise.resolve(pass resolve value)
-Promise.resolve('abc')
-    .then(x => console.log('x: ', x))
 
-Promise.reject(new Error('Problem!'))
-    .catch(x => console.error('x: ', x))
-// no necessary THEN, because there will be no resolved value anyway
+    // Promise.resolve('abc')
+    //     .then(x => console.log('x: ', x))
+
+    // Promise.reject(new Error('Problem!'))
+    //     .catch(x => console.error('x: ', x))
+
+    // no necessary THEN, because there will be no resolved value anyway
 //! AND THESE TWO SHOULD NOW APPEAR AT THE VERY BEGINNING 
 
-// Lottery draw is happening 🔮  //* COMES FROM PREVIOUS pROMISE
+// Lottery draw is happening 🔮  //* COMES FROM PREVIOUS PROMISE
 // x:  abc              //! comes first
 // x:  Error: Problem!  //! comes first
 // (anonymous) @ index.js:682
@@ -696,5 +698,187 @@ Promise.reject(new Error('Problem!'))
 // I waited for 1 seconds
 // 3 second passed
 // 4 second passed
+
+
+
+//TODO Promisifying the Geolocation
+
+// navigator.geolocation.getCurrentPosition(1stArgument, 2ndArgument) 
+
+//   navigator.geolocation.getCurrentPosition(position => {    //* 1st argument
+//   console.log('position: ', position);
+// },
+//   err => {                                            //* 2nd argument      
+//     console.error('err: ', err);
+//   }
+// )
+
+// console.log('Getting Position...');  //! will be consoled FIRST
+//? because script will start with navigator... , offloaded its work to the background to Browser API and immediately moves to next command line
+
+// const getPosition = function() {
+//   return new Promise(function(resolve, reject) {
+
+//     // navigator.geolocation.getCurrentPosition(position => { 
+//     //   console.log('position: ', position);
+//     //   resolve(position);
+//     // },
+//     //   err => {                        
+//     //     console.error('err: ', err);
+//     //     reject(err);
+//     //   }
+//     // )
+
+//     navigator.geolocation.getCurrentPosition(resolve, reject) 
+    
+//   })
+// }
+
+// getPosition().then(pos => console.log('position: ', pos))
+
+const whereAmI = function() {
+
+  getPosition().then(position => {
+    console.log('position coords: ', position.coords.latitude);
+    // const {lat = latitude, lng = longitude} = position.coords; //! error, see how improved
+    const {latitude: lat, longitude: lng} = position.coords;
+
+    return fetch(`https://geocode.xyz/${lat}, ${lng}?geoit=json`)
+  })
+  .then(res => {
+    if (!res.ok) throw new Error(`Problem with geocoding ${res.status}`)
+
+    return res.json();
+  })
+  .then(data => {
+    console.log('data: ', data);
+    console.log(`You are in ${data.city}, ${data.country}`);
+
+    return fetch(`https://restcountries.com/v2/name/${data.country}`)
+  })
+  .then(res => {
+    if (!res.ok) throw new Error(`Country not found (${res.status})`);
+
+    return res.json()
+  })
+  .then(data => renderCountry(data[0]))
+  .catch(err => console.error(`${err.message} 💥 `)) 
+}
+
+// how to array and object
+//* coords ? arr or obj ?
+//* position: 
+// GeolocationPosition {coords: GeolocationCoordinates, timestamp: 1646928269568}
+
+// btn.addEventListener('click', whereAmI);
+
+
+
+//TODO ASYNC AWAIT
+
+// async is now asynchronous function, that will keep running in the background while performing the ode that inside of it,
+// then when this function is done, it automatically returns a Promise
+// inside this async function we can have One or More AWAIT statements
+// await and we need a Promise
+// we can use the Promise returned from FETCH function
+// AWAIT will stop code execution at this point of the function until the Promise is FULFILLED
+// until the data has been fetched in this case
+//! this function is running asynchronously in the background, so therefore it is not blocking the main threat of execution
+// it's not blocking the call stack
+// it's make our code look like regular synchronous code while behind the scenes everything is Asynchronous.
+
+// and we can store this "await promise value" into a variable 
+
+
+  // const whereAmIAsync = async function(country) {
+  //   // fetch(`https://restcountries.com/v2/name/${country}`)
+  //   // .then(res => console.log('response: ', res))
+
+  //   const res = await fetch(`https://restcountries.com/v2/name/${country}`);
+  //   // take a look at that response
+  //   console.log('response: ', res);
+    
+  //   // we write
+  //   // return res.json()
+  //   // now:
+  //   const data =  await res.json()    //* will return new  Promise
+  //   console.log('data: ', data);
+
+  //   //todo and all we need to do is render it
+  //   renderCountry(data[0])
+
+  // }
+
+  // whereAmIAsync('portugal')
+  // console.log('will display First');
+
+// this time we got response in really nice and elegant way
+// we can simply AWAIT until the value of the Promise is RETURNED
+// and just assign that value to a variable
+// before we had to mess with callback functions and that was true callback hell
+// but now with async await, that is completely gone
+// and this looks now like normal synchronous code 
+
+//! async await is a syntactic sugar over the THEN method in Promises
+// this is a same as:
+  // fetch(`https://restcountries.com/v2/name/${country}`)
+  //   .then(res => console.log('response: ', res))
+
+// recreate whereAmI function
+
+//! all without de-chaining of promises like we had before
+
+const getPosition = function() {
+  return new Promise(function(resolve, reject) {
+
+    navigator.geolocation.getCurrentPosition(resolve, reject) 
+    
+  })
+}
+
+  const whereAmIAsync = async function() {
+    try {// 2 Geolocation
+      const pos =  await getPosition();
+      const {latitude: lat, longitude: lng} = pos.coords;
+
+      // Reverse geocoding
+      const resGeo = await fetch(`https://geocode.xyz/${lat}, ${lng}?geoit=json`)
+
+      if (!resGeo.ok) throw new Error('Problem getting location data');
+
+      const dataGeo = await resGeo.json()
+      console.log('dataGeo: ', dataGeo);
+
+      // Country data
+      const res = await fetch(`https://restcountries.com/v2/name/${dataGeo.country}`);
+
+      if (!res.ok) throw new Error('Problem getting country');
+
+      console.log('response: ', res);
+      const data =  await res.json()    //* will return new  Promise
+      console.log('data: ', data);
+
+      renderCountry(data[0])
+   } catch(err) {
+     console.error('err: ', err);
+
+     renderError(` 💥 ${err.message}`)
+   }
+  }
+
+  whereAmIAsync()
+  console.log('will display First');
+
+
+  //todo  try catch 
+
+  // try {
+  //   let y = 1;
+  //   const x = 2;
+  //   y = 3; 
+  // } catch (err) {
+  //   console.log('err: ', err);
+  // }
+
 
 

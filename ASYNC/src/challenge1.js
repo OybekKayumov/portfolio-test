@@ -48,7 +48,7 @@ const whereAmI = function(lat, lng) {
     .then(res => {
       if (!res.ok) throw new Error(`Country not found (${res.status})`);
 
-      return response.json()
+      return res.json()
     })
     .then(data => renderCountry(data[0]))
     .catch(err => console.error(`${err.message} 💥 `)) 
