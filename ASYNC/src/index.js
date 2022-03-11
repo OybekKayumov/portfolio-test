@@ -879,10 +879,10 @@ console.log('1: will get location');
 // console.log('city: ', city);
 
 // 2
-whereAmIAsync()
-  .then(city => console.log(`2: ${city}`))
-  .catch(err => console.error(`2: ${err.message} 💥`))
-  .finally(() => console.log('3: finished getting location'))
+    // whereAmIAsync()
+    //   .then(city => console.log(`2: ${city}`))
+    //   .catch(err => console.error(`2: ${err.message} 💥`))
+    //   .finally(() => console.log('3: finished getting location'))
 
 //todo  try catch 
 
@@ -911,9 +911,11 @@ whereAmIAsync()
 //
 (async function() {
   try {
-
+    const city =  await whereAmIAsync();
+    console.log(`2: ${city}`);
   } catch(err) {
-    
+    console.error(`2: ${err.message} 💥`)
   }
+    console.log('3: finished getting location')
 })();
 
