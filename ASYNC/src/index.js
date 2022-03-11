@@ -872,7 +872,7 @@ const getPosition = function() {
    }
   }
 
-console.log('1: will get location');
+// console.log('1: will get location');
 // whereAmIAsync()
 // 1
 // const city =  whereAmIAsync()
@@ -968,8 +968,8 @@ const get3Countries = async function(c1, c2, c3)  {
     //     });
     // }
 
-get3Countries('portugal', 'canada', 'tanzania')
-get3Countries('uzbekistan', 'kazakhstan', 'russia')
+// get3Countries('portugal', 'canada', 'tanzania')
+// get3Countries('uzbekistan', 'kazakhstan', 'russia')
 // (3) ['Lisbon', 'Ottawa', 'Dodoma']
 // (3) ['Tashkent', 'Nur-Sultan', 'Moscow']
 
@@ -989,3 +989,33 @@ get3Countries('uzbekistan', 'kazakhstan', 'russia')
 // IMPORTANT NOTE HERE IS : IF ONE OF THE PROMISES REJECTS, THEN THE WHOLE
 // PROMISE.ALL REJECTS AS WELL
 //! PROMISE.ALL combinator : combain multiple Promises
+
+// OTHER PROMISE combinators: 
+//PROMISE.race 
+// first settled promise (resolve or reject) wins the race
+
+(async function() {
+  const response = await Promise.race([
+    getJSON(`https://restcountries.com/v2/name/italy`),
+    getJSON(`https://restcountries.com/v2/name/egypt`).
+    getJSON(`https://restcountries.com/v2/name/mexico`)
+  ])
+  console.log('res3: ', res[0]);
+})()
+
+//! we will get one resultn array of the results of all three
+
+const timeout = function(s) {
+  return new Promise(function(_, reject) {
+    setTimeout(function() {
+      reject( new Error('Request took too long!'))
+    }, sec * 1000)
+  })
+};
+
+Promise.race([
+  getJSON(`https://restcountries.com/v2/name/mexico`),
+  timeout(5),
+])
+  .then(res => console.log('res maxico: ', res[0]))
+  .catch(err => console.log(err))
