@@ -513,7 +513,7 @@ const getCountryDataWithErr = function(country) {
 };
 
 btn.addEventListener('click', () => {
-  getCountryDataWithErr('portugal');  
+  // getCountryDataWithErr('portugal');  
 
 })
 
@@ -734,4 +734,40 @@ const getPosition = function() {
   })
 }
 
-getPosition().then(pos => console.log('position: ', pos))
+// getPosition().then(pos => console.log('position: ', pos))
+
+const whereAmI = function() {
+
+  getPosition().then(position => {
+    console.log('position coords: ', position.coords.latitude);
+    // const {lat = latitude, lng = longitude} = position.coords; //! error, see how improved
+    const {latitude: lat, longitude: lng} = position.coords;
+
+    return fetch(`https://geocode.xyz/${lat}, ${lng}?geoit=json`)
+  })
+  .then(res => {
+    if (!res.ok) throw new Error(`Problem with geocoding ${res.status}`)
+
+    return res.json();
+  })
+  .then(data => {
+    console.log('data: ', data);
+    console.log(`You are in ${data.city}, ${data.country}`);
+
+    return fetch(`https://restcountries.com/v2/name/${data.country}`)
+  })
+  .then(res => {
+    if (!res.ok) throw new Error(`Country not found (${res.status})`);
+
+    return res.json()
+  })
+  .then(data => renderCountry(data[0]))
+  .catch(err => console.error(`${err.message} 💥 `)) 
+}
+
+// how to array and object
+//* coords ? arr or obj ?
+//* position: 
+// GeolocationPosition {coords: GeolocationCoordinates, timestamp: 1646928269568}
+
+btn.addEventListener('click', whereAmI);
