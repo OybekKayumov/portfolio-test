@@ -934,6 +934,15 @@ const get3Countries = async function(c1, c2, c3)  {
 
    // capital
    console.log([data1.capital, data2.capital, data3.capital]);
+
+   // helper function on Promise constructor: static method
+   //it takes array of promises and will return a NEW Promise
+   // running getdata in same time: see console --> network
+   Promise.all([
+    getJSON(`https://restcountries.com/v2/name/${c1}`),
+    getJSON(`https://restcountries.com/v2/name/${c2}`),
+    getJSON(`https://restcountries.com/v2/name/${c3}`)
+   ])
    
   } catch(err) {
     console.error('err: ', err);
@@ -953,4 +962,6 @@ const get3Countries = async function(c1, c2, c3)  {
     // }
 
 get3Countries('portugal', 'canada', 'tanzania')
+get3Countries('uzbekistan', 'kazakhstan', 'russia')
 // (3) ['Lisbon', 'Ottawa', 'Dodoma']
+// (3) ['Tashkent', 'Nur-Sultan', 'Moscow']
