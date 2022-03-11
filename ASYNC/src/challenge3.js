@@ -71,10 +71,26 @@ const LoadNPause = async function() {
   } 
 }
 
-LoadNPause();
+// LoadNPause();
 
 
 // PART 2
 const loadAll = async function(imgArr) {
-  
+  try {
+    const imgs = imgArr.map(async img => await createImg(img));
+    console.log('imgs: ', imgs);
+    
+  } catch (err) {
+    console.log(err);
+  }
 }
+
+loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg'])
+
+// imgs:  
+// Array(3)
+// 0: Promise {<fulfilled>: img}
+// 1: Promise {<fulfilled>: img}
+// 2: Promise {<fulfilled>: img}
+// length: 3
+// [[Prototype]]: Array(0)
