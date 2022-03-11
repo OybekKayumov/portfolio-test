@@ -991,7 +991,7 @@ const get3Countries = async function(c1, c2, c3)  {
 //! PROMISE.ALL combinator : combain multiple Promises
 
 // OTHER PROMISE combinators: 
-//PROMISE.race 
+//!PROMISE.race 
 // first settled promise (resolve or reject) wins the race
 
 (async function() {
@@ -1003,7 +1003,7 @@ const get3Countries = async function(c1, c2, c3)  {
   console.log('res3: ', res[0]);
 })()
 
-//! we will get one resultn array of the results of all three
+//! we will get one result an array of the results of all three
 
 const timeout = function(s) {
   return new Promise(function(_, reject) {
@@ -1017,5 +1017,18 @@ Promise.race([
   getJSON(`https://restcountries.com/v2/name/mexico`),
   timeout(5),
 ])
-  .then(res => console.log('res maxico: ', res[0]))
+  .then(res => console.log('res mexico: ', res[0]))
   .catch(err => console.log(err))
+
+
+//!PROMISE.allSettled 
+// return array of all the settled promises
+// return all the results of all the promises
+
+Promise.allSettled()([
+  Promise.resolve('Success'),
+  Promise.reject('ERROR'),
+  Promise.resolve('Another success'),
+])
+.then(res => console.log('res allSettled: ', res))
+
