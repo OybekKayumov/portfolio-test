@@ -798,3 +798,16 @@ const whereAmIAsync = async function(country) {
 
 whereAmIAsync('portugal')
 console.log('will display First');
+
+// this time we got response in really nice and elegant way
+// we can simply AWAIT until the value of the Promise is RETURNED
+// and just assign that value to a variable
+// before we had to mess with callback functions and that was true callback hell
+// but now with async await, that is completely gone
+// and this looks now like normal synchronous code 
+
+//! async await is a syntactic sugar over the THEN method in Promises
+// this is a same as:
+fetch(`https://restcountries.com/v2/name/${country}`)
+  .then(res => console.log('response: ', res))
+
