@@ -5,7 +5,10 @@
 console.log('Exporting module');
 
 const shippingCost = 10;
-const cart = [];
+// const cart = [];
+
+// 7
+export const cart = [];
 
 // 2
 //? 2 types of export :Named and Default Exports
