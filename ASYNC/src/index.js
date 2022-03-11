@@ -713,7 +713,7 @@ btn.addEventListener('click', () => {
 //   }
 // )
 
-console.log('Getting Position...');  //! will be consoled FIRST
+// console.log('Getting Position...');  //! will be consoled FIRST
 //? because script will start with navigator... , offloaded its work to the background to Browser API and immediately moves to next command line
 
 const getPosition = function() {
@@ -770,4 +770,31 @@ const whereAmI = function() {
 //* position: 
 // GeolocationPosition {coords: GeolocationCoordinates, timestamp: 1646928269568}
 
-btn.addEventListener('click', whereAmI);
+// btn.addEventListener('click', whereAmI);
+
+
+
+//TODO ASYNC AWAIT
+
+// async is now asynchronous function, that will keep running in the background while performing the ode that inside of it,
+// then when this function is done, it automatically returns a Promise
+// inside this async function we can have One or More AWAIT statements
+// await and we need a Promise
+// we can use the Promise returned from FETCH function
+// AWAIT will stop code execution at this point of the function until the Promise is FULFILLED
+// until the data has been fetched in this case
+//! this function is running asynchronously in the background, so therefore it is not blocking the main threat of execution
+// it's not blocking the call stack
+// it's make our code look like regular synchronous code while behind the scenes everything is Asynchronous.
+
+// and we can store this "await promise value" into a variable 
+
+
+const whereAmIAsync = async function(country) {
+  const res = await fetch(`https://restcountries.com/v2/name/${country}`);
+  // take a look at that response
+  console.log('response: ', res);
+}
+
+whereAmIAsync('portugal')
+console.log('will display First');
