@@ -927,23 +927,24 @@ const get3Countries = async function(c1, c2, c3)  {
   try {
     // result getJSON is array with one object, so we write [data1]
     // we use destructuring to take first element there
-   const [data1] = await getJSON(`https://restcountries.com/v2/name/${c1}`)
+  //!  const [data1] = await getJSON(`https://restcountries.com/v2/name/${c1}`)
    // duplicate code twice
-   const [data2] = await getJSON(`https://restcountries.com/v2/name/${c2}`)
-   const [data3] = await getJSON(`https://restcountries.com/v2/name/${c3}`)
+  //!  const [data2] = await getJSON(`https://restcountries.com/v2/name/${c2}`)
+  //!  const [data3] = await getJSON(`https://restcountries.com/v2/name/${c3}`)
 
-   // capital
-   console.log([data1.capital, data2.capital, data3.capital]);
-
-   // helper function on Promise constructor: static method
-   //it takes array of promises and will return a NEW Promise
-   // running getdata in same time: see console --> network
-   Promise.all([
+  
+  // helper function on Promise constructor: static method
+  //it takes array of promises and will return a NEW Promise
+  // running getdata in same time: see console --> network
+  Promise.all([
     getJSON(`https://restcountries.com/v2/name/${c1}`),
     getJSON(`https://restcountries.com/v2/name/${c2}`),
     getJSON(`https://restcountries.com/v2/name/${c3}`)
-   ])
-   
+  ])
+  
+  // capital
+  console.log([data1.capital, data2.capital, data3.capital]);
+  
   } catch(err) {
     console.error('err: ', err);
   } 
