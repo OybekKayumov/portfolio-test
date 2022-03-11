@@ -936,15 +936,21 @@ const get3Countries = async function(c1, c2, c3)  {
   // helper function on Promise constructor: static method
   //it takes array of promises and will return a NEW Promise
   // running getdata in same time: see console --> network
-  Promise.all([
+  const data =  await Promise.all([
     getJSON(`https://restcountries.com/v2/name/${c1}`),
     getJSON(`https://restcountries.com/v2/name/${c2}`),
     getJSON(`https://restcountries.com/v2/name/${c3}`)
   ])
   
   // capital
-  console.log([data1.capital, data2.capital, data3.capital]);
-  
+  // console.log([data1.capital, data2.capital, data3.capital]);
+  console.log('dataAll: ', data);  //*Promise pending
+
+  // map
+  //* d=Array1, from d we want to take elem [0], and capital
+  console.log(data.map(d => d[0].capital));  
+
+
   } catch(err) {
     console.error('err: ', err);
   } 
@@ -966,3 +972,20 @@ get3Countries('portugal', 'canada', 'tanzania')
 get3Countries('uzbekistan', 'kazakhstan', 'russia')
 // (3) ['Lisbon', 'Ottawa', 'Dodoma']
 // (3) ['Tashkent', 'Nur-Sultan', 'Moscow']
+
+//! we get data with 3 arrays, each of them is object we are looking for
+// dataAll:  (3) [Array(1), Array(1), Array(1)]
+// dataAll:  (3) [Array(1), Array(1), Array(1)]
+
+// we have to loop over this data
+// and take out the data that we want
+
+//todo  map
+// dataAll:  (3) [Array(1), Array(1), Array(1)]
+// (3) ['Lisbon', 'Ottawa', 'Dodoma']
+// dataAll:  (3) [Array(1), Array(1), Array(1)]
+// (3) ['Tashkent', 'Nur-Sultan', 'Moscow']
+
+// IMPORTANT NOTE HERE IS : IF ONE OF THE PROMISES REJECTS, THEN THE WHOLE
+// PROMISE.ALL REJECTS AS WELL
+//! PROMISE.ALL combinator : combain multiple Promises
