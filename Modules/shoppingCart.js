@@ -9,3 +9,8 @@ const cart = [];
 //? 2 types of export
 // Named and Default Exports
 
+//todo Named export
+export const addToCart = (product, quantity) => {
+  cart.push({ product, quantity });
+  console.log(`${quantity} ${product} added to cart`);
+}
