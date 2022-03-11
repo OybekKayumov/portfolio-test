@@ -25,13 +25,26 @@ const createImg = function(imgPath) {
   })
 }
 
+let currImg;
+
 createImg('img/img-1.jpg')
   .then(img => {
+    currImg = img;
     console.log('Image 1 loaded');
     return wait(2);
   })
   .then(() => {
+    currImg.style.display = 'none';
     
+    return createImg('img/img-2.jpg');
+  })
+  .then(img => {
+    currImg = img;
+    console.log('Image 2 loaded');
+    return wait(2)
+  })
+  .then(() => {
+    currImg.style.display = 'none';
   })
   .catch(err => console.error('err: ', err))
 
