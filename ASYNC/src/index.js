@@ -919,3 +919,38 @@ console.log('1: will get location');
     console.log('3: finished getting location')
 })();
 
+
+
+//TODO RUNNING PROMISES IN PARALLEL
+
+const get3Countries = async function(c1, c2, c3)  {
+  try {
+    // result getJSON is array with one object, so we write [data1]
+    // we use destructuring to take first element there
+   const [data1] = await getJSON(`https://restcountries.com/v2/name/${c1}`)
+   // duplicate code twice
+   const [data2] = await getJSON(`https://restcountries.com/v2/name/${c2}`)
+   const [data3] = await getJSON(`https://restcountries.com/v2/name/${c3}`)
+
+   // capital
+   console.log([data1.capital, data2.capital, data3.capital]);
+   
+  } catch(err) {
+    console.error('err: ', err);
+  } 
+}
+
+//! in async function we really need to wrap or coat into a "try-catch block"
+// NEVER WORK AN ASYNC FUNCTION WITHOUT THIS
+//?*!todo in real world scenario you would do real error handling and not just log it to the console
+
+    // const getJSON = function (url, errorMsg = "Something went wrong") {
+    //   return fetch(url).then(response => {
+    //       if (!response.ok) throw new Error (`${errorMsg} (${response.status})`) 
+          
+    //       return response.json()
+    //     });
+    // }
+
+get3Countries('portugal', 'canada', 'tanzania')
+// (3) ['Lisbon', 'Ottawa', 'Dodoma']
