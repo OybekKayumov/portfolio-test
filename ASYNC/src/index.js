@@ -858,19 +858,33 @@ const getPosition = function() {
       const data =  await res.json()    //* will return new  Promise
       console.log('data: ', data);
 
-      renderCountry(data[0])
+      renderCountry(data[0]);
+
+      return `You are in ${dataGeo.city}, ${dataGeo.country}`
+      
    } catch(err) {
      console.error('err: ', err);
 
      renderError(` 💥 ${err.message}`)
+
+     // Reject promise returned from async function
+     throw err;
    }
   }
 
-  whereAmIAsync()
-  console.log('will display First');
+// console.log('1: will get location');
+// whereAmIAsync()
+// 1
+// const city =  whereAmIAsync()
+// console.log('city: ', city);
 
+// 2
+    // whereAmIAsync()
+    //   .then(city => console.log(`2: ${city}`))
+    //   .catch(err => console.error(`2: ${err.message} 💥`))
+    //   .finally(() => console.log('3: finished getting location'))
 
-  //todo  try catch 
+//todo  try catch 
 
   // try {
   //   let y = 1;
@@ -880,5 +894,153 @@ const getPosition = function() {
   //   console.log('err: ', err);
   // }
 
+//TODO returning values from Async functions 
+
+// convert to async await
+//! IIFE : immediately-invoked function expressions --> create example
+(function() {
+  // body
+})();
+// function, body, and at the and call it 
+
+// also we can create async
+(async function() {
+  // body
+})();
+
+//
+(async function() {
+  try {
+    const city =  await whereAmIAsync();
+    console.log(`2: ${city}`);
+  } catch(err) {
+    console.error(`2: ${err.message} 💥`)
+  }
+    console.log('3: finished getting location')
+})();
 
 
+
+//TODO RUNNING PROMISES IN PARALLEL
+
+const get3Countries = async function(c1, c2, c3)  {
+  try {
+    // result getJSON is array with one object, so we write [data1]
+    // we use destructuring to take first element there
+  //!  const [data1] = await getJSON(`https://restcountries.com/v2/name/${c1}`)
+   // duplicate code twice
+  //!  const [data2] = await getJSON(`https://restcountries.com/v2/name/${c2}`)
+  //!  const [data3] = await getJSON(`https://restcountries.com/v2/name/${c3}`)
+
+  
+  // helper function on Promise constructor: static method
+  //it takes array of promises and will return a NEW Promise
+  // running getdata in same time: see console --> network
+  const data =  await Promise.all([
+    getJSON(`https://restcountries.com/v2/name/${c1}`),
+    getJSON(`https://restcountries.com/v2/name/${c2}`),
+    getJSON(`https://restcountries.com/v2/name/${c3}`)
+  ])
+  
+  // capital
+  // console.log([data1.capital, data2.capital, data3.capital]);
+  console.log('dataAll: ', data);  //*Promise pending
+
+  // map
+  //* d=Array1, from d we want to take elem [0], and capital
+  console.log(data.map(d => d[0].capital));  
+
+
+  } catch(err) {
+    console.error('err: ', err);
+  } 
+}
+
+//! in async function we really need to wrap or coat into a "try-catch block"
+// NEVER WORK AN ASYNC FUNCTION WITHOUT THIS
+//?*!todo in real world scenario you would do real error handling and not just log it to the console
+
+    // const getJSON = function (url, errorMsg = "Something went wrong") {
+    //   return fetch(url).then(response => {
+    //       if (!response.ok) throw new Error (`${errorMsg} (${response.status})`) 
+          
+    //       return response.json()
+    //     });
+    // }
+
+// get3Countries('portugal', 'canada', 'tanzania')
+// get3Countries('uzbekistan', 'kazakhstan', 'russia')
+// (3) ['Lisbon', 'Ottawa', 'Dodoma']
+// (3) ['Tashkent', 'Nur-Sultan', 'Moscow']
+
+//! we get data with 3 arrays, each of them is object we are looking for
+// dataAll:  (3) [Array(1), Array(1), Array(1)]
+// dataAll:  (3) [Array(1), Array(1), Array(1)]
+
+// we have to loop over this data
+// and take out the data that we want
+
+//todo  map
+// dataAll:  (3) [Array(1), Array(1), Array(1)]
+// (3) ['Lisbon', 'Ottawa', 'Dodoma']
+// dataAll:  (3) [Array(1), Array(1), Array(1)]
+// (3) ['Tashkent', 'Nur-Sultan', 'Moscow']
+
+// IMPORTANT NOTE HERE IS : IF ONE OF THE PROMISES REJECTS, THEN THE WHOLE
+// PROMISE.ALL REJECTS AS WELL
+//! PROMISE.ALL combinator : combain multiple Promises
+
+// OTHER PROMISE combinators: 
+//! PROMISE.race 
+// first settled promise (resolve or reject) wins the race
+
+(async function() {
+  const response = await Promise.race([
+    getJSON(`https://restcountries.com/v2/name/italy`),
+    getJSON(`https://restcountries.com/v2/name/egypt`).
+    getJSON(`https://restcountries.com/v2/name/mexico`)
+  ])
+  console.log('res3: ', res[0]);
+})()
+
+//! we will get one result an array of the results of all three
+
+const timeout = function(s) {
+  return new Promise(function(_, reject) {
+    setTimeout(function() {
+      reject( new Error('Request took too long!'))
+    }, sec * 1000)
+  })
+};
+
+Promise.race([
+  getJSON(`https://restcountries.com/v2/name/mexico`),
+  timeout(5),
+])
+  .then(res => console.log('res mexico: ', res[0]))
+  .catch(err => console.log(err))
+
+
+//! PROMISE.allSettled 
+// return array of all the settled promises
+// return all the results of all the promises
+
+Promise.allSettled()([
+  Promise.resolve('Success'),
+  Promise.reject('ERROR'),
+  Promise.resolve('Another success'),
+])
+.then(res => console.log('res allSettled: ', res))
+
+
+//! PROMISE.any [ES2021]
+// return the first fulfilled promise and ignore rejected promises
+
+
+Promise.any()([
+  Promise.resolve('Success'),
+  Promise.reject('ERROR'),
+  Promise.resolve('Another success'),
+])
+.then(res => console.log('res allSettled: ', res))
+.catch(err => console.log(err))
