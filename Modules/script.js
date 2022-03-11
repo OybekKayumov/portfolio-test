@@ -21,9 +21,18 @@ console.log('Importing module');
 // console.log(price, tq);
 
 
-//todo 4: import everything same time
+//todo 4: import everything same time  
 import * as ShoppingCart from './shoppingCart.js'
 // now we have to take addToCart() from ShoppingCart object
 ShoppingCart.addToCart('bread', 5)
 console.log(ShoppingCart.totalPrice, ShoppingCart.tq); 
 
+// 5 we can give any name to imported default
+// import add from './shoppingCart.js'
+
+// add('pizza', 2);
+
+// 6 also we can mixt import
+import add, { addToCart, totalPrice as price, tq } from './shoppingCart.js'
+add('pizza', 2);
+console.log('price: ', price);

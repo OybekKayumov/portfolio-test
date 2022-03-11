@@ -25,3 +25,16 @@ const totalQuantity = 23;
 // export { totalPrice, totalQuantity }
 export { totalPrice, totalQuantity as tq}
 
+
+// 5
+//todo Default export - when to export ONE thing per module
+// export default function (product, quantity) {
+//   cart.push({ product, quantity });
+//   console.log(`${quantity} ${product} added to cart`);
+// }
+
+// arrow function
+export default (product, quantity) => {
+  cart.push({ product, quantity });
+  console.log(`${quantity} ${product} added to cart`);
+}
