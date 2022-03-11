@@ -716,23 +716,23 @@ btn.addEventListener('click', () => {
 // console.log('Getting Position...');  //! will be consoled FIRST
 //? because script will start with navigator... , offloaded its work to the background to Browser API and immediately moves to next command line
 
-const getPosition = function() {
-  return new Promise(function(resolve, reject) {
+// const getPosition = function() {
+//   return new Promise(function(resolve, reject) {
 
-    // navigator.geolocation.getCurrentPosition(position => { 
-    //   console.log('position: ', position);
-    //   resolve(position);
-    // },
-    //   err => {                        
-    //     console.error('err: ', err);
-    //     reject(err);
-    //   }
-    // )
+//     // navigator.geolocation.getCurrentPosition(position => { 
+//     //   console.log('position: ', position);
+//     //   resolve(position);
+//     // },
+//     //   err => {                        
+//     //     console.error('err: ', err);
+//     //     reject(err);
+//     //   }
+//     // )
 
-    navigator.geolocation.getCurrentPosition(resolve, reject) 
+//     navigator.geolocation.getCurrentPosition(resolve, reject) 
     
-  })
-}
+//   })
+// }
 
 // getPosition().then(pos => console.log('position: ', pos))
 
@@ -790,14 +790,27 @@ const whereAmI = function() {
 // and we can store this "await promise value" into a variable 
 
 
-const whereAmIAsync = async function(country) {
-  const res = await fetch(`https://restcountries.com/v2/name/${country}`);
-  // take a look at that response
-  console.log('response: ', res);
-}
+  // const whereAmIAsync = async function(country) {
+  //   // fetch(`https://restcountries.com/v2/name/${country}`)
+  //   // .then(res => console.log('response: ', res))
 
-whereAmIAsync('portugal')
-console.log('will display First');
+  //   const res = await fetch(`https://restcountries.com/v2/name/${country}`);
+  //   // take a look at that response
+  //   console.log('response: ', res);
+    
+  //   // we write
+  //   // return res.json()
+  //   // now:
+  //   const data =  await res.json()    //* will return new  Promise
+  //   console.log('data: ', data);
+
+  //   //todo and all we need to do is render it
+  //   renderCountry(data[0])
+
+  // }
+
+  // whereAmIAsync('portugal')
+  // console.log('will display First');
 
 // this time we got response in really nice and elegant way
 // we can simply AWAIT until the value of the Promise is RETURNED
@@ -808,6 +821,40 @@ console.log('will display First');
 
 //! async await is a syntactic sugar over the THEN method in Promises
 // this is a same as:
-fetch(`https://restcountries.com/v2/name/${country}`)
-  .then(res => console.log('response: ', res))
+  // fetch(`https://restcountries.com/v2/name/${country}`)
+  //   .then(res => console.log('response: ', res))
+
+// recreate whereAmI function
+
+//! all without de-chaining of promises like we had before
+
+const getPosition = function() {
+  return new Promise(function(resolve, reject) {
+
+    navigator.geolocation.getCurrentPosition(resolve, reject) 
+    
+  })
+}
+
+  const whereAmIAsync = async function() {
+    // 2 Geolocation
+    const pos =  await getPosition();
+    const {latitude: lat, longitude: lng} = pos.coords;
+
+    // Reverse geocoding
+    const resGeo = await fetch(`https://geocode.xyz/${lat}, ${lng}?geoit=json`)
+    const dataGeo = await resGeo.json()
+    console.log('dataGeo: ', dataGeo);
+
+    // Country data
+    const res = await fetch(`https://restcountries.com/v2/name/${dataGeo.country}`);
+    console.log('response: ', res);
+    const data =  await res.json()    //* will return new  Promise
+    console.log('data: ', data);
+
+    renderCountry(data[0])
+  }
+
+  whereAmIAsync()
+  console.log('will display First');
 
