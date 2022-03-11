@@ -1,5 +1,11 @@
 const imgContainer = document.querySelector('.images');
 
+const wait = (seconds) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, seconds * 1000)
+  });
+};
+
 const createImg = function(imgPath) {
   return new Promise (function(resolve, reject) {
 
@@ -14,11 +20,20 @@ const createImg = function(imgPath) {
 
     img.addEventListener('error', function() {
 
-      reject(new Error('Image not found'));
+      reject(new Error('Image not found!!!'));
     })
   })
 }
 
+createImg('img/img-1.jpg')
+  .then(img => {
+    console.log('Image 1 loaded');
+    return wait(2);
+  })
+  .then(() => {
+    
+  })
+  .catch(err => console.error('err: ', err))
 
 
 
