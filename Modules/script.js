@@ -113,13 +113,22 @@ import * as ShoppingCart from './shoppingCart.js'
 // console.log('Array cart: ', ShoppingCart2.cart);
 
 
-//! CommonJS module
+//! CommonJS module example
 // export
-export const addToCart3 = (product, quantity) => {
-      cart.push({ product, quantity });
-      console.log(`${quantity} ${product} added to cart (shipping cost is ${shippingCost})`);
-    };
+// export const addToCart3 = (product, quantity) => {
+//       cart.push({ product, quantity });
+//       console.log(`${quantity} ${product} added to cart (shipping cost is ${shippingCost})`);
+//     };
 
 // import
-const { addToCart3 } = require ('./shoppingCart.js')
-  
+//! const { addToCart3 } = require ('./shoppingCart.js')
+
+//todo Command line
+
+// ls, dir, cd, clear, mkdir
+// touch - create file, edit -  windows
+// rm del
+// move - mv file address: mv indx.js ../
+// rmdir - empty directories
+// rm -R DIR-NAME
+
