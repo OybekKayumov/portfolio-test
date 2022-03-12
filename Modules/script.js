@@ -147,6 +147,8 @@ import * as ShoppingCart from './shoppingCart.js'
 // npm i lodash-es
 
 import cloneDeep from '../node_modules/lodash-es/cloneDeep.js';
+// import cloneDeep from 'lodash-es'; //! doesn't work
+// import cloneDeep from 'lodash'; //! doesn't work
 
 //nested object
 const state = {
@@ -190,9 +192,9 @@ console.log('stateDeepClone: ', stateDeepClone); //! true
 // }
 
 // be able to use Parcel in consol, we have 2 options
-// npx or npm script
+//! 1 npx or 2 npm script
 
-// npx parcel index.html 
+//! 1 npx parcel index.html 
 // parcel starts a new development server on this url http://localhost:1234
 
 //if you have error installing, using sudo will give you more permissions
@@ -206,3 +208,21 @@ console.log('stateDeepClone: ', stateDeepClone); //! true
 // npm uninstall parcel
 
 //todo dist folder
+
+// rebuild index.html without type="module"
+
+// this code only parcel understand
+if (module.hot) {
+  module.hot.accept()
+}
+// whenever we change this will not reload this part of the page, this is good for maintaining state on page when we are testing out smth,
+// for example login to app when reload page
+// page will not reload
+
+
+
+// be able to use Parcel in consol, we have 2 options
+//! 1 npx or 2 npm script
+//! 2 npm script
+
+

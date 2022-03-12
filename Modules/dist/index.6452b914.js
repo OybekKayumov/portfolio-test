@@ -621,6 +621,8 @@ var _shoppingCartJs = require("./shoppingCart.js");
 var _cloneDeepJs = require("../node_modules/lodash-es/cloneDeep.js");
 var _cloneDeepJsDefault = parcelHelpers.interopDefault(_cloneDeepJs);
 console.log('Importing module');
+// import cloneDeep from 'lodash-es'; //! doesn't work
+// import cloneDeep from 'lodash'; //! doesn't work
 //nested object
 const state = {
     cart: [
@@ -648,31 +650,40 @@ state.user.loggedIn = false;
 // user: {loggedIn: false}    //! false
 console.log('stateClone: ', stateClone);
 console.log('stateDeepClone: ', stateDeepClone); //! true
- // don't include folder "node_modules" into git
- // npm install --> go to the package.json, look at all the dependencies and install them back
- //todo Parcel
- // npm i parcel --save-dev
- //! regular dependencies
- // "dependencies": {
- //   "leaflet": "^1.7.1"
- // }
- //! DEV dependencies
- // "devDependencies": {
- //   "parcel": "^2.3.2"
- // }
+// don't include folder "node_modules" into git
+// npm install --> go to the package.json, look at all the dependencies and install them back
+//todo Parcel
+// npm i parcel --save-dev
+//! regular dependencies
+// "dependencies": {
+//   "leaflet": "^1.7.1"
+// }
+//! DEV dependencies
+// "devDependencies": {
+//   "parcel": "^2.3.2"
+// }
+// be able to use Parcel in consol, we have 2 options
+//! 1 npx or 2 npm script
+//! 1 npx parcel index.html 
+// parcel starts a new development server on this url http://localhost:1234
+//if you have error installing, using sudo will give you more permissions
+// sudo npm i parcel --save-dev and enter your password 
+// installing version
+// npm i parcel@2.3.2
+// uninstall package
+// npm uninstall parcel
+//todo dist folder
+// rebuild index.html without type="module"
+// this code only parcel understand
+if (module.hot) module.hot.accept();
+ // whenever we change this will not reload this part of the page, this is good for maintaining state on page when we are testing out smth,
+ // for example login to app when reload page
+ // page will not reload
  // be able to use Parcel in consol, we have 2 options
- // npx or npm script
- // npx parcel index.html 
- // parcel starts a new development server on this url http://localhost:1234
- //if you have error installing, using sudo will give you more permissions
- // sudo npm i parcel --save-dev and enter your password 
- // installing version
- // npm i parcel@2.3.2
- // uninstall package
- // npm uninstall parcel
- //todo dist folder
+ //! 1 npx or 2 npm script
+ //! 2 npm script
 
-},{"./shoppingCart.js":"38VDv","../node_modules/lodash-es/cloneDeep.js":"dd5At","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"38VDv":[function(require,module,exports) {
+},{"./shoppingCart.js":"38VDv","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../node_modules/lodash-es/cloneDeep.js":"dd5At"}],"38VDv":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "cart", ()=>cart
