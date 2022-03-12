@@ -253,3 +253,98 @@ if (module.hot) {
 // "main": "scripts.js",
 
 // and added after: npm run build
+
+
+
+//TODO 
+class Person {
+  greeting = 'Hey'
+
+  constructor(name) {
+    this.name = name;
+    console.log(`${this.greeting}, ${this.name}`);
+  }
+}
+
+const jonas = new Person('Jonas')
+//* Hey, Jonas
+
+console.log('Jonas' ?? null);
+
+// console.log(cart.find(el => el.quantity >= 2));
+
+Promise.resolve('Test').then(x => console.log(x))
+
+// import 'core-js/stable';
+// npm -i core-js
+
+// npm install --save-dev @babel/core @babel/cli
+
+// "scripts": {
+  //   "start": "parcel index.html",
+  //   - "build": "parcel build index.html",
+  //   + "build": "babel src -d lib"
+  // },
+  
+  // npm install @babel/preset-env --save-dev
+  
+  // babel.config.json
+  // {
+    //   "presets": ["@babel/preset-env"]
+    // }
+    
+import 'core-js/stable';
+// import 'core-js/stable/array/find';
+// import 'core-js/stable/promise';
+
+// Polifilling async functions
+// npm i regenerator-runtime
+import 'regenerator-runtime/runtime'
+
+// TODO READABLE CODE
+// write a readable cod in future
+// write code so that you can understand it in 1 year
+// avoid over complicated-"clever" solutions - might make your code very confusing and unreadable
+
+// give descriptive names to functions and variables. For variables - what they contain, for functions - according what they do
+
+// TODO GENERAL
+// DRY principle : refactor your code whenever you can
+
+// don't pollute global namespace, encapsulate data into functions, classes, modules
+// don't use var
+
+// use strong type checks (=== and !==)
+
+// TODO Functions
+// functions should do only one thing in generally
+// don't use more than 3 function parameters
+// use default parameters whenever possible
+// return same data type as received
+// you can and should use arrow functions when they make code more readable
+
+// TODO Object-Oriented programming
+// use ES6 Classes
+// encapsulate data and DON'T mutate it from outside the class
+// implement method chaining
+// don't use arrow functions as methods (in regular objects), by doing that you will not get access to the THIS keyword of that object
+
+// TODO AVOID NESTED CODE
+// writing nested code, writing code inside of blocks, inside of other blocks is really bad for readable code
+// use guard clauses - use early return, in case some condition is not met
+
+// use ternary (conditional) or logical operators instead of IF (Ternary. operators does not create new code block, while IF creates new code block)
+// use more IF, not with IF-ELSE
+
+// completely AVOID any kind of FOR LOOPs (for of), 
+// use array methods like map, filter, reduce
+
+// AVOID callback-based asynchronous APIs
+
+// TODO Asynchronous Code
+// consume promises with async/await for best readability, not using (than-catch methods). because these methods actually require callback functions, which will then introduce even more nested code
+
+// whenever possible, run promises in PARALLEL(Promise.all)
+// when Promises do not depend each other, run them in parallel to make the application little bit faster for users
+
+// handle errors and promises rejections
