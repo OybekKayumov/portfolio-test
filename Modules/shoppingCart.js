@@ -6,9 +6,9 @@ console.log('Exporting module');
 
 
 // Blocking code : only after executing this block, other code will be call to run: see console
-    console.log('Start fetching users');
-    await fetch('https://jsonplaceholder.typicode.com/users')
-    console.log('Finish fetching users');
+    // console.log('Start fetching users');
+    // await fetch('https://jsonplaceholder.typicode.com/users')
+    // console.log('Finish fetching users');
 
     // Exporting module
     // Start fetching users    //! 
@@ -49,7 +49,7 @@ export { totalPrice, totalQuantity as tq}
 // }
 
 // arrow function
-export default (product, quantity) => {
-  cart.push({ product, quantity });
-  console.log(`${quantity} ${product} added to cart`);
-}
+// export default (product, quantity) => {
+//   cart.push({ product, quantity });
+//   console.log(`${quantity} ${product} added to cart`);
+// }
