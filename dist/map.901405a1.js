@@ -519,6 +519,7 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"2DePO":[function(require,module,exports) {
+"use strict";
 
 },{}]},["5wuSx","2DePO"], "2DePO", "parcelRequire2041")
 

@@ -1,29 +1,24 @@
-const catResult = document.querySelector('#catResult');
-const dogResult = document.querySelector('#dogResult');
-const catBtn = document.querySelector('#catBtn');
-const dogBtn = document.querySelector('#dogBtn');
-const divAbout = document.querySelector('.about');
-const getRandomCat = ()=>{
-    fetch('https://randomfox.ca/floof/').then((res)=>res.json()
-    ).then((data)=>{
+"use strict";
+var catResult = document.querySelector('#catResult');
+var dogResult = document.querySelector('#dogResult');
+var catBtn = document.querySelector('#catBtn');
+var dogBtn = document.querySelector('#dogBtn');
+var divAbout = document.querySelector('.about');
+var getRandomCat = function getRandomCat() {
+    fetch('https://randomfox.ca/floof/').then(function(res) {
+        return res.json();
+    }).then(function(data) {
         console.log('fox data: ', data);
-        catResult.innerHTML = `<img src="${data.image}">`;
+        catResult.innerHTML = "<img src=\"".concat(data.image, "\">");
     });
 };
-const getRandomDog = ()=>{
-    fetch('https://zoo-animal-api.herokuapp.com/animals/rand').then((res)=>res.json()
-    ).then((data)=>{
+var getRandomDog = function getRandomDog() {
+    fetch('https://zoo-animal-api.herokuapp.com/animals/rand').then(function(res) {
+        return res.json();
+    }).then(function(data) {
         console.log('bear data: ', data);
-        dogResult.innerHTML = `<img src="${data.image_link}">`;
-        divAbout.innerHTML = `
-          <p>Name: ${data.name}</p>
-          <p>Latin Name: ${data.latin_name}</p>
-          <p>Animal Type: ${data.animal_type}</p>
-          <p>Active Time: ${data.active_time}</p>
-          <p>Habitat: ${data.habitat}</p>
-          <p>Diet: ${data.diet}</p>
-          <p>Geo Range: ${data.geo_range}</p>
-      `;
+        dogResult.innerHTML = "<img src=\"".concat(data.image_link, "\">");
+        divAbout.innerHTML = "\n          <p>Name: ".concat(data.name, "</p>\n          <p>Latin Name: ").concat(data.latin_name, "</p>\n          <p>Animal Type: ").concat(data.animal_type, "</p>\n          <p>Active Time: ").concat(data.active_time, "</p>\n          <p>Habitat: ").concat(data.habitat, "</p>\n          <p>Diet: ").concat(data.diet, "</p>\n          <p>Geo Range: ").concat(data.geo_range, "</p>\n      ");
     });
 };
 catBtn.addEventListener('click', getRandomCat);

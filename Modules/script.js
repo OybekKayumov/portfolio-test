@@ -253,3 +253,42 @@ if (module.hot) {
 // "main": "scripts.js",
 
 // and added after: npm run build
+
+
+
+//TODO 
+class Person {
+  greeting = 'Hey'
+
+  constructor(name) {
+    this.name = name;
+    console.log(`${this.greeting}, ${this.name}`);
+  }
+}
+
+const jonas = new Person('Jonas')
+//* Hey, Jonas
+
+console.log('Jonas' ?? null);
+
+// console.log(cart.find(el => el.quantity >= 2));
+
+Promise.resolve('Test').then(x => console.log(x))
+
+import 'core-js/stable';
+// npm -i core-js
+
+// npm install --save-dev @babel/core @babel/cli
+
+// "scripts": {
+//   "start": "parcel index.html",
+//   - "build": "parcel build index.html",
+//   + "build": "babel src -d lib"
+// },
+
+// npm install @babel/preset-env --save-dev
+
+// babel.config.json
+// {
+//   "presets": ["@babel/preset-env"]
+// }
