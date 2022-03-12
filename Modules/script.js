@@ -172,3 +172,25 @@ console.log('stateClone: ', stateClone);
 
 console.log('stateDeepClone: ', stateDeepClone); //! true
 
+// don't include folder "node_modules" into git
+// npm install --> go to the package.json, look at all the dependencies and install them back
+
+
+//todo Parcel
+// npm i parcel --save-dev
+
+//! regular dependencies
+// "dependencies": {
+//   "leaflet": "^1.7.1"
+// }
+
+//! DEV dependencies
+// "devDependencies": {
+//   "parcel": "^2.3.2"
+// }
+
+// be able to use Parcel in consol, we have 2 options
+// npx or npm script
+
+// npx parcel index.html 
+// parcel starts a new development server on this url http://localhost:1234

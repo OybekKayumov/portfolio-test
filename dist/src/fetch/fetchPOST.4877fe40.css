@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Rubik',sans-serif;
+  width: 100%;
+  min-height: 100vh;
+}
+
+div .postFetch{
+  margin-bottom: 30px;
+  border: 2px dashed red;
+}
+
+input,
+.btn {
+  height: 30px;  
+  font-size: 20px;
+  margin: 10px;
+}
+
+/*# sourceMappingURL=fetchPOST.4877fe40.css.map */
