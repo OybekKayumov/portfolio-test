@@ -132,3 +132,7 @@ import * as ShoppingCart from './shoppingCart.js'
 // rmdir - empty directories
 // rm -R DIR-NAME
 
+//todo npm
+// npm -v
+// npm init -y
+// package.json --> stores the entire configuration of project
