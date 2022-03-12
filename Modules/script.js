@@ -194,3 +194,15 @@ console.log('stateDeepClone: ', stateDeepClone); //! true
 
 // npx parcel index.html 
 // parcel starts a new development server on this url http://localhost:1234
+
+//if you have error installing, using sudo will give you more permissions
+// sudo npm i parcel --save-dev and enter your password 
+
+
+// installing version
+// npm i parcel@2.3.2
+
+// uninstall package
+// npm uninstall parcel
+
+//todo dist folder
