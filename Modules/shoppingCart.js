@@ -19,7 +19,7 @@ export const addToCart = (product, quantity) => {
   console.log(`${quantity} ${product} added to cart`);
 }
 
-console.log('cart Array: ', cart);
+// console.log('cart Array: ', cart);
 
 // 3
 const totalPrice = 237;

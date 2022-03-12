@@ -9,7 +9,7 @@
 import { addToCart, totalPrice as price, tq } from './shoppingCart.js' 
 
 
-console.log('Importing module');
+// console.log('Importing module');
 
 // console.log(shippingCost);
 //! Uncaught ReferenceError: shippingCost is not defined
@@ -25,7 +25,7 @@ console.log('Importing module');
 import * as ShoppingCart from './shoppingCart.js'
 // now we have to take addToCart() from ShoppingCart object
 // ShoppingCart.addToCart('bread', 5)
-console.log(ShoppingCart.totalPrice, ShoppingCart.tq); 
+// console.log(ShoppingCart.totalPrice, ShoppingCart.tq); 
 
 // 5 we can give any name to imported default
 // import add from './shoppingCart.js'
@@ -66,5 +66,18 @@ console.log('cart :', cart);
 const getLastPost = async function() {
    const res = await fetch('https://jsonplaceholder.typicode.com/posts')
     const data = await res.json();
-    console.log('data: ', data);
+    // console.log('data: ', data);
+
+    // how to take data from fetch
+    return {title: data.at(-1).title, text: data.at(-1).body}
 }
+
+const lastPost = getLastPost()
+console.log('lastPost: ', lastPost); //* Promise{pending}
+
+// Not very clean
+// lastPost.then(last => console.log('last: ', last))
+
+// use top-level await
+const lastPost2 = await getLastPost();
+console.log('LastPost2: ', lastPost2);
