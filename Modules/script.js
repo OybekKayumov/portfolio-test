@@ -25,7 +25,7 @@ console.log('Importing module');
 import * as ShoppingCart from './shoppingCart.js'
 // now we have to take addToCart() from ShoppingCart object
 // ShoppingCart.addToCart('bread', 5)
-console.log(ShoppingCart.totalPrice, ShoppingCart.tq); 
+// console.log(ShoppingCart.totalPrice, ShoppingCart.tq); 
 
 // 5 we can give any name to imported default
 // import add from './shoppingCart.js'
@@ -37,16 +37,219 @@ console.log(ShoppingCart.totalPrice, ShoppingCart.tq);
 // import add, { addToCart, totalPrice as price, tq } from './shoppingCart.js'
 
 
-import add, {cart} from './shoppingCart.js'
-add('pizza', 2);
-add('bread', 5);
-add('apples', 4);
+// import add, {cart} from './shoppingCart.js'
+// add('pizza', 2);
+// add('bread', 5);
+// add('apples', 4);
 
 // console.log('price: ', price);
 
-console.log('cart :', cart);
+// console.log('cart :', cart);
 //* cart : (3) [{…}, {…}, {…}]
 
 //! imports are not copies of the export
 // they are like a live connection : we point to the same place in memory
 
+
+// TOP LEVEL AWAIT
+// this await will blocking the entire execution of this part of code: see console
+    // console.log('Start fetching...');
+    // const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+    // const data = await res.json();
+    // console.log('data: ', data);
+    // console.log('Next code');
+
+//* Start fetching...
+// data:  (100) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}//* script.js:60 Next code
+
+
+// const getLastPost = async function() {
+//    const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+//     const data = await res.json();
+//     // console.log('data: ', data);
+
+//     // how to take data from fetch
+//     return {title: data.at(-1).title, text: data.at(-1).body}
+// }
+
+// const lastPost = getLastPost()
+// console.log('lastPost: ', lastPost); //* Promise{pending}
+
+// Not very clean
+// lastPost.then(last => console.log('last: ', last))
+
+// using top-level await outside of any ASYNC function will BLOCK the entire module. This is NOT oly helpful tool, but also we need to use with great care 
+// const lastPost2 = await getLastPost();
+// console.log('LastPost2: ', lastPost2);
+
+
+
+// const ShoppingCart2 = (function() {
+//   const cart = [];
+//   const shippingCost = 10;
+//   const totalPrice = 237;
+//   const totalQuantity = 23;
+
+//   const addToCart = (product, quantity) => {
+//     cart.push({ product, quantity });
+//     console.log(`${quantity} ${product} added to cart (shipping cost is ${shippingCost})`);
+//   };
+
+//   const orderStock = (product, quantity) => {
+//     console.log(`${quantity} ${product} ordered from supplier`)
+//   } 
+  
+//   return {
+//     addToCart,
+//     cart,
+//     totalPrice,
+//     totalQuantity,
+//   }
+
+// })()
+
+// ShoppingCart2.addToCart('apple', 4)
+// ShoppingCart2.addToCart('pizza', 2)
+// console.log('Array cart: ', ShoppingCart2.cart);
+
+
+//! CommonJS module example
+// export
+// export const addToCart3 = (product, quantity) => {
+//       cart.push({ product, quantity });
+//       console.log(`${quantity} ${product} added to cart (shipping cost is ${shippingCost})`);
+//     };
+
+// import
+//! const { addToCart3 } = require ('./shoppingCart.js')
+
+//todo Command line
+
+// ls, dir, cd, clear, mkdir
+// touch - create file, edit -  windows
+// rm del
+// move - mv file address: mv indx.js ../
+// rmdir - empty directories
+// rm -R DIR-NAME
+
+//todo npm
+// npm -v
+// npm init -y
+// package.json --> stores the entire configuration of project
+// npm i name; npm install name;
+
+// "dependencies": {
+//   "leaflet": "^1.7.1"
+// }
+
+//? lodash is a collaction of a ton of useful functions for arrays, objects, functions, dates ...
+//special version lodash-es (es-modules)
+// npm i lodash-es
+
+import cloneDeep from '../node_modules/lodash-es/cloneDeep.js';
+// import cloneDeep from 'lodash-es'; //! doesn't work
+// import cloneDeep from 'lodash'; //! doesn't work
+
+//nested object
+const state = {
+  cart: [
+    { product: 'bread', quamtity: 5 },
+    { product: 'pizza', quamtity: 3 },
+  ],
+  user: { loggedIn: true },
+};
+
+const stateClone = Object.assign({}, state);
+const stateDeepClone = cloneDeep(state);
+
+// stateClone: 
+// cart: (2) [{…}, {…}]
+// user: {loggedIn: true}     //! true
+
+state.user.loggedIn = false;
+// cart: (2) [{…}, {…}]
+// user: {loggedIn: false}    //! false
+
+console.log('stateClone: ', stateClone);
+
+console.log('stateDeepClone: ', stateDeepClone); //! true
+
+// don't include folder "node_modules" into git
+// npm install --> go to the package.json, look at all the dependencies and install them back
+
+
+//todo Parcel
+// npm i parcel --save-dev
+
+//! regular dependencies
+// "dependencies": {
+//   "leaflet": "^1.7.1"
+// }
+
+//! DEV dependencies
+// "devDependencies": {
+//   "parcel": "^2.3.2"
+// }
+
+// be able to use Parcel in consol, we have 2 options
+//! 1 npx or 2 npm script
+
+//! 1 npx parcel index.html 
+// parcel starts a new development server on this url http://localhost:1234
+
+//if you have error installing, using sudo will give you more permissions
+// sudo npm i parcel --save-dev and enter your password 
+
+
+// installing version
+// npm i parcel@2.3.2
+
+// uninstall package
+// npm uninstall parcel
+
+//todo dist folder
+
+// rebuild index.html without type="module"
+
+// this code only parcel understand
+if (module.hot) {
+  module.hot.accept()
+}
+// whenever we change this will not reload this part of the page, this is good for maintaining state on page when we are testing out smth,
+// for example login to app when reload page
+// page will not reload
+
+
+
+// be able to use Parcel in consol, we have 2 options
+//! 1 npx or 2 npm script
+//! 2 npm script
+
+//? "scripts": {
+//?   "test": "echo \"Error: no test specified\" && exit 1"
+//? },
+
+//todo Edit
+// "scripts": {
+//   "start": "script name",  //*
+//   "start": "parcel index.html",
+// },
+
+//! npm run start
+//! npm start
+
+// whenever we are done developing project, it is time build the final bundle
+// bundle, that is compressed 
+// build 
+//? "build": "parcel build index.html",
+
+//! npm run build
+
+//todo Install packages globally
+//! npm i parcel -g
+
+// https://github.com/parcel-bundler/parcel/issues/7129
+// line 5 from package.json was deleted
+// "main": "scripts.js",
+
+// and added after: npm run build
