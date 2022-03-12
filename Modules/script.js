@@ -225,4 +225,31 @@ if (module.hot) {
 //! 1 npx or 2 npm script
 //! 2 npm script
 
+//? "scripts": {
+//?   "test": "echo \"Error: no test specified\" && exit 1"
+//? },
 
+//todo Edit
+// "scripts": {
+//   "start": "script name",  //*
+//   "start": "parcel index.html",
+// },
+
+//! npm run start
+//! npm start
+
+// whenever we are done developing project, it is time build the final bundle
+// bundle, that is compressed 
+// build 
+//? "build": "parcel build index.html",
+
+//! npm run build
+
+//todo Install packages globally
+//! npm i parcel -g
+
+// https://github.com/parcel-bundler/parcel/issues/7129
+// line 5 from package.json was deleted
+// "main": "scripts.js",
+
+// and added after: npm run build

@@ -142,13 +142,13 @@
       this[globalName] = mainExports;
     }
   }
-})({"2opec":[function(require,module,exports) {
+})({"iAea7":[function(require,module,exports) {
 "use strict";
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "3767fea76452b914";
+module.bundle.HMR_BUNDLE_ID = "a050e760e234359e";
 function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
@@ -682,8 +682,28 @@ if (module.hot) module.hot.accept();
  // be able to use Parcel in consol, we have 2 options
  //! 1 npx or 2 npm script
  //! 2 npm script
+ //? "scripts": {
+ //?   "test": "echo \"Error: no test specified\" && exit 1"
+ //? },
+ //todo Edit
+ // "scripts": {
+ //   "start": "script name",  //*
+ //   "start": "parcel index.html",
+ // },
+ //! npm run start
+ //! npm start
+ // whenever we are done developing project, it is time build the final bundle
+ // bundle, that is compressed 
+ // build 
+ //? "build": "parcel build index.html",
+ //! npm run build
+ //todo Install packages globally
+ //! npm i parcel -g
+ // https://github.com/parcel-bundler/parcel/issues/7129
+ // line 5 from package.json was deleted
+ // "main": "scripts.js",
 
-},{"./shoppingCart.js":"38VDv","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../node_modules/lodash-es/cloneDeep.js":"dd5At"}],"38VDv":[function(require,module,exports) {
+},{"./shoppingCart.js":"38VDv","../node_modules/lodash-es/cloneDeep.js":"dd5At","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"38VDv":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "cart", ()=>cart
@@ -3282,6 +3302,6 @@ var _isObjectLikeJsDefault = parcelHelpers.interopDefault(_isObjectLikeJs);
 }
 exports.default = baseIsSet;
 
-},{"./_getTag.js":"1kCom","./isObjectLike.js":"iad76","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["2opec","9Beov"], "9Beov", "parcelRequire2041")
+},{"./_getTag.js":"1kCom","./isObjectLike.js":"iad76","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["iAea7","9Beov"], "9Beov", "parcelRequire2041")
 
-//# sourceMappingURL=index.6452b914.js.map
+//# sourceMappingURL=index.e234359e.js.map

@@ -1,0 +1,3 @@
+//! Default options are marked with *
+const postFetch=document.querySelector(".postFetch"),input=document.querySelector(".input"),sendBtn=document.querySelector(".btn");fetch("https://jsonplaceholder.typicode.com/posts",{method:"POST",body:JSON.stringify({title:"Cline Walter",body:"48, Street, City, Country",userId:789}),headers:{"Content-type":"application/json"}}).then((t=>t.json())).then((t=>{console.log("data: ",t),postFetch.innerHTML=`\n          <p>Post data:</p>\n          <p>Name: ${t.title}</p>\n          <p>About: ${t.body}</p>\n          <p>userID: ${t.userId}</p>\n          <p>ID: ${t.id}</p>\n\n   `}));
+//# sourceMappingURL=fetchPOST.8864cd09.js.map
