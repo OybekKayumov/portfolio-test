@@ -275,20 +275,53 @@ console.log('Jonas' ?? null);
 
 Promise.resolve('Test').then(x => console.log(x))
 
-import 'core-js/stable';
+// import 'core-js/stable';
 // npm -i core-js
 
 // npm install --save-dev @babel/core @babel/cli
 
 // "scripts": {
-//   "start": "parcel index.html",
-//   - "build": "parcel build index.html",
-//   + "build": "babel src -d lib"
-// },
+  //   "start": "parcel index.html",
+  //   - "build": "parcel build index.html",
+  //   + "build": "babel src -d lib"
+  // },
+  
+  // npm install @babel/preset-env --save-dev
+  
+  // babel.config.json
+  // {
+    //   "presets": ["@babel/preset-env"]
+    // }
+    
+import 'core-js/stable';
+// import 'core-js/stable/array/find';
+// import 'core-js/stable/promise';
 
-// npm install @babel/preset-env --save-dev
+// Polifilling async functions
+// npm i regenerator-runtime
+import 'regenerator-runtime/runtime'
 
-// babel.config.json
-// {
-//   "presets": ["@babel/preset-env"]
-// }
+// TODO READABLE CODE
+// write a readable cod in future
+// write code so that you can understand it in 1 year
+// avoid over complicated-"clever" solutions - might make your code very confusing and unreadable
+
+// give descriptive names to functions and variables. For variables - what they contain, for functions - according what they do
+
+// TODO GENERAL
+// DRY principle : refactor your code whenever you can
+
+// don't pollute global namespace, encapsulate data into functions, classes, modules
+// don't use var
+
+// use strong type checks (=== and !==)
+
+// TODO Functions
+// functions should do only one thing in generally
+// don't use more than 3 function parameters
+// use default parameters whenever possible
+// return same data type as received
+// you can and should use arrow functions when they make code more readable
+
+
+
