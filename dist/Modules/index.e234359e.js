@@ -722,6 +722,11 @@ Promise.resolve('Test').then(function(x) {
  // use default parameters whenever possible
  // return same data type as received
  // you can and should use arrow functions when they make code more readable
+ // TODO Object-Oriented programming
+ // use ES6 Classes
+ // encapsulate data and DON'T mutate it from outside the class
+ // implement method chaining
+ // don't use arrow functions as methods (in regular objects), by doing that you will not get access to the THIS keyword of that object
 
 },{"./shoppingCart.js":"38VDv","../node_modules/lodash-es/cloneDeep.js":"dd5At","core-js/stable":"7CRIE","regenerator-runtime/runtime":"dXNgZ"}],"38VDv":[function(require,module,exports) {
 "use strict";

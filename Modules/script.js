@@ -323,5 +323,10 @@ import 'regenerator-runtime/runtime'
 // return same data type as received
 // you can and should use arrow functions when they make code more readable
 
+// TODO Object-Oriented programming
+// use ES6 Classes
+// encapsulate data and DON'T mutate it from outside the class
+// implement method chaining
+// don't use arrow functions as methods (in regular objects), by doing that you will not get access to the THIS keyword of that object
 
 
