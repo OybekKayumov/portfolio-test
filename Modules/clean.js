@@ -14,6 +14,11 @@ const spendingLimits = {
   matilda: 100,
 };
 
+// refactoring
+const getLimit = (user) => {
+  spendingLimits?.[user] ?? 0;  
+} 
+
 const addExpense = function (value, description, user = 'jonas') {
   if (!user) user = 'jonas';
   user = user.toLowerCase();
@@ -32,9 +37,12 @@ const addExpense = function (value, description, user = 'jonas') {
   // ask for user property--> ?.[user], if there is a property with this name, (for example 'jonas' here), then all of this (spendingLimits?.[user]) will be that value.
   // but if not, then will be 'undefined', and in that case we set it to zero 0
   // coalescing operator ??
-  const limit = spendingLimits?.[user] ?? 0;  
+  // const limit = spendingLimits?.[user] ?? 0;  
+  
+  // const limit = getLimit(user)
 
-  if (value <= limit) {
+  // if (value <= limit) {
+  if (value <= getLimit(user)) {
     // budget.push({ value: -value, description: description, user: user });
     budget.push({ value: -value, description, user });
   }
@@ -46,31 +54,42 @@ console.log(budget);
 
 const checkExpenses = function () {
   for (const entry of budget) {
-    let lim;
-    if (spendingLimits[entry.user]) {
-      lim = spendingLimits[entry.user];
-    } else {
-      lim = 0;
-    }
+          // let lim;
+          // if (spendingLimits[entry.user]) {
+          //   lim = spendingLimits[entry.user];
+          // } else {
+          //   lim = 0;
+          // }
 
-    if (entry.value < -lim) {
+    // const limit = spendingLimits?.[entry.user] ?? 0;
+
+
+    // if (entry.value < -limit) {
+    if (entry.value < -getLimit(entry.user)) {
       entry.flag = 'limit';
     }
   }
 };
+ 
 checkExpenses();
 
 console.log(budget);
 
-const bigExpenses = function (limit) {
+const logBigExpenses = function (BigLimit) {
   let output = '';
-  for (const el of budget) {
-    if (el.value <= -limit) {
-      output += el.description.slice(-2) + ' / '; // Emojis are 2 chars
-    }
-  }
+  for (const entry of budget) {
+
+    output += entry.value <= -BigLimit 
+      ? `${entry.description.slice(-2)} / `
+      : ''; 
+
+      // if (entry.value <= -BigLimit) {
+        // output += el.description.slice(-2) + ' / '; // Emojis are 2 chars
+        // output += `${entry.description.slice(-2)} / `; // Emojis are 2 chars
+      // }
+}
   output = output.slice(0, -2); // Remove last '/ '
   console.log(output);
 };
 
-bigExpenses(1000);
+logBigExpenses(1000);
