@@ -145,3 +145,17 @@ import * as ShoppingCart from './shoppingCart.js'
 //? lodash is a collaction of a ton of useful functions for arrays, objects, functions, dates ...
 //special version lodash-es (es-modules)
 // npm i lodash-es
+
+import cloneDeep from '../node_modules/lodash-es/cloneDeep.js';
+
+//nested object
+const state = {
+  cart: [
+    { product: 'bread', quamtity: 5 },
+    { product: 'pizza', quamtity: 3 },
+  ],
+  user: { logged: true },
+};
+
+const stateClone = Object.assign({}, state);
+console.log('stateClone: ', stateClone);
