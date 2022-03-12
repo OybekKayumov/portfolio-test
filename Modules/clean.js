@@ -29,13 +29,14 @@ const addExpense = function (value, description, user = 'jonas') {
       //   ? spendingLimits[user] 
       //   : 0;
   //! optional chaining - use it with bracket notations
-  // ask for user property--> ?.[user], if there is a property with this name, (for example 'jonas' here), then all of this here will be that value.
+  // ask for user property--> ?.[user], if there is a property with this name, (for example 'jonas' here), then all of this (spendingLimits?.[user]) will be that value.
   // but if not, then will be 'undefined', and in that case we set it to zero 0
   // coalescing operator ??
   const limit = spendingLimits?.[user] ?? 0;  
 
   if (value <= limit) {
-    budget.push({ value: -value, description: description, user: user });
+    // budget.push({ value: -value, description: description, user: user });
+    budget.push({ value: -value, description, user });
   }
 };
 addExpense(10, 'Pizza 🍕');
@@ -43,21 +44,21 @@ addExpense(100, 'Going to movies 🍿', 'Matilda');
 addExpense(200, 'Stuff', 'Jay');
 console.log(budget);
 
-const check = function () {
-  for (const el of budget) {
+const checkExpenses = function () {
+  for (const entry of budget) {
     let lim;
-    if (spendingLimits[el.user]) {
-      lim = spendingLimits[el.user];
+    if (spendingLimits[entry.user]) {
+      lim = spendingLimits[entry.user];
     } else {
       lim = 0;
     }
 
-    if (el.value < -lim) {
-      el.flag = 'limit';
+    if (entry.value < -lim) {
+      entry.flag = 'limit';
     }
   }
 };
-check();
+checkExpenses();
 
 console.log(budget);
 
