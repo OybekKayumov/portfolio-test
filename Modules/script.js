@@ -154,8 +154,21 @@ const state = {
     { product: 'bread', quamtity: 5 },
     { product: 'pizza', quamtity: 3 },
   ],
-  user: { logged: true },
+  user: { loggedIn: true },
 };
 
 const stateClone = Object.assign({}, state);
+const stateDeepClone = cloneDeep(state);
+
+// stateClone: 
+// cart: (2) [{…}, {…}]
+// user: {loggedIn: true}     //! true
+
+state.user.loggedIn = false;
+// cart: (2) [{…}, {…}]
+// user: {loggedIn: false}    //! false
+
 console.log('stateClone: ', stateClone);
+
+console.log('stateDeepClone: ', stateDeepClone); //! true
+
