@@ -136,3 +136,12 @@ import * as ShoppingCart from './shoppingCart.js'
 // npm -v
 // npm init -y
 // package.json --> stores the entire configuration of project
+// npm i name; npm install name;
+
+// "dependencies": {
+//   "leaflet": "^1.7.1"
+// }
+
+//? lodash is a collaction of a ton of useful functions for arrays, objects, functions, dates ...
+//special version lodash-es (es-modules)
+// npm i lodash-es

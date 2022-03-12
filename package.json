@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/OybekKayumov/portfolio/issues"
   },
-  "homepage": "https://github.com/OybekKayumov/portfolio#readme"
+  "homepage": "https://github.com/OybekKayumov/portfolio#readme",
+  "dependencies": {
+    "leaflet": "^1.7.1",
+    "lodash-es": "^4.17.21"
+  }
 }
