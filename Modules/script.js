@@ -50,3 +50,21 @@ console.log('cart :', cart);
 //! imports are not copies of the export
 // they are like a live connection : we point to the same place in memory
 
+
+// TOP LEVEL AWAIT
+// this await will blocking the entire execution of this part of code: see console
+    // console.log('Start fetching...');
+    // const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+    // const data = await res.json();
+    // console.log('data: ', data);
+    // console.log('Next code');
+
+//* Start fetching...
+// data:  (100) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}//* script.js:60 Next code
+
+
+const getLastPost = async function() {
+   const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+    const data = await res.json();
+    console.log('data: ', data);
+}
