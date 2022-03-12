@@ -342,5 +342,9 @@ import 'regenerator-runtime/runtime'
 // AVOID callback-based asynchronous APIs
 
 // TODO Asynchronous Code
+// consume promises with async/await for best readability, not using (than-catch methods). because these methods actually require callback functions, which will then introduce even more nested code
 
+// whenever possible, run promises in PARALLEL(Promise.all)
+// when Promises do not depend each other, run them in parallel to make the application little bit faster for users
 
+// handle errors and promises rejections

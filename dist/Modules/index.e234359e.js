@@ -736,6 +736,10 @@ Promise.resolve('Test').then(function(x) {
  // use array methods like map, filter, reduce
  // AVOID callback-based asynchronous APIs
  // TODO Asynchronous Code
+ // consume promises with async/await for best readability, not using (than-catch methods). because these methods actually require callback functions, which will then introduce even more nested code
+ // whenever possible, run promises in PARALLEL(Promise.all)
+ // when Promises do not depend each other, run them in parallel to make the application little bit faster for users
+ // handle errors and promises rejections
 
 },{"./shoppingCart.js":"38VDv","../node_modules/lodash-es/cloneDeep.js":"dd5At","core-js/stable":"7CRIE","regenerator-runtime/runtime":"dXNgZ"}],"38VDv":[function(require,module,exports) {
 "use strict";
