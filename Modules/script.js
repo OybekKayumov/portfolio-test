@@ -9,7 +9,7 @@
 import { addToCart, totalPrice as price, tq } from './shoppingCart.js' 
 
 
-// console.log('Importing module');
+console.log('Importing module');
 
 // console.log(shippingCost);
 //! Uncaught ReferenceError: shippingCost is not defined
@@ -78,6 +78,7 @@ console.log('lastPost: ', lastPost); //* Promise{pending}
 // Not very clean
 // lastPost.then(last => console.log('last: ', last))
 
-// use top-level await
+// using top-level await outside of any ASYNC function will BLOCK the entire module. This is NOT oly helpful tool, but also we need to use with great care 
 const lastPost2 = await getLastPost();
 console.log('LastPost2: ', lastPost2);
+

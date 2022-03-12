@@ -4,6 +4,18 @@
 // 1
 console.log('Exporting module');
 
+
+// Blocking code : only after executing this block, other code will be call to run: see console
+    console.log('Start fetching users');
+    await fetch('https://jsonplaceholder.typicode.com/users')
+    console.log('Finish fetching users');
+
+    // Exporting module
+    // Start fetching users    //! 
+    // Finish fetching users   //!
+    // Importing module
+
+
 const shippingCost = 10;
 // const cart = [];
 
