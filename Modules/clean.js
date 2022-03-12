@@ -25,9 +25,14 @@ const addExpense = function (value, description, user = 'jonas') {
       //   lim = 0;
       // }
 
-  const limit = spendingLimits[user]
-    ? spendingLimits[user] 
-    : 0;
+      // const limit = spendingLimits[user]
+      //   ? spendingLimits[user] 
+      //   : 0;
+  //! optional chaining - use it with bracket notations
+  // ask for user property--> ?.[user], if there is a property with this name, (for example 'jonas' here), then all of this here will be that value.
+  // but if not, then will be 'undefined', and in that case we set it to zero 0
+  // coalescing operator ??
+  const limit = spendingLimits?.[user] ?? 0;  
 
   if (value <= limit) {
     budget.push({ value: -value, description: description, user: user });
