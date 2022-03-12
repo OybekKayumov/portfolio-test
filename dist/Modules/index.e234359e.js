@@ -727,6 +727,15 @@ Promise.resolve('Test').then(function(x) {
  // encapsulate data and DON'T mutate it from outside the class
  // implement method chaining
  // don't use arrow functions as methods (in regular objects), by doing that you will not get access to the THIS keyword of that object
+ // TODO AVOID NESTED CODE
+ // writing nested code, writing code inside of blocks, inside of other blocks is really bad for readable code
+ // use guard clauses - use early return, in case some condition is not met
+ // use ternary (conditional) or logical operators instead of IF (Ternary. operators does not create new code block, while IF creates new code block)
+ // use more IF, not with IF-ELSE
+ // completely AVOID any kind of FOR LOOPs (for of), 
+ // use array methods like map, filter, reduce
+ // AVOID callback-based asynchronous APIs
+ // TODO Asynchronous Code
 
 },{"./shoppingCart.js":"38VDv","../node_modules/lodash-es/cloneDeep.js":"dd5At","core-js/stable":"7CRIE","regenerator-runtime/runtime":"dXNgZ"}],"38VDv":[function(require,module,exports) {
 "use strict";

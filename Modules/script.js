@@ -329,4 +329,18 @@ import 'regenerator-runtime/runtime'
 // implement method chaining
 // don't use arrow functions as methods (in regular objects), by doing that you will not get access to the THIS keyword of that object
 
+// TODO AVOID NESTED CODE
+// writing nested code, writing code inside of blocks, inside of other blocks is really bad for readable code
+// use guard clauses - use early return, in case some condition is not met
+
+// use ternary (conditional) or logical operators instead of IF (Ternary. operators does not create new code block, while IF creates new code block)
+// use more IF, not with IF-ELSE
+
+// completely AVOID any kind of FOR LOOPs (for of), 
+// use array methods like map, filter, reduce
+
+// AVOID callback-based asynchronous APIs
+
+// TODO Asynchronous Code
+
 
