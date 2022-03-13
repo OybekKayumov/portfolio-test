@@ -30,8 +30,8 @@ const spendingLimits = Object.freeze({
 
 
 // refactoring
-const getLimit = (user) => {
-  spendingLimits?.[user] ?? 0;  
+const getLimit = ( limits, user) => {
+  limits?.[user] ?? 0;  
 } 
 
 // side-effect  -that something outside of a function is manipulated
@@ -48,7 +48,7 @@ const addExpense = function (state, limits, value, description, user = 'jonas') 
   //   return [...state, { value: -value, description, user:cleanUser }]
   // }
 
-  return value <= getLimit(cleanUser) 
+  return value <= getLimit(limits, cleanUser) 
     ? [...state, { value: -value, description, user:cleanUser }]
     : state;
   
@@ -60,33 +60,31 @@ const newBudget2 = addExpense(newBudget1, spendingLimits, 100, 'movies 🍿', 'M
 
 const newBudget3 = addExpense(newBudget2, spendingLimits, 200, 'Stuff', 'Jay');
 
-console.log('newBudget1: '. newBudget1);
-console.log('newBudget2: '. newBudget2);
-console.log('newBudget3: '. newBudget3);
+// console.log('newBudget1: '. newBudget1);
+// console.log('newBudget2: '. newBudget2);
+// console.log('newBudget3: '. newBudget3);
 console.log(budget);
 
-const checkExpenses = function () {
-  for (const entry of budget) {
-          // let lim;
-          // if (spendingLimits[entry.user]) {
-          //   lim = spendingLimits[entry.user];
-          // } else {
-          //   lim = 0;
-          // }
+const checkExpenses = (state, limits) => {
 
-    // const limit = spendingLimits?.[entry.user] ?? 0;
-
-
-    // if (entry.value < -limit) {
-    if (entry.value < -getLimit(entry.user)) {
-      entry.flag = 'limit';
-    }
-  }
+  state.map(entry =>      //* map returns a new array, so not mutated
+    entry.value < -getLimit(limits, entry.user)
+      ? {...entry, flag: 'limit'}
+      : entry  
+  )
+  // for (const entry of newBudget3) {
+    
+  //   if (entry.value < -getLimit(limits, entry.user)) {
+  //     entry.flag = 'limit';
+  //   }
+  // }
 };
- 
-checkExpenses();
 
-console.log(budget);
+const finalBudget = checkExpenses(newBudget3, spendingLimits);
+// console.log('newBudget3: '. newBudget3);
+console.log(finalBudget);
+ 
+// console.log(budget);
 
 const logBigExpenses = function (BigLimit) {
   let output = '';
