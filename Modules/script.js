@@ -385,6 +385,21 @@ console.log('doubled2: ', doubled2);
 // !functional programing - declarative
 // based on the idea of writing software by combining many pure functions, avoiding side effects and mutating data
 
-// side effect: modification (mutation) of any data Outside of the function(mutating external variables, logging to console, writing to DOM, etc)
+//* side effect: modification (mutation) of any data Outside of the function(mutating external variables, logging to console, writing to DOM, etc)
 // logging stuff to the consol, changing something in the DOM  is also causing side effect
 
+//* Pure function is a function without side effects. Does not depend on external variables. Given the same inputs, always returns the same outputs.
+
+//* immutability: state (data) is NEVER modified! instead, state is COPIED and the copy is mutated and returned 
+
+//! functional programing is a huge paradigm, WHICH IS REALLY DIFFICULT TO IMPLEMENT IN PRACTICE. BUT IT IS VERY IMPORTANT THAT TO KNOW SOME OF THESE PRINCIPLES,  such as "side effects", "pure functions" and "immutability". 
+//? Because many popular libraries , such as REACT or REDUX, are built around all of these principles.
+
+//* for example, in REACT the state is also completely immutable
+
+// usually it mixed imperative and declarative programming
+// we can start using some of the functional programing techniques in our own code base.
+//todo Try to avoid data mutation
+//todo Use built-in methods that don't produced side effects
+//todo Do data transformations with methods such as .MAP(), .FILTER() and .REDUCE() 
+//todo Try to avoid side effects in functions: this is of course not always possible!
