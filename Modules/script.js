@@ -212,9 +212,9 @@ console.log('stateDeepClone: ', stateDeepClone); //! true
 // rebuild index.html without type="module"
 
 // this code only parcel understand
-if (module.hot) {
-  module.hot.accept()
-}
+// if (module.hot) {
+//   module.hot.accept()
+// }
 // whenever we change this will not reload this part of the page, this is good for maintaining state on page when we are testing out smth,
 // for example login to app when reload page
 // page will not reload
@@ -293,13 +293,13 @@ Promise.resolve('Test').then(x => console.log(x))
     //   "presets": ["@babel/preset-env"]
     // }
     
-import 'core-js/stable';
+// import 'core-js/stable';
 // import 'core-js/stable/array/find';
 // import 'core-js/stable/promise';
 
 // Polifilling async functions
 // npm i regenerator-runtime
-import 'regenerator-runtime/runtime'
+// import 'regenerator-runtime/runtime'
 
 // TODO READABLE CODE
 // write a readable cod in future
@@ -348,3 +348,19 @@ import 'regenerator-runtime/runtime'
 // when Promises do not depend each other, run them in parallel to make the application little bit faster for users
 
 // handle errors and promises rejections
+
+// TODO Two fundamentally different ways of writing code: Paradigms
+
+//! IMPERATIVE
+// whenever we write imperative code, we need to explain to the computer how to do certain things, explain every single step computer needs to follow
+// tell step by step recipe
+
+const arr = [2, 4, 6, 8];
+const doubled = [];
+for (let i = 0; i < arr.length; i++) 
+  doubled[i] = arr[i] * 2;
+
+console.log('doubled: ', doubled);  
+
+
+//! DECLARATIVE
