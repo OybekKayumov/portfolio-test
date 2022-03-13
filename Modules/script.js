@@ -353,14 +353,38 @@ Promise.resolve('Test').then(x => console.log(x))
 
 //! IMPERATIVE
 // whenever we write imperative code, we need to explain to the computer how to do certain things, explain every single step computer needs to follow
-// tell step by step recipe
+// tell step by step recipe of a cake
+// the programmer explain HOW to do things 
 
 const arr = [2, 4, 6, 8];
 const doubled = [];
 for (let i = 0; i < arr.length; i++) 
-  doubled[i] = arr[i] * 2;
+doubled[i] = arr[i] * 2;
 
 console.log('doubled: ', doubled);  
 
 
 //! DECLARATIVE
+// the programmer tells the computer only what todo
+// we describe the way the computer should achieve the result
+// description of a cake
+// the HOW (step-by-step instructions) gets abstracted away
+// describing the task and the result should be achieved is the declarative way
+
+const arr2 = [2, 4, 6, 8];
+const doubled2 = arr2.map(n => n * 2)
+
+console.log('doubled2: ', doubled2);
+// creating an empty array,
+// initializing a counter
+// lke this steps have been abstracted away
+// this is Important to understand, this is how modern JavaScript code is written 
+
+
+// Declarative Paradigms is actually a Big and Popular paradigm, functional programing 
+// !functional programing - declarative
+// based on the idea of writing software by combining many pure functions, avoiding side effects and mutating data
+
+// side effect: modification (mutation) of any data Outside of the function(mutating external variables, logging to console, writing to DOM, etc)
+// logging stuff to the consol, changing something in the DOM  is also causing side effect
+
