@@ -1,5 +1,4 @@
 'strict mode'
-// alert('1')
 
 const budget = Object.freeze( [
   { value: 250, description: 'Sold old TV 📺', user: 'jonas' },
@@ -15,8 +14,6 @@ const budget = Object.freeze( [
 //* keep it in mind
 // budget[0].value = 10000;  //* works
 // budget[9] = 'jonas'       //* this is not going to work
-
-
 
 // spendingLimits is now immutable : we can no longer put any new properties into it
 const spendingLimits = Object.freeze({
@@ -60,9 +57,6 @@ const newBudget2 = addExpense(newBudget1, spendingLimits, 100, 'movies 🍿', 'M
 
 const newBudget3 = addExpense(newBudget2, spendingLimits, 200, 'Stuff', 'Jay');
 
-// console.log('newBudget1: '. newBudget1);
-// console.log('newBudget2: '. newBudget2);
-// console.log('newBudget3: '. newBudget3);
 console.log(budget);
 
 const checkExpenses = (state, limits) => {
@@ -72,35 +66,36 @@ const checkExpenses = (state, limits) => {
       ? {...entry, flag: 'limit'}
       : entry  
   )
-  // for (const entry of newBudget3) {
-    
-  //   if (entry.value < -getLimit(limits, entry.user)) {
-  //     entry.flag = 'limit';
-  //   }
-  // }
+  
 };
 
 const finalBudget = checkExpenses(newBudget3, spendingLimits);
-// console.log('newBudget3: '. newBudget3);
 console.log(finalBudget);
- 
-// console.log(budget);
 
-const logBigExpenses = function (BigLimit) {
-  let output = '';
-  for (const entry of budget) {
+// Impure function
+const logBigExpenses = function (state, bigLimit) {
+  
+  const bigExpense = state.filter(entry => entry.value <= -bigLimit)
+      .map(entry => entry.description.slice(-2))
+      .join(' / ');
+      // .reduce((str, cur) =>  `${str} / ${cur.description.slice(-2)}`, '')
 
-    output += entry.value <= -BigLimit 
-      ? `${entry.description.slice(-2)} / `
-      : ''; 
+  console.log(bigExpense);
+  
+  // let output = '';
+  // for (const entry of budget) {
+
+  //   output += entry.value <= -bigLimit 
+  //     ? `${entry.description.slice(-2)} / `
+  //     : ''; 
 
       // if (entry.value <= -BigLimit) {
         // output += el.description.slice(-2) + ' / '; // Emojis are 2 chars
         // output += `${entry.description.slice(-2)} / `; // Emojis are 2 chars
       // }
-}
-  output = output.slice(0, -2); // Remove last '/ '
-  console.log(output);
+// }
+  // output = output.slice(0, -2); // Remove last '/ '
+  // console.log(output);
 };
 
-logBigExpenses(1000);
+logBigExpenses(finalBudget, 500);
