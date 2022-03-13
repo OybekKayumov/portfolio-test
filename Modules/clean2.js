@@ -27,47 +27,31 @@ const spendingLimits = Object.freeze({
 
 
 // refactoring
-const getLimit = ( limits, user) => {
-  limits?.[user] ?? 0;  
-} 
+const getLimit = ( limits, user) => limits?.[user] ?? 0;  
 
 // side-effect  -that something outside of a function is manipulated
 // or the function does something other than simply returning a value
 // IMPURE FUNCTION - which has or produces side effects
 // PURE FUNCTION
 const addExpense = function (state, limits, value, description, user = 'jonas') {
-  // if (!user) user = 'jonas';
-
-  const cleanUser = user.toLowerCase();
-
-  // if (value <= getLimit(cleanUser)) {
-        //*no budget.push({ value: -value, description, user:cleanUser });
-  //   return [...state, { value: -value, description, user:cleanUser }]
-  // }
+   const cleanUser = user.toLowerCase();
 
   return value <= getLimit(limits, cleanUser) 
-    ? [...state, { value: -value, description, user:cleanUser }]
-    : state;
-  
+    ? [...state, { value: -value, description, user: cleanUser }]
+    : state;  
 };
 
 const newBudget1 = addExpense(budget, spendingLimits, 10, 'Pizza 🍕');
-
 const newBudget2 = addExpense(newBudget1, spendingLimits, 100, 'movies 🍿', 'Matilda');
-
 const newBudget3 = addExpense(newBudget2, spendingLimits, 200, 'Stuff', 'Jay');
 
-console.log(budget);
-
-const checkExpenses = (state, limits) => {
-
+//!
+const checkExpenses = (state, limits) => 
   state.map(entry =>      //* map returns a new array, so not mutated
     entry.value < -getLimit(limits, entry.user)
       ? {...entry, flag: 'limit'}
       : entry  
-  )
-  
-};
+);
 
 const finalBudget = checkExpenses(newBudget3, spendingLimits);
 console.log(finalBudget);
@@ -75,27 +59,13 @@ console.log(finalBudget);
 // Impure function
 const logBigExpenses = function (state, bigLimit) {
   
-  const bigExpense = state.filter(entry => entry.value <= -bigLimit)
+  const bigExpense = state
+      .filter(entry => entry.value <= -bigLimit)
       .map(entry => entry.description.slice(-2))
       .join(' / ');
       // .reduce((str, cur) =>  `${str} / ${cur.description.slice(-2)}`, '')
 
   console.log(bigExpense);
-  
-  // let output = '';
-  // for (const entry of budget) {
-
-  //   output += entry.value <= -bigLimit 
-  //     ? `${entry.description.slice(-2)} / `
-  //     : ''; 
-
-      // if (entry.value <= -BigLimit) {
-        // output += el.description.slice(-2) + ' / '; // Emojis are 2 chars
-        // output += `${entry.description.slice(-2)} / `; // Emojis are 2 chars
-      // }
-// }
-  // output = output.slice(0, -2); // Remove last '/ '
-  // console.log(output);
 };
 
 logBigExpenses(finalBudget, 500);
