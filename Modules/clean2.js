@@ -1,6 +1,7 @@
 'strict mode'
+// alert('1')
 
-const budget = [
+const budget = Object.freeze( [
   { value: 250, description: 'Sold old TV 📺', user: 'jonas' },
   { value: -45, description: 'Groceries 🥑', user: 'jonas' },
   { value: 3500, description: 'Monthly salary 👩‍💻', user: 'jonas' },
@@ -9,7 +10,12 @@ const budget = [
   { value: -20, description: 'Candy 🍭', user: 'matilda' },
   { value: -125, description: 'Toys 🚂', user: 'matilda' },
   { value: -1800, description: 'New Laptop 💻', user: 'jonas' },
-];
+]);
+
+//* keep it in mind
+// budget[0].value = 10000;  //* works
+// budget[9] = 'jonas'       //* this is not going to work
+
 
 
 // spendingLimits is now immutable : we can no longer put any new properties into it
@@ -17,9 +23,10 @@ const spendingLimits = Object.freeze({
   jonas: 1500,
   matilda: 100,
 });
+
 // try to add new property
-spendingLimits.jay = 200;
-console.log(spendingLimits); //* object didn't change
+// spendingLimits.jay = 200;
+// console.log(spendingLimits); //* object didn't change
 
 
 // refactoring
@@ -27,37 +34,35 @@ const getLimit = (user) => {
   spendingLimits?.[user] ?? 0;  
 } 
 
-const addExpense = function (value, description, user = 'jonas') {
-  if (!user) user = 'jonas';
-  user = user.toLowerCase();
+// side-effect  -that something outside of a function is manipulated
+// or the function does something other than simply returning a value
+// IMPURE FUNCTION - which has or produces side effects
+// PURE FUNCTION
+const addExpense = function (state, limits, value, description, user = 'jonas') {
+  // if (!user) user = 'jonas';
 
-      // let lim;
-      // if (spendingLimits[user]) {
-      //   lim = spendingLimits[user];
-      // } else {
-      //   lim = 0;
-      // }
+  const cleanUser = user.toLowerCase();
 
-      // const limit = spendingLimits[user]
-      //   ? spendingLimits[user] 
-      //   : 0;
-  //! optional chaining - use it with bracket notations
-  // ask for user property--> ?.[user], if there is a property with this name, (for example 'jonas' here), then all of this (spendingLimits?.[user]) will be that value.
-  // but if not, then will be 'undefined', and in that case we set it to zero 0
-  // coalescing operator ??
-  // const limit = spendingLimits?.[user] ?? 0;  
+  // if (value <= getLimit(cleanUser)) {
+        //*no budget.push({ value: -value, description, user:cleanUser });
+  //   return [...state, { value: -value, description, user:cleanUser }]
+  // }
+
+  return value <= getLimit(cleanUser) 
+    ? [...state, { value: -value, description, user:cleanUser }]
+    : state;
   
-  // const limit = getLimit(user)
-
-  // if (value <= limit) {
-  if (value <= getLimit(user)) {
-    // budget.push({ value: -value, description: description, user: user });
-    budget.push({ value: -value, description, user });
-  }
 };
-addExpense(10, 'Pizza 🍕');
-addExpense(100, 'Going to movies 🍿', 'Matilda');
-addExpense(200, 'Stuff', 'Jay');
+
+const newBudget1 = addExpense(budget, spendingLimits, 10, 'Pizza 🍕');
+
+const newBudget2 = addExpense(newBudget1, spendingLimits, 100, 'movies 🍿', 'Matilda');
+
+const newBudget3 = addExpense(newBudget2, spendingLimits, 200, 'Stuff', 'Jay');
+
+console.log('newBudget1: '. newBudget1);
+console.log('newBudget2: '. newBudget2);
+console.log('newBudget3: '. newBudget3);
 console.log(budget);
 
 const checkExpenses = function () {
