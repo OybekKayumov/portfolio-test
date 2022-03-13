@@ -212,9 +212,9 @@ console.log('stateDeepClone: ', stateDeepClone); //! true
 // rebuild index.html without type="module"
 
 // this code only parcel understand
-if (module.hot) {
-  module.hot.accept()
-}
+// if (module.hot) {
+//   module.hot.accept()
+// }
 // whenever we change this will not reload this part of the page, this is good for maintaining state on page when we are testing out smth,
 // for example login to app when reload page
 // page will not reload
@@ -293,13 +293,13 @@ Promise.resolve('Test').then(x => console.log(x))
     //   "presets": ["@babel/preset-env"]
     // }
     
-import 'core-js/stable';
+// import 'core-js/stable';
 // import 'core-js/stable/array/find';
 // import 'core-js/stable/promise';
 
 // Polifilling async functions
 // npm i regenerator-runtime
-import 'regenerator-runtime/runtime'
+// import 'regenerator-runtime/runtime'
 
 // TODO READABLE CODE
 // write a readable cod in future
@@ -348,3 +348,64 @@ import 'regenerator-runtime/runtime'
 // when Promises do not depend each other, run them in parallel to make the application little bit faster for users
 
 // handle errors and promises rejections
+
+// TODO Two fundamentally different ways of writing code: Paradigms
+
+//! IMPERATIVE
+// whenever we write imperative code, we need to explain to the computer how to do certain things, explain every single step computer needs to follow
+// tell step by step recipe of a cake
+// the programmer explain HOW to do things 
+
+const arr = [2, 4, 6, 8];
+const doubled = [];
+for (let i = 0; i < arr.length; i++) 
+doubled[i] = arr[i] * 2;
+
+console.log('doubled: ', doubled);  
+
+
+//! DECLARATIVE
+// the programmer tells the computer only what todo
+// we describe the way the computer should achieve the result
+// description of a cake
+// the HOW (step-by-step instructions) gets abstracted away
+// describing the task and the result should be achieved is the declarative way
+
+const arr2 = [2, 4, 6, 8];
+const doubled2 = arr2.map(n => n * 2)
+
+console.log('doubled2: ', doubled2);
+// creating an empty array,
+// initializing a counter
+// lke this steps have been abstracted away
+// this is Important to understand, this is how modern JavaScript code is written 
+
+
+// Declarative Paradigms is actually a Big and Popular paradigm, functional programing 
+// !functional programing - declarative
+// based on the idea of writing software by combining many pure functions, avoiding side effects and mutating data
+
+//* side effect: modification (mutation) of any data Outside of the function(mutating external variables, logging to console, writing to DOM, etc)
+// logging stuff to the consol, changing something in the DOM  is also causing side effect
+
+//* Pure function is a function without side effects. Does not depend on external variables. Given the same inputs, always returns the same outputs.
+
+//* immutability: state (data) is NEVER modified! instead, state is COPIED and the copy is mutated and returned 
+
+//! functional programing is a huge paradigm, WHICH IS REALLY DIFFICULT TO IMPLEMENT IN PRACTICE. BUT IT IS VERY IMPORTANT THAT TO KNOW SOME OF THESE PRINCIPLES,  such as "side effects", "pure functions" and "immutability". 
+//? Because many popular libraries , such as REACT or REDUX, are built around all of these principles.
+
+//* for example, in REACT the state is also completely immutable
+
+// usually it mixed imperative and declarative programming
+// we can start using some of the functional programing techniques in our own code base.
+//todo Try to avoid data mutation
+//todo Use built-in methods that don't produced side effects
+//todo Do data transformations with methods such as .MAP(), .FILTER() and .REDUCE() 
+//todo Try to avoid side effect s in functions: this is of course not always possible!
+
+//! DECLARATIVE SYNTAX
+// use array and object destructuring
+// use the spread operator(...)
+// use the ternary (conditional) operator
+// use template literals
