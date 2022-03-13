@@ -402,4 +402,10 @@ console.log('doubled2: ', doubled2);
 //todo Try to avoid data mutation
 //todo Use built-in methods that don't produced side effects
 //todo Do data transformations with methods such as .MAP(), .FILTER() and .REDUCE() 
-//todo Try to avoid side effects in functions: this is of course not always possible!
+//todo Try to avoid side effect s in functions: this is of course not always possible!
+
+//! DECLARATIVE SYNTAX
+// use array and object destructuring
+// use the spread operator(...)
+// use the ternary (conditional) operator
+// use template literals
