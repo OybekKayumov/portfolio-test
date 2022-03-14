@@ -243,3 +243,11 @@ class superHeroCl extends PersonCl {
 
 const batmanCl = new superHeroCl('Cline', 'Kent')
 console.log(batmanCl.sayMyName());
+
+//! make sure you understand :
+// how to create a Class
+// how to initialize properties (constructor)
+// how to add methods
+// how to create an instance of the class
+// how to inherit using the extends and 
+//* "super" keyword
