@@ -43,8 +43,8 @@ function outer2() {
 }
 
 const fn = outer2();
-fn();
-fn();
+// fn();
+// fn();
 // counter:  1
 // counter:  2
 // когда возращаем функцию из другой функции мы фактически возвращаем комбинацию function definition вместе с областью действия function's scope.
@@ -59,7 +59,7 @@ function sum(a, b, c) {
   return a + b + c
 }
 
-console.log('sum: ', sum(2, 3, 5));
+// console.log('sum: ', sum(2, 3, 5));
 
 // sum(2, 3, 5) --> sum(2)(3)(5)
 function curry (fn) {
@@ -73,13 +73,13 @@ function curry (fn) {
 }
 
 const curriedSum = curry(sum)
-console.log("curry: ", curriedSum(2)(3)(5));
+// console.log("curry: ", curriedSum(2)(3)(5));
 
 const add2 = curriedSum(2)
 const add3 = add2(3)
 const add5 = add3(5)
 
-console.log('add5: ', add5);
+// console.log('add5: ', add5);
 
 
 //! this
@@ -120,7 +120,7 @@ function sayMyName () {
   console.log(`Hey, my name is ${this.name}!`);
 }
 
-sayMyName.call(person)
+// sayMyName.call(person)
 // Hey, my name is Vishwas!
 
 
@@ -136,8 +136,8 @@ function Person (name) {
 const p1 = new Person('Batman')
 const p2 = new Person('Superman')
 
-console.log(p1, p2);
-console.log(p1.name, p2.name);
+// console.log(p1, p2);
+// console.log(p1.name, p2.name);
 
 // Person {name: 'Batman'} Person {name: 'Superman'}
 // Batman Superman
@@ -189,3 +189,23 @@ console.log('person2.getFullName: ', person2.getFullName());
 
 
 //todo Inheritance
+function superHero(fName, lName) {
+  // this = {}
+  Person1.call(this, fName, lName)
+  this.isSuperHero = true
+}  
+
+superHero.prototype.fightCrime = function() {
+  console.log('Fighting crime');
+}
+
+superHero.prototype = Object.create(Person1.prototype);  // chain to Person1
+
+const batman = new superHero('Bruce', 'Wayne');
+superHero.prototype.constructor = superHero
+
+console.log('batman full name: ', batman.getFullName());
+console.log('batman: ', batman);
+
+// batman superHero has inherited getFullName from Person1
+// superHero has inherited properties and methods from Person1
