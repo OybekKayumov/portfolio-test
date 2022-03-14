@@ -31,7 +31,7 @@ function outer1() {
 //* counter:  1
 
 
-// closures замыкания
+//! closures замыкания
 // 3
 function outer2() {
   let counter = 0
@@ -50,3 +50,33 @@ fn();
 // когда возращаем функцию из другой функции мы фактически возвращаем комбинацию function definition вместе с областью действия function's scope.
 // это позволило бы function definition иметь связанную посьоянную память, которая могла бы удерживать live data между выполнениями. эта комбинация функции и и ее цепочки области действия - называется замыканием - Closure
  
+
+//! Function currying
+// currying is a process in functional programming in which we transform a function with multiple arguments into a sequence of nesting functions that take one argument at a time.
+// function f(a,b,c) is transformed to function(a)(b)(c)
+
+function sum(a, b, c) {
+  return a + b + c
+}
+
+console.log('sum: ', sum(2, 3, 5));
+
+// sum(2, 3, 5) --> sum(2)(3)(5)
+function curry (fn) {
+  return function(a) {
+    return function(b) {
+      return function(c) {
+        return fn(a, b, c)  
+      }
+    }
+  }
+}
+
+const curriedSum = curry(sum)
+console.log("curry: ", curriedSum(2)(3)(5));
+
+const add2 = curriedSum(2)
+const add3 = add2(3)
+const add5 = add3(5)
+
+console.log('add5: ', add5);
