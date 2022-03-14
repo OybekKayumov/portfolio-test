@@ -209,3 +209,20 @@ console.log('batman: ', batman);
 
 // batman superHero has inherited getFullName from Person1
 // superHero has inherited properties and methods from Person1
+
+//todo Class
+ 
+class PersonCl {
+  constructor(fName, lName) {
+    this.firstName = fName;
+    this.lastName = lName;  
+  }
+
+  sayMyName() {
+    return this.firstName + ' ' + this.lastName
+  }
+}
+
+const classP1 = new PersonCl('Sentayhu', 'Berhanu')
+console.log('classP1: ', classP1);
+console.log(classP1.sayMyName());
