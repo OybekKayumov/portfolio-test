@@ -155,3 +155,37 @@ globalThis.name = 'Hulk'
 // explicit binding
 // imlicit binding
 // default binding
+
+
+//todo Prototype
+function Person1(fName, lName) {
+  this.firstName = fName,
+  this.lastName = lName
+}
+
+const person1 = new Person1('Bruce', 'Wayne')
+const person2 = new Person1('Clark', 'Kent')
+
+person1.getFullName = function() {
+  // return this.firstName + ' ' + this.lastName;
+  return `${this.firstName} ${this.lastName}`
+}
+
+// console.log('person1.getFullName: ', person1.getFullName());
+
+// console.log('person2.getFullName: ', person2.getFullName());
+//! Uncaught TypeError: person2.getFullName is not a function
+ 
+Person1.prototype.getFullName = function() {
+  // return this.firstName + ' ' + this.lastName;
+  return `${this.firstName} ${this.lastName}`
+}
+
+console.log('person1.getFullName: ', person1.getFullName());
+
+console.log('person2.getFullName: ', person2.getFullName());
+// person1.getFullName:  Bruce Wayne
+// person2.getFullName:  Clark Kent
+
+
+//todo Inheritance
