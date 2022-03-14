@@ -1,4 +1,7 @@
 // nested function scope
+
+// const { default: object } = require("lodash-es/object");
+
 // 1
 let a = 10
 function outer() {
@@ -226,3 +229,17 @@ class PersonCl {
 const classP1 = new PersonCl('Sentayhu', 'Berhanu')
 console.log('classP1: ', classP1);
 console.log(classP1.sayMyName());
+
+class superHeroCl extends PersonCl {
+  constructor(fName, lName) {
+    super(fName, lName)
+    this.isSuperHero = true    
+  }
+
+  fightCrimeCl() {
+    console.log('Fighting crime');
+  }
+}
+
+const batmanCl = new superHeroCl('Cline', 'Kent')
+console.log(batmanCl.sayMyName());
