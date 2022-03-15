@@ -1,5 +1,7 @@
 // nested function scope
 
+// const { values } = require("core-js/core/array");
+
 // const { default: object } = require("lodash-es/object");
 
 // 1
@@ -251,3 +253,85 @@ console.log(batmanCl.sayMyName());
 // how to create an instance of the class
 // how to inherit using the extends and 
 //* "super" keyword
+ 
+
+//todo Iterables and Iterators
+// 1 String
+// const str = 'Vishvas';
+// for loop
+// for (let i = 0; i < str.length; i++) {
+//   console.log('str.charAt(i): ', str.charAt(i));
+// }
+
+// str.charAt(i):  V
+// str.charAt(i):  i
+// str.charAt(i):  s
+// str.charAt(i):  h
+// str.charAt(i):  v
+// str.charAt(i):  a
+// str.charAt(i):  s
+
+// 1 Array 
+// const arr = ['V', 'i', 's', 'h', 'v', 'a', 's']
+// for loop
+// for (let i = 0; i < arr.length; i++) {
+//   console.log('arr[i]: ', arr[i]);
+// }
+
+// arr[i]:  V
+// arr[i]:  i
+// arr[i]:  s
+// arr[i]:  h
+// arr[i]:  v
+// arr[i]:  a
+// arr[i]:  s
+
+// for .. of // String
+// const str = 'Vishvas';
+// for (const char of str) {
+//   console.log('char: ', char);
+// }
+
+// for .. of // Array
+// const arr = ['V', 'i', 's', 'h', 'v', 'a', 's']
+// for (const item of arr) {
+//   console.log('item: ', item);
+// }
+
+// char:  V
+// char:  i
+// char:  s
+// char:  h
+// char:  v
+// char:  a
+// char:  s
+
+// item:  V
+// item:  i
+// item:  s
+// item:  h
+// item:  s
+// item:  v
+// item:  a
+
+const obj = {
+  [Symbol.iterator]: function() {
+    let step = 0;
+    const iterator = {
+      next: function() {
+        step++;
+        if (step === 1) {
+          return {value: 'Hello', done: false}
+        } else if (step === 2) {
+          return {value: 'World', done: false}          
+        }  
+        return {value: undefined , done: true}
+      },
+    }
+    return iterator
+  },
+}
+
+for (const word of obj) {
+  console.log('word: ', word);
+}
