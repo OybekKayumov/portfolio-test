@@ -335,3 +335,26 @@ const obj = {
 for (const word of obj) {
   console.log('word: ', word);
 }
+
+
+//todo Generators
+function normFuncion() {
+  console.log('Hello');
+  console.log('World');
+}
+
+// normFuncion();
+// normFuncion();
+
+function* GeneratorsFunction () {
+  yield 'Hello';
+  yield 'World';
+ 
+}
+
+// console.log(GeneratorsFunction());
+const generatorObject = GeneratorsFunction();
+
+for (const say of generatorObject) {
+  console.log('say: ', say);
+}
