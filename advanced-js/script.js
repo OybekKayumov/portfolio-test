@@ -91,3 +91,50 @@ cleanTable(this, 'some soap')
 
 cleanTable.call(this, 'some soap')      //! .call
 // cleaning window table! using some soap
+
+// call function from global scope ...
+
+this.garage1 = {
+  table: 'garage table'  
+};
+
+cleanTable.call(this.garage1, 'some soap !')      //! .call
+//* cleaning garage table using some soap !
+
+
+let JohnsRoom1 = {
+  table: 'Johns table'
+}
+
+cleanTable.call(JohnsRoom1, 'some soap !!!' )
+//* cleaning Johns table using some soap !!!
+
+
+
+//! this inside an inner FUNCTION
+
+const cleanTable2 = function(soap) {
+
+  // 1
+  // let text = this;
+  // 2
+  const innerFunction = function (_soap) {
+    // 1
+    // console.log(`cleaning ${text.table} using ${_soap}`); 
+    // 2
+    console.log(`cleaning ${this.table} using ${_soap}`); 
+  }
+
+  // 1
+  // innerFunction(soap);
+  // 2
+  innerFunction.call(this, soap);
+}
+
+cleanTable2.call(this, 'some soap 2!')
+// 1
+//* cleaning window table! using some soap 2!
+
+// 2 same result
+//* cleaning window table! using some soap 2!
+
