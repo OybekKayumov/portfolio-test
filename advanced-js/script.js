@@ -63,11 +63,11 @@ this.garage.cleanTable()    // cleanTable() is method
 
 //! this inside FUNCTION
 
-const cleanTable = function() {
-  console.log(`cleaning ${this.table}`); 
-}
+// const cleanTable = function() {
+//   console.log(`cleaning ${this.table}`); 
+// }
 
-cleanTable();
+// cleanTable();
 //* cleaning window table!
 // "this" will search in Global Scope "windows"
 
@@ -78,6 +78,16 @@ cleanTable();
 
 
 //! call function
-cleanTable(this);         //* cleaning window table!
-cleanTable.call(this);    //* cleaning window table!
+// cleanTable(this);         //* cleaning window table!
+// cleanTable.call(this);    //* cleaning window table!
 
+const cleanTable = function(soap) {
+  console.log(`cleaning ${this.table} using ${soap}`); 
+}
+
+cleanTable(this, 'some soap')
+//* cleaning window table! using [object Window]
+
+
+cleanTable.call(this, 'some soap')      //! .call
+// cleaning window table! using some soap
