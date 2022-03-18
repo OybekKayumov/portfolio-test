@@ -171,3 +171,46 @@ cleanTableInnerArrow.call(this, 'some soap innerArrow!')
 
 
 //! CREATE CONSTRUCTOR to produce objects
+//! this inside the constructor
+// constructor is a function
+
+const cleanTableConstructor = function(soap) {
+  console.log(`cleaning ${this.table} using ${soap}`); 
+}
+
+let createRoom = function(name) {
+  this.table = `${name}s room`
+}
+
+const susansRoom = new createRoom('Susan');
+
+cleanTableConstructor.call(susansRoom, 'some soap 3!')
+//* cleaning Susans room using some soap 3!
+
+
+//!prototype
+createRoom.prototype.cleanTableConstructor = function(soap) {
+  console.log(`cleaning ${this.table} using ${soap}`); 
+}
+
+susansRoom.cleanTableConstructor('some soap 4!');
+//* cleaning Susans room using some soap 4!
+
+
+
+//! this inside a class
+
+class createRoomCl {
+  constructor(name) {
+    this.table = `${name}s table`
+  }
+
+  cleanTableCl(soap) {
+    console.log(`cleaning ${this.table} using ${soap}`); 
+  }
+}
+
+const susansRoomCl = new createRoomCl('Susan');
+susansRoomCl.cleanTableCl('some soap class!')
+
+//* cleaning Susans table using some soap class!
