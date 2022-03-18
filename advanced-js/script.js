@@ -1,3 +1,5 @@
+// 'use strict'
+
 // Javascript this keyword explained in
 // Global Scope,
 // Object, 
@@ -56,4 +58,26 @@ console.log(JohnsRoomMethod.table);
 JohnsRoomMethod.cleanTable()
 //* cleaning Johns table
 
-this.garage.cleanTable()
+this.garage.cleanTable()    // cleanTable() is method
+
+
+//! this inside FUNCTION
+
+const cleanTable = function() {
+  console.log(`cleaning ${this.table}`); 
+}
+
+cleanTable();
+//* cleaning window table!
+// "this" will search in Global Scope "windows"
+
+// and if we will use 'use strict'
+// then will be an error: 
+//! Uncaught TypeError: Cannot read properties of undefined (reading 'table')
+//! at cleanTable
+
+
+//! call function
+cleanTable(this);         //* cleaning window table!
+cleanTable.call(this);    //* cleaning window table!
+
