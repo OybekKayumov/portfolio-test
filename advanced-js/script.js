@@ -128,7 +128,11 @@ const cleanTable2 = function(soap) {
   // 1
   // innerFunction(soap);
   // 2
-  innerFunction.call(this, soap);
+  // innerFunction.call(this, soap);   //! .call
+  //3
+  innerFunction.bind(this)(soap);      //! .bind
+
+
 }
 
 cleanTable2.call(this, 'some soap 2!')
@@ -138,3 +142,32 @@ cleanTable2.call(this, 'some soap 2!')
 // 2 same result
 //* cleaning window table! using some soap 2!
 
+// 3
+// bind creates a new function
+//* cleaning window table! using some soap 2!
+
+
+//! using "this" inside as ARROW innerFunction 
+
+const cleanTableInnerArrow = function(soap) {
+
+  const arrowInnerFunction = (_soap) => {        //! ARROW innerFunction 
+    console.log(`cleaning ${this.table} using ${_soap}`); 
+  }
+
+  arrowInnerFunction(soap);      //! .bind
+
+}
+
+cleanTableInnerArrow.call(this, 'some soap innerArrow!')
+//* cleaning window table! using some soap innerArrow!
+
+// when we use arrow function, "this" here ${this.table} will take from outer scope - "this" будеть взят из внешней области и использовать его
+//? here outer scope is "cleanTableInnerArrow" function
+
+// we have actually 4 solutions
+// .call, .bind, passing as TEXT= this, and using ARROW FUNCTION 
+
+
+
+//! CREATE CONSTRUCTOR to produce objects
