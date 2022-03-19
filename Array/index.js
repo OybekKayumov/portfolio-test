@@ -134,3 +134,14 @@ const nameList = names.split(re)
 console.log('nameList: ', nameList);
 //* (6) ['Hurry Trunk', 'Fred Barney', 'Helen Rigby', 'Bill Abel', 'Chess Hand', '']
 
+
+//! returning a limited number of splits
+// return first 4 splits
+
+const myStr = 'Hello World. How are you doing?'
+const splitMyStr = myStr.split(' ', 4)
+console.log('splitMyStr: ', splitMyStr);
+//* (4) ['Hello', 'World.', 'How', 'are']
+
+
+//! splitting with regex to include parts of the separator in the result
