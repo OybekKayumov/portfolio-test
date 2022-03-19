@@ -27,10 +27,10 @@ const arrFirstElem = splitStr[0];
 console.log('arrFirstElem: ', arrFirstElem);
 //* arrFirstElem:  bearer
 
-// here is what is happaning in the above code:
+// here is what is happening in the above code:
 
-// 1. the string is split wit " " as the separator
-// 2. the first and second entrys in the array are accessed
+// 1. the string is split with " " as the separator
+// 2. the first and second entries in the array are accessed
 
 
 //todo Example 2: apply array methods to a string
@@ -49,7 +49,7 @@ const textArr = morseArr.map((char) => morseToChar[char])
 console.log('textArr: ', textArr);   //* (4) ['c', 'o', 'd', 'e']
 
 const text = textArr.join('') 
-console.log('text: ', text);      //* text
+console.log('text: ', text);      //* text:  code
 
 
 //todo how to add a limit to split
