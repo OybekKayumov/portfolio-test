@@ -1,5 +1,7 @@
 //todo split()
 
+import array from "lodash-es/array";
+
 // a string can be broken apart into an array of multiple strings using the split method
 const publish = 'free code camp'
 console.log(publish); //* free code cump
@@ -145,3 +147,12 @@ console.log('splitMyStr: ', splitMyStr);
 
 
 //! splitting with regex to include parts of the separator in the result
+
+const regexSplitStr = 'Hello 1 word. Sentence number 2.';
+const splitReg = regexSplitStr.split(/(\d)/);
+
+console.log('splitReg: ', splitReg);
+//* (5) ['Hello ', '1', ' word. Sentence number ', '2', '.']
+
+// if "separator" is a regular expression that contains capturing 
+// parentheses "(" ")", matched results are included in the array
