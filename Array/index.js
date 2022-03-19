@@ -80,11 +80,57 @@ console.log('strCopy :',strCopy);
 // split(separator)
 // split(separator, limit)
 
-// split()
+//? split()
 const emptyStr = '';
 // string is empty and no separator is specified
 console.log(emptyStr.split());  //* [''];
 
 // string and separator are both empty string
 console.log(emptyStr.split(emptyStr));  //* [];
+
+//? split(separator)
+function splitString (strToSplit, separator) {
+  const arrOfStrings = strToSplit.split(separator);
+
+  console.log('The original string is: ', strToSplit);
+  console.log('The separator is: ', separator);
+  console.log('The array has ', arrOfStrings.length, ' elements: ', arrOfStrings.join(' / '));
+}
+
+const tempString = "Oh brave new world that has such people in it."
+const monthStr = 'Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec';
+
+const space = ' ';
+const comma = ',';
+
+splitString(tempString,space);
+// The original string is:  Oh brave new world that has such people in it
+// The separator is:   
+// The array has  10  elements:  Oh / brave / new / world / that / has / such / people / in / it.
+
+
+splitString(tempString);
+// The original string is:  Oh brave new world that has such people in it.
+// The separator is:  undefined
+// The array has  1  elements:  Oh brave new world that has such people in it.
+
+splitString(monthStr, comma);
+// The original string is:  Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec
+// The separator is:  ,
+// The array has  12  elements:  Jan / Feb / Mar / Apr / May / Jun / Jul / Aug / Sep / Oct / Nov / Dec
+
+
+//? split(separator, limit)
+//! removing spaces from a string
+// example remove spaces and semicolon from string
+
+const names = 'Hurry Trunk; Fred Barney; Helen Rigby ; Bill Abel ;Chess Hand '
+
+console.log('names: ', names);
+
+const re = /\s*(?:;|$)\s*/
+const nameList = names.split(re)
+
+console.log('nameList: ', nameList);
+//* (6) ['Hurry Trunk', 'Fred Barney', 'Helen Rigby', 'Bill Abel', 'Chess Hand', '']
 
