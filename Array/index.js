@@ -1,7 +1,5 @@
 //todo split()
 
-import array from "lodash-es/array";
-
 // a string can be broken apart into an array of multiple strings using the split method
 const publish = 'free code camp'
 console.log(publish); //* free code cump
