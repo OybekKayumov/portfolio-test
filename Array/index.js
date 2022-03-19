@@ -154,3 +154,8 @@ console.log('splitReg: ', splitReg);
 
 // if "separator" is a regular expression that contains capturing 
 // parentheses "(" ")", matched results are included in the array
+
+
+// map()
+// filter()
+// reduce()
