@@ -1,4 +1,5 @@
 //todo split()
+
 // a string can be broken apart into an array of multiple strings using the split method
 const publish = 'free code camp'
 console.log(publish); //* free code cump
@@ -49,3 +50,41 @@ console.log('textArr: ', textArr);   //* (4) ['c', 'o', 'd', 'e']
 
 const text = textArr.join('') 
 console.log('text: ', text);      //* text
+
+
+//todo how to add a limit to split
+const public = 'jasvascript html css'
+console.log(public.split('', 1)); //* ['j']
+
+console.log(public.split(' ', 1)); //* ['jasvascript']
+
+
+//todo string.split()
+
+const str = 'The quick brown fox jumps over the lazy dog.';
+const words = str.split(' ');
+console.log('words: ', words);
+//* (9) ['The', 'quick', 'brown', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog.']
+
+console.log('words[3]: ', words[3]); //* fox
+
+const chars = str.split('');
+console.log('chars[8]: ', chars[8]); //* k
+
+const strCopy = str.split();
+console.log('strCopy :',strCopy);
+//* ['The quick brown fox jumps over the lazy dog.']
+
+//! Syntax
+// split()
+// split(separator)
+// split(separator, limit)
+
+// split()
+const emptyStr = '';
+// string is empty and no separator is specified
+console.log(emptyStr.split());  //* [''];
+
+// string and separator are both empty string
+console.log(emptyStr.split(emptyStr));  //* [];
+
