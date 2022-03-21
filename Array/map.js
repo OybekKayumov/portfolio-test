@@ -31,3 +31,35 @@ let book = books.map((elem) => {
 })
 
 console.log('books by authors: ', book);
+
+
+// todo The complete map() method SYNTAX
+// array.map(function(element, index, array){}, this);
+
+// the callback 'function()' is called on each array Element, and the "map()" method always passes the current "element", the "index" of the current element, and the whole "array" object to it 
+
+// "this" argument will be used inside the callback function. By default, its value is 'undefined'.
+// here's how to change the 'this' value to the number '80':
+
+let arr = [2, 3, 5, 7];
+
+arr.map(function(elem, index, array) {
+  console.log('this: ', this);  //* 80
+  console.log('element: ', elem);
+  console.log('index: ', index);
+  console.log('array: ', array);
+
+  return elem;
+
+}, 80)
+
+// this:  Number {80}[[Prototype]]: Number[[PrimitiveValue]]: 80
+// this:  Number {80}
+// this:  Number {80}
+// this:  Number {80}
+
+//! output for last element example
+// this:  Number {80}
+// element:  7
+// index:  3
+// array:  (4) [2, 3, 5, 7]
