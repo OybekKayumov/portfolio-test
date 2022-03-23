@@ -11,5 +11,11 @@
 // selectionEnd - индекс последнего выделенного символа,
 // selectionDirection - [optional] строка, определяющая направления произведенного выделения. Принимаются значения "forward", "backward", или "none", если направление выделения неизвестно или неважно.
 
+function selectText() {
+  const input = document.getElementById('mytextbox');
+  input.focus();
+  // input.setSelectionRange(9, 9)    //* focus after "F" 
+  input.setSelectionRange(2, 12)      //*  'zilla Fire' 
+}
 
-
+// press button to see result
