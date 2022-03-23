@@ -19,3 +19,50 @@ function selectText() {
 }
 
 // press button to see result
+
+// async
+
+// const fetch = require('node-fetch');
+// const fs = require('fs');
+
+//!setTimeout
+//? setTimeout(() => {
+//   console.log('wait 1 sec');
+// }, 1000);
+
+// nested setTimeout
+
+//? setTimeout(() => {
+//   console.log('3');
+//   setTimeout(() => {
+//     console.log('2');
+//     setTimeout(() => {
+//       console.log('1');
+//     }, 1000);
+//   }, 1000);
+// }, 1000);
+
+//* 3
+// 2
+// 1
+
+//! fetch
+// fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+//   .then((res) => res.json())
+//   .then((data) => console.log('data: ', data))
+//   .catch((err) => console.error(err));
+  
+
+// //! async await
+// const fetchPokemon = async (id) => {
+//   try {
+//     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+//     const data = await res.json();
+    
+//     console.log('data: ', data);
+//   } catch (err) {
+//     console.error(err);
+//   }  
+// }
+
+// fetchPokemon(5);
