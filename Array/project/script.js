@@ -105,15 +105,34 @@ console.log([...arr]); //* (5) ['a', 'b', 'c', 'd', 'e']
 
 //todo splice
 // same as slice, but it does change the original array
-// it mutates that array
+// splice() mutates that array
 
 // console.log(arr.splice(2)); //! (3) ['c', 'd', 'e']
 // console.log(arr); //! (2) ['a', 'b']
 // splice delete selected elements from arr
 
-arr.splice(-1); // remove last element 
-console.log(arr); //* ['a', 'b', 'c', 'd']
-arr.splice(1, 2); //*  2 here number of element to delete
-console.log(arr); //* (2) ['a', 'd']   removed 1t and 2d elements
+// arr.splice(-1); // remove last element 
+// console.log(arr); //* ['a', 'b', 'c', 'd']
+// arr.splice(1, 2); //*  2 here number of element to delete
+// console.log(arr); //* (2) ['a', 'd']   removed 1t and 2d elements
 
 
+//todo reverse
+const arr2 = ['j', 'i', 'h', 'g', 'f'];
+console.log(arr2.reverse()); //* 5) ['f', 'g', 'h', 'i', 'j']
+// reverse() mutates that array
+console.log(arr2); //* 5) ['f', 'g', 'h', 'i', 'j']
+
+//todo concat
+
+const letters = arr.concat(arr2);
+console.log(letters);
+//* (10) ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+
+console.log([...arr, ...arr2]);
+//* (10) ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+
+
+//todo join
+console.log(letters.join(' - '));
+//* a - b - c - d - e - f - g - h - i - j
