@@ -103,4 +103,17 @@ console.log(arr.slice()); //* (5) ['a', 'b', 'c', 'd', 'e']
 console.log([...arr]); //* (5) ['a', 'b', 'c', 'd', 'e']
 
 
+//todo splice
+// same as slice, but it does change the original array
+// it mutates that array
+
+// console.log(arr.splice(2)); //! (3) ['c', 'd', 'e']
+// console.log(arr); //! (2) ['a', 'b']
+// splice delete selected elements from arr
+
+arr.splice(-1); // remove last element 
+console.log(arr); //* ['a', 'b', 'c', 'd']
+arr.splice(1, 2); //*  2 here number of element to delete
+console.log(arr); //* (2) ['a', 'd']   removed 1t and 2d elements
+
 
