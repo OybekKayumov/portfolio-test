@@ -74,3 +74,10 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+let arr = ['a', 'b', 'c', 'd', 'e']
+
+//todo slice
+// we can extract part of any array WITHOUT changing the original array
+arr.slice(2) //* start from 'c' and all the way to the end
+// and doesn't mutate original arr. Returns new arr, copy of arr BUT only with the extracted parts
+console.log(arr.slice(2));  //* (3) ['c', 'd', 'e']
