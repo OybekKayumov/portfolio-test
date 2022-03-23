@@ -81,3 +81,26 @@ let arr = ['a', 'b', 'c', 'd', 'e']
 arr.slice(2) //* start from 'c' and all the way to the end
 // and doesn't mutate original arr. Returns new arr, copy of arr BUT only with the extracted parts
 console.log(arr.slice(2));  //* (3) ['c', 'd', 'e']
+
+console.log(arr.slice(2, 4));  //* (2) ['c', 'd']
+// end parameter is not included in the output
+// (2, 4) means 2 and 3 without 4
+
+console.log(arr.slice(-2));  
+// starts from the end, and takes last 2 elements of arr
+//*  (2) ['d', 'e']
+
+console.log(arr.slice(-1));  
+// last element of any ARRAY
+
+console.log(arr.slice(1, -2)); //* (2) ['b', 'c']
+
+
+//! SHALLOW copy of arr
+console.log(arr.slice()); //* (5) ['a', 'b', 'c', 'd', 'e']
+// same as:  
+//todo using spread operator
+console.log([...arr]); //* (5) ['a', 'b', 'c', 'd', 'e']
+
+
+
