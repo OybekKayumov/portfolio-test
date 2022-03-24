@@ -308,3 +308,19 @@ const currencies = new Map([
 // like a snowball as it rolls down a hill : snowball effect
 // no new array, but only the reduced value
 
+
+//! MAP - creates a new array
+
+const movements2 = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const eurToUsd = 1.1;
+
+const movementsUSD = movements2.map((mov) => {
+  return mov * eurToUsd;  
+})
+
+console.log(movements2);
+console.log(movementsUSD);
+// (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
+
+// (8) [220.00000000000003, 495.00000000000006, -440.00000000000006, 3300.0000000000005, -715.0000000000001, -143, 77, 1430.0000000000002]
