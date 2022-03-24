@@ -63,16 +63,23 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 
 const displayMovements = function(movements) {
+  //* empty the entire container and only then we start adding new elements
+  containerMovements.innerHTML = '';
+  //* .textContent = 0
+
   movements.forEach((mov, i) => {
 
-    const type = mov > 0 ? 'deposit' : 'withdrawal'
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
     <div class="movements__row">
       <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
       <div class="movements__value">${mov}</div>
     </div>    
     `;
-  })
+
+    //? containerMovements.insertAdjacentHTML(position, htmlElemToInsert)
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
 }
 
 displayMovements(account1.movements)
