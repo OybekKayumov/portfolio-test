@@ -291,3 +291,20 @@ const currencies = new Map([
 
 //! currenciesUnique.forEach((value, _ , map) => {  
 //* ' _ ' variable which is unnecessary - throwaway variable
+
+
+//! MAP
+// is similar to the forEach but with the difference that MAP creates a brand new ARRAY based an original array
+
+//! FILTER 
+// USED TO FILTER FOR ELEMENTS in the original array which satisfy a certain condition. for example we looking for element greater than 2
+//* 3, 1, 4, 3, 2   filter current > 2
+//* 3, 4, 3   //* new filtered array
+// elements, for which the condition is true will be included in a new array that the filter method returns
+
+//! REDUCE 
+// use to boil down all the elements of the original array into one single value
+// accumulator + current
+// like a snowball as it rolls down a hill : snowball effect
+// no new array, but only the reduced value
+
