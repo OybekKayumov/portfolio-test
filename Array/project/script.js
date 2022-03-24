@@ -78,6 +78,7 @@ const displayMovements = function(movements) {
     `;
 
     //? containerMovements.insertAdjacentHTML(position, htmlElemToInsert)
+    // containerMovements.insertAdjacentHTML('beforeend', html);
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 }
