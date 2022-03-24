@@ -141,28 +141,29 @@ arr.slice(2) //* start from 'c' and all the way to the end
 //todo forEach
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-for (const movement of movements) {
-  if (movement > 0) {
-    console.log(`You deposited ${movement}`);
-  } else {
-    // console.log(`You withdrew ${movement}`);  //*  -
-    console.log(`You withdrew ${Math.abs(movement)}`);
-  }
-};
+// for (const movement of movements) {
+//   if (movement > 0) {
+//     console.log(`You deposited ${movement}`);
+//   } else {
+//     // console.log(`You withdrew ${movement}`);  //*  -
+//     console.log(`You withdrew ${Math.abs(movement)}`);
+//   }
+// };
 
-console.log('----- FOREACH -----');
-movements.forEach((movement) => {
-  if (movement > 0) {
-    console.log(`You deposited ${movement}`);
-  } else {
-    // console.log(`You withdrew ${movement}`);  //*  -
-    console.log(`You withdrew ${Math.abs(movement)}`);
-  }
-})
+// console.log('----- FOREACH -----');
+// movements.forEach((movement) => {
+// movements.forEach(function(movement) {    //* callback function
+//   if (movement > 0) {
+//     console.log(`You deposited ${movement}`);
+//   } else {
+//     // console.log(`You withdrew ${movement}`);  //*  -
+//     console.log(`You withdrew ${Math.abs(movement)}`);
+//   }
+// })
 
-//* You deposited 200
-// You deposited 450
-// You withdrew 400
+//* You deposited 200   //* function(200)
+// You deposited 450    //* function(450)
+// You withdrew 400     //* function(-400) ...
 // You deposited 3000
 // You withdrew 650
 // You withdrew 130
@@ -177,3 +178,31 @@ movements.forEach((movement) => {
 // You withdrew 130
 // You deposited 70
 // You deposited 1300
+
+
+//! for of with forEach
+// * ORDER: [ 1-currIndex, 2-currElement ]
+for (const [i,movement] of movements.entries()) { 
+  if (movement > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${movement}`);
+  } else {
+    // console.log(`You withdrew ${movement}`);  //*  -
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
+  }
+};
+
+console.log('----- FOREACH -----');
+//! order parameter list always need to be like:
+// movements.forEach((currElement, currIndex, entireArr) => { 
+movements.forEach((mov, i, arr) => { 
+  if (mov > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${mov}`);
+  } else {
+    // console.log(`You withdrew ${movement}`);  //*  -
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
+  }
+  })
+
+// Movement 1: You deposited 200
+// Movement 2: You deposited 450
+// Movement 3: You withdrew 400 ...
