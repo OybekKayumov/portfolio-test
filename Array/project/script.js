@@ -206,3 +206,29 @@ movements.forEach((mov, i, arr) => {
 // Movement 1: You deposited 200
 // Movement 2: You deposited 450
 // Movement 3: You withdrew 400 ...
+
+// when should we use forEach and "for of" ?
+// one fundamental difference between the two of them
+// we cannot break out forEach loop,
+// forEach will always loop over the entire array and there is nothing we can do about it
+// if we need to break out of a loop, then we have to keep using "for of" loop 
+
+// don't become frustrated with this
+// it will all become obvious with practice
+// just keep using this and you will be fine
+
+// once you do understand exactly how this works,
+// specially this fundamental mechanism of the callback and passing arguments into callback here  
+//!.forEach((currElement, currIndex, entireArr)
+// then working with all other array methods will become really easy
+// because most of them follow the exact same principle
+
+//не расстраивайтесь есди это непонятно еще
+// все станет ясно с практикой
+// просто продолжайте использовать это, и все будет хорошо
+
+// как только вы поймете, как именно это работает,
+// особенно этот фундаментальный механизм обратного вызова и передачи аргументов в обратный вызов здесь
+//!.forEach((currElement, currIndex, entireArr)
+// тогда работа со всеми другими методами массива станет очень простой
+// потому что большинство из них следуют одному и тому же принципу
