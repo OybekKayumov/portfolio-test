@@ -65,11 +65,11 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -182,26 +182,26 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 //! for of with forEach
 // * ORDER: [ 1-currIndex, 2-currElement ]
-for (const [i,movement] of movements.entries()) { 
-  if (movement > 0) {
-    console.log(`Movement ${i + 1}: You deposited ${movement}`);
-  } else {
-    // console.log(`You withdrew ${movement}`);  //*  -
-    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
-  }
-};
+// for (const [i,movement] of movements.entries()) { 
+//   if (movement > 0) {
+//     console.log(`Movement ${i + 1}: You deposited ${movement}`);
+//   } else {
+//     // console.log(`You withdrew ${movement}`);  //*  -
+//     console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
+//   }
+// };
 
-console.log('----- FOREACH -----');
-//! order parameter list always need to be like:
-// movements.forEach((currElement, currIndex, entireArr) => { 
-movements.forEach((mov, i, arr) => { 
-  if (mov > 0) {
-    console.log(`Movement ${i + 1}: You deposited ${mov}`);
-  } else {
-    // console.log(`You withdrew ${movement}`);  //*  -
-    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
-  }
-  })
+// console.log('----- FOREACH -----');
+// //! order parameter list always need to be like:
+// // movements.forEach((currElement, currIndex, entireArr) => { 
+// movements.forEach((mov, i, arr) => { 
+//   if (mov > 0) {
+//     console.log(`Movement ${i + 1}: You deposited ${mov}`);
+//   } else {
+//     // console.log(`You withdrew ${movement}`);  //*  -
+//     console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
+//   }
+//   })
 
 // Movement 1: You deposited 200
 // Movement 2: You deposited 450
@@ -232,3 +232,39 @@ movements.forEach((mov, i, arr) => {
 //!.forEach((currElement, currIndex, entireArr)
 // тогда работа со всеми другими методами массива станет очень простой
 // потому что большинство из них следуют одному и тому же принципу
+
+//todo forEach with map and set
+// map
+const currencies = new Map([
+  ['USD', 'United States dollar'], //* [key, value]
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach((currValueElement, currKeyIndex, currMapArray) => {
+  console.log(`${currKeyIndex}: ${currValueElement}`);  //* [key, value]
+})
+
+
+// set
+const currenciesUnique = new Set(['Usd', 'Gbp', 'Eur', 'Eur', 'Usd', 'Gbp']);
+console.log(currenciesUnique);
+//* Set(3) {'Usd', 'Gbp', 'Eur'}
+
+currenciesUnique.forEach((value, key, map) => {
+  console.log(`${key} ${value}`);
+})
+
+//* Usd Usd
+//* Gbp Gbp
+//* Eur Eur
+// this means that key is same as value: why is that?
+// Set doesn't have keys and indexes
+// there is no value for key
+// (value, KEY, map) KEY here makes no sense at all
+// it wouldn't even have to be there
+// for Set second argument was omitted
+
+
+//! currenciesUnique.forEach((value, _ , map) => {  
+//* ' _ ' variable which is unnecessary - throwaway variable
