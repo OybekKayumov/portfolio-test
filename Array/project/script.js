@@ -317,10 +317,36 @@ const eurToUsd = 1.1;
 
 const movementsUSD = movements2.map((mov) => {
   return mov * eurToUsd;  
+  // return 25;  //* 2
 })
+//! or
+const movementsUSD2 = movements2.map(mov => mov * eurToUsd)
 
 console.log(movements2);
 console.log(movementsUSD);
 // (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
 
 // (8) [220.00000000000003, 495.00000000000006, -440.00000000000006, 3300.0000000000005, -715.0000000000001, -143, 77, 1430.0000000000002]
+
+//* 2
+// (8) [25, 25, 25, 25, 25, 25, 25, 25]
+
+//todo for of
+// completely different philosophy
+const movementsUSDfor = [];
+for (const mov of movements2) movementsUSDfor.push(mov * eurToUsd);
+console.log(movementsUSDfor);
+//* same
+// (8) [220.00000000000003, 495.00000000000006, -440.00000000000006, 3300.0000000000005, -715.0000000000001, -143, 77, 1430.0000000000002]
+
+//? in map we use (arrow) function to solve a problem of creating a new array
+//? in "for of" we simply loop one array and manually create a new array.
+//* different philosophy or paradigms
+
+//? in map more with FUNCTIONAL PROGRAMMING AND THIS IS A WAY TO GO
+// new and modern
+
+
+
+
+
