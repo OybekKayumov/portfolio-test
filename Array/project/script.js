@@ -375,3 +375,10 @@ console.log(movementsDescriptions);
 // length: 8
 // [[Prototype]]: Array(0)
 
+//! here is a BIG difference between forEach and map
+// before printed each line individually to the console, as we were looping over the array. In each of iterations we performed some action that was visible in console - this can be called a "SIDE EFFECT"
+
+// "forEach" method creates "side effects"
+
+// map returns each of the strings from the callback and got added into a new array, we console logged that entire array to the console and NOT the elements ONE BY ONE, we don't create side effect in each iteration
+// in map we build a new array
