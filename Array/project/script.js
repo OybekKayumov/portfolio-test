@@ -61,6 +61,12 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+
+const displayMovements = function(movements) {
+
+}
+
+displayMovements(account1.movements)
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -241,19 +247,19 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-currencies.forEach((currValueElement, currKeyIndex, currMapArray) => {
-  console.log(`${currKeyIndex}: ${currValueElement}`);  //* [key, value]
-})
+// currencies.forEach((currValueElement, currKeyIndex, currMapArray) => {
+//   console.log(`${currKeyIndex}: ${currValueElement}`);  //* [key, value]
+// })
 
 
 // set
-const currenciesUnique = new Set(['Usd', 'Gbp', 'Eur', 'Eur', 'Usd', 'Gbp']);
-console.log(currenciesUnique);
+// const currenciesUnique = new Set(['Usd', 'Gbp', 'Eur', 'Eur', 'Usd', 'Gbp']);
+// console.log(currenciesUnique);
 //* Set(3) {'Usd', 'Gbp', 'Eur'}
 
-currenciesUnique.forEach((value, key, map) => {
-  console.log(`${key} ${value}`);
-})
+// currenciesUnique.forEach((value, key, map) => {
+//   console.log(`${key} ${value}`);
+// })
 
 //* Usd Usd
 //* Gbp Gbp
