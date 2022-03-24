@@ -346,7 +346,32 @@ console.log(movementsUSDfor);
 //? in map more with FUNCTIONAL PROGRAMMING AND THIS IS A WAY TO GO
 // new and modern
 
+//! using current elements
+const movementsDescriptions = movements2.map((mov, index, arr) => 
+  // {
+  `Movement ${index + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(mov)}`
+  //* same
+  // if (mov > 0) {
+  //       return `Movement ${index + 1}: You deposited ${mov}`;
+  //     } else {
+  //         return `Movement ${index + 1}: You withdrew ${Math.abs(mov)}`;
+  //     }
+// }
+)
 
+// we use return, because with map we will place elements to a new array
+//* and it is possible use (return) in both same time inside of (if)
+console.log(movementsDescriptions);
 
-
+// (8) ['Movement 1: You deposited 200', 'Movement 2: You deposited 450', 'Movement 3: You withdrew 400', 'Movement 4: You deposited 3000', 'Movement 5: You withdrew 650', 'Movement 6: You withdrew 130', 'Movement 7: You deposited 70', 'Movement 8: You deposited 1300']
+// 0: "Movement 1: You deposited 200"
+// 1: "Movement 2: You deposited 450"
+// 2: "Movement 3: You withdrew 400"
+// 3: "Movement 4: You deposited 3000"
+// 4: "Movement 5: You withdrew 650"
+// 5: "Movement 6: You withdrew 130"
+// 6: "Movement 7: You deposited 70"
+// 7: "Movement 8: You deposited 1300"
+// length: 8
+// [[Prototype]]: Array(0)
 
