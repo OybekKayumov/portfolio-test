@@ -164,6 +164,7 @@ console.log(accounts);
 console.log(accounts[2]);
 
 
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -462,3 +463,28 @@ const movementsDescriptions = movements2.map((mov, index, arr) =>
 
 // map returns each of the strings from the callback and got added into a new array, we console logged that entire array to the console and NOT the elements ONE BY ONE, we don't create side effect in each iteration
 // in map we build a new array
+
+
+//! FILTER
+// movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+
+// create a new array of deposits (mov > 0)
+const deposits = movements.filter((mov) => {
+  return mov > 0;
+})
+
+console.log(movements);
+console.log(deposits);
+// (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
+// (5) [200, 450, 3000, 70, 1300]
+
+// see difference:
+let depositsFor = [];
+for (const mov of movements) {
+  if (mov > 0) {
+    depositsFor.push(mov);
+  }
+}
+
+console.log(depositsFor);
+// (5) [200, 450, 3000, 70, 1300]
