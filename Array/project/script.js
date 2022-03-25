@@ -493,3 +493,14 @@ const withdrawals = movements.filter(mov => mov < 0);  //! RETURN IS HIDDEN HERE
 console.log(withdrawals);
 // (3) [-400, -650, -130]
 
+
+
+//! REDUCE
+// movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+
+//* accumulator is like snowball - and accumulator will return
+const balance = movements.reduce((accumulator, current, index, arr) => {  
+  return accumulator + current 
+}, 0)  //* second (initial) parameter of the accumulator 
+// the INITIAL value of accumulator in the FIRST loop iteration
+// here we want to start counting at ZERO
