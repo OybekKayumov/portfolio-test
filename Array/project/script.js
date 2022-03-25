@@ -84,6 +84,102 @@ const displayMovements = function(movements) {
 }
 
 displayMovements(account1.movements)
+
+const user = 'Steven Thomas Williams'; // stw
+// 1
+// const username = user.toLowerCase().split(' ');
+// 2
+// const username = user
+//         .toLowerCase()
+//         .split(' ')
+//         .map((name) => { //? VI: callback function in map always need to return the new value in a new array
+//           return name[0]  //* returns 1st letter of each word from array
+//         })
+//         .join('');    //* 3
+
+// console.log(username);
+// 1
+// (3) ['steven', 'thomas', 'williams']
+
+//2
+// (3) ['s', 't', 'w']
+
+// 3
+// stw
+
+// create function to get username
+
+const createUserNames = (user) => {
+  const username = user
+      .toLowerCase()
+      .split(' ')
+      .map((name) => { 
+        return name[0]  
+      })
+      .join('');
+      
+  return username;
+};
+
+console.log(createUserNames('Steven Thomas Williams'));
+
+// side effect - use forEach with map
+
+// we have array accounts
+// const accounts = [account1, account2, account3, account4];
+// account1-2-3-4 are objects
+// we will create new element "username: 'stw'" inside the objects  
+
+// const account3 = {
+//   owner: 'Steven Thomas Williams',
+//   movements: [200, -200, 340, -300, -20, 50, 400, -460],
+//   interestRate: 0.7,
+//   pin: 3333,
+// };
+
+// 2:
+// interestRate: 0.7
+// movements: (8) [200, -200, 340, -300, -20, 50, 400, -460]
+// owner: "Steven Thomas Williams"
+// pin: 3333
+// username: "stw"  //* added
+
+// we loop over the accounts array
+// in each iteration we manipulated the current account object
+// add acc.username to it 
+// based on acc.owner plus all of these transformations
+
+const createUserNames2 = (accs) => {  //* accounts
+  accs.forEach((acc) => {
+    acc.username = acc.owner
+            .toLowerCase()
+            .split(' ')
+            .map(name => name[0])
+            .join('')
+  });
+};
+
+createUserNames2(accounts);
+// console.log(accounts);
+// console.log(accounts[2]);
+
+//todo reduce
+const calcDisplayBalance = (movements) => {
+  // const balance = movements.reduce((acc, curMov) => acc + curMov, 0);
+  const balance = movements.reduce((acc, curMov) => {
+   return acc + curMov
+  }, 0);
+
+
+  labelBalance.textContent = `${balance} EUR`;
+}
+
+calcDisplayBalance(account1.movements);
+
+
+
+
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -322,8 +418,8 @@ const movementsUSD = movements2.map((mov) => {
 //! or
 const movementsUSD2 = movements2.map(mov => mov * eurToUsd)
 
-console.log(movements2);
-console.log(movementsUSD);
+// console.log(movements2);
+// console.log(movementsUSD);
 // (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
 
 // (8) [220.00000000000003, 495.00000000000006, -440.00000000000006, 3300.0000000000005, -715.0000000000001, -143, 77, 1430.0000000000002]
@@ -335,7 +431,7 @@ console.log(movementsUSD);
 // completely different philosophy
 const movementsUSDfor = [];
 for (const mov of movements2) movementsUSDfor.push(mov * eurToUsd);
-console.log(movementsUSDfor);
+// console.log(movementsUSDfor);
 //* same
 // (8) [220.00000000000003, 495.00000000000006, -440.00000000000006, 3300.0000000000005, -715.0000000000001, -143, 77, 1430.0000000000002]
 
@@ -361,7 +457,7 @@ const movementsDescriptions = movements2.map((mov, index, arr) =>
 
 // we use return, because with map we will place elements to a new array
 //* and it is possible use (return) in both same time inside of (if)
-console.log(movementsDescriptions);
+// console.log(movementsDescriptions);
 
 // (8) ['Movement 1: You deposited 200', 'Movement 2: You deposited 450', 'Movement 3: You withdrew 400', 'Movement 4: You deposited 3000', 'Movement 5: You withdrew 650', 'Movement 6: You withdrew 130', 'Movement 7: You deposited 70', 'Movement 8: You deposited 1300']
 // 0: "Movement 1: You deposited 200"
@@ -382,3 +478,78 @@ console.log(movementsDescriptions);
 
 // map returns each of the strings from the callback and got added into a new array, we console logged that entire array to the console and NOT the elements ONE BY ONE, we don't create side effect in each iteration
 // in map we build a new array
+
+
+//! FILTER
+// movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+
+// create a new array of deposits (mov > 0)
+const deposits = movements.filter((mov, index, arr) => {
+  return mov > 0;
+})
+
+console.log(movements);
+console.log(deposits);
+// (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
+// (5) [200, 450, 3000, 70, 1300]
+
+// see difference:
+let depositsFor = [];
+for (const mov of movements) {
+  if (mov > 0) {
+    depositsFor.push(mov);
+  }
+}
+
+console.log(depositsFor);
+// (5) [200, 450, 3000, 70, 1300]
+
+const withdrawals = movements.filter(mov => mov < 0);  //! RETURN IS HIDDEN HERE
+console.log(withdrawals);
+// (3) [-400, -650, -130]
+
+
+
+//! REDUCE
+// movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+
+//* accumulator is like snowball - and accumulator will return
+// const balance = movements.reduce((accumulator, current, index, arr) => {
+//   console.log(`Iteration ${index}: ${accumulator} (${current > 0 ? 'deposit' : 'withdrawal'}: ${current})`);  
+//   return accumulator + current 
+// }, 0)  //* second (initial) parameter of the accumulator 
+// the INITIAL value of accumulator in the FIRST loop iteration
+// here we want to start counting at ZERO
+
+// const balance2 = movements.reduce((accumulator, current) => accumulator + current, 0)
+// console.log('balance2: ', balance2);  //* 3840
+
+
+// console.log('balance: ', balance);
+// Iteration 0: 0 (deposit: 200)
+// Iteration 1: 200 (deposit: 450)
+// Iteration 2: 650 (withdrawal: -400)
+// Iteration 3: 250 (deposit: 3000)
+// Iteration 4: 3250 (withdrawal: -650)
+// Iteration 5: 2600 (withdrawal: -130)
+// Iteration 6: 2470 (deposit: 70)
+// Iteration 7: 2540 (deposit: 1300)
+// balance:  3840
+
+//? same with "for of"
+let balanceFor = 0  //* we always need external variable whenever we want to use a for loop
+// for (const mov of movements) balanceFor += mov;
+// console.log('balanceFor: ', balanceFor);
+
+
+//todo get Max value of array
+
+const maxValArr = movements.reduce((acc, curMov) => {
+  if (acc > curMov)
+    return acc;
+  else 
+    return curMov;
+
+}, movements[0]);  //* first element of array 
+
+console.log('max value of array is: ', maxValArr);
