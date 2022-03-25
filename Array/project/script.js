@@ -123,6 +123,46 @@ const createUserNames = (user) => {
 
 console.log(createUserNames('Steven Thomas Williams'));
 
+// side effect - use forEach with map
+
+// we have array accounts
+// const accounts = [account1, account2, account3, account4];
+// account1-2-3-4 are objects
+// we will create new element "username: 'stw'" inside the objects  
+
+// const account3 = {
+//   owner: 'Steven Thomas Williams',
+//   movements: [200, -200, 340, -300, -20, 50, 400, -460],
+//   interestRate: 0.7,
+//   pin: 3333,
+// };
+
+// 2:
+// interestRate: 0.7
+// movements: (8) [200, -200, 340, -300, -20, 50, 400, -460]
+// owner: "Steven Thomas Williams"
+// pin: 3333
+// username: "stw"  //* added
+
+// we loop over the accounts array
+// in each iteration we manipulated the current account object
+// add acc.username to it 
+// based on acc.owner plus all of these transformations
+
+const createUserNames2 = (accs) => {  //* accounts
+  accs.forEach((acc) => {
+    acc.username = acc.owner
+            .toLowerCase()
+            .split(' ')
+            .map(name => name[0])
+            .join('')
+  });
+};
+
+createUserNames2(accounts);
+console.log(accounts);
+console.log(accounts[2]);
+
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
