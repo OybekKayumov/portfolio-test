@@ -469,7 +469,7 @@ const movementsDescriptions = movements2.map((mov, index, arr) =>
 // movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
 
 // create a new array of deposits (mov > 0)
-const deposits = movements.filter((mov) => {
+const deposits = movements.filter((mov, index, arr) => {
   return mov > 0;
 })
 
@@ -491,3 +491,5 @@ console.log(depositsFor);
 
 const withdrawals = movements.filter(mov => mov < 0);  //! RETURN IS HIDDEN HERE
 console.log(withdrawals);
+// (3) [-400, -650, -130]
+
