@@ -540,3 +540,16 @@ console.log(withdrawals);
 let balanceFor = 0  //* we always need external variable whenever we want to use a for loop
 // for (const mov of movements) balanceFor += mov;
 // console.log('balanceFor: ', balanceFor);
+
+
+//todo get Max value of array
+
+const maxValArr = movements.reduce((acc, curMov) => {
+  if (acc > curMov)
+    return acc;
+  else 
+    return curMov;
+
+}, movements[0]);  //* first element of array 
+
+console.log('max value of array is: ', maxValArr);
