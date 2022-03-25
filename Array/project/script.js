@@ -89,15 +89,15 @@ const user = 'Steven Thomas Williams'; // stw
 // 1
 // const username = user.toLowerCase().split(' ');
 // 2
-const username = user
-        .toLowerCase()
-        .split(' ')
-        .map((name) => {
-          return name[0]  //* returns 1st letter of each word from array
-        })
-        .join('');    //* 3
+// const username = user
+//         .toLowerCase()
+//         .split(' ')
+//         .map((name) => { //? VI: callback function in map always need to return the new value in a new array
+//           return name[0]  //* returns 1st letter of each word from array
+//         })
+//         .join('');    //* 3
 
-console.log(username);
+// console.log(username);
 // 1
 // (3) ['steven', 'thomas', 'williams']
 
@@ -106,6 +106,22 @@ console.log(username);
 
 // 3
 // stw
+
+// create function to get username
+
+const createUserNames = (user) => {
+  const username = user
+      .toLowerCase()
+      .split(' ')
+      .map((name) => { 
+        return name[0]  
+      })
+      .join('');
+      
+  return username;
+};
+
+console.log(createUserNames('Steven Thomas Williams'));
 
 
 /////////////////////////////////////////////////
@@ -346,8 +362,8 @@ const movementsUSD = movements2.map((mov) => {
 //! or
 const movementsUSD2 = movements2.map(mov => mov * eurToUsd)
 
-console.log(movements2);
-console.log(movementsUSD);
+// console.log(movements2);
+// console.log(movementsUSD);
 // (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
 
 // (8) [220.00000000000003, 495.00000000000006, -440.00000000000006, 3300.0000000000005, -715.0000000000001, -143, 77, 1430.0000000000002]
@@ -359,7 +375,7 @@ console.log(movementsUSD);
 // completely different philosophy
 const movementsUSDfor = [];
 for (const mov of movements2) movementsUSDfor.push(mov * eurToUsd);
-console.log(movementsUSDfor);
+// console.log(movementsUSDfor);
 //* same
 // (8) [220.00000000000003, 495.00000000000006, -440.00000000000006, 3300.0000000000005, -715.0000000000001, -143, 77, 1430.0000000000002]
 
@@ -385,7 +401,7 @@ const movementsDescriptions = movements2.map((mov, index, arr) =>
 
 // we use return, because with map we will place elements to a new array
 //* and it is possible use (return) in both same time inside of (if)
-console.log(movementsDescriptions);
+// console.log(movementsDescriptions);
 
 // (8) ['Movement 1: You deposited 200', 'Movement 2: You deposited 450', 'Movement 3: You withdrew 400', 'Movement 4: You deposited 3000', 'Movement 5: You withdrew 650', 'Movement 6: You withdrew 130', 'Movement 7: You deposited 70', 'Movement 8: You deposited 1300']
 // 0: "Movement 1: You deposited 200"
