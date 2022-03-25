@@ -488,3 +488,6 @@ for (const mov of movements) {
 
 console.log(depositsFor);
 // (5) [200, 450, 3000, 70, 1300]
+
+const withdrawals = movements.filter(mov => mov < 0);  //! RETURN IS HIDDEN HERE
+console.log(withdrawals);
