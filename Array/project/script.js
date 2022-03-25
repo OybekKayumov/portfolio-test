@@ -499,8 +499,21 @@ console.log(withdrawals);
 // movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
 
 //* accumulator is like snowball - and accumulator will return
-const balance = movements.reduce((accumulator, current, index, arr) => {  
+const balance = movements.reduce((accumulator, current, index, arr) => {
+  console.log(`Iteration ${index}: ${accumulator} (${current})`);  
   return accumulator + current 
 }, 0)  //* second (initial) parameter of the accumulator 
 // the INITIAL value of accumulator in the FIRST loop iteration
 // here we want to start counting at ZERO
+
+console.log('balance: ', balance);
+// Iteration 0: 0 (200)
+// Iteration 1: 200 (450)
+// Iteration 2: 650 (-400)
+// Iteration 3: 250 (3000)
+// Iteration 4: 3250 (-650)
+// Iteration 5: 2600 (-130)
+// Iteration 6: 2470 (70)
+// Iteration 7: 2540 (1300)
+// balance:  3840
+
