@@ -86,10 +86,27 @@ const displayMovements = function(movements) {
 displayMovements(account1.movements)
 
 const user = 'Steven Thomas Williams'; // stw
-const username = user.toLowerCase().split(' ');
+// 1
+// const username = user.toLowerCase().split(' ');
+// 2
+const username = user
+        .toLowerCase()
+        .split(' ')
+        .map((name) => {
+          return name[0]  //* returns 1st letter of each word from array
+        })
+        .join('');    //* 3
 
 console.log(username);
-(3) ['steven', 'thomas', 'williams']
+// 1
+// (3) ['steven', 'thomas', 'williams']
+
+//2
+// (3) ['s', 't', 'w']
+
+// 3
+// stw
+
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
