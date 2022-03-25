@@ -160,8 +160,23 @@ const createUserNames2 = (accs) => {  //* accounts
 };
 
 createUserNames2(accounts);
-console.log(accounts);
-console.log(accounts[2]);
+// console.log(accounts);
+// console.log(accounts[2]);
+
+//todo reduce
+const calcDisplayBalance = (movements) => {
+  // const balance = movements.reduce((acc, curMov) => acc + curMov, 0);
+  const balance = movements.reduce((acc, curMov) => {
+   return acc + curMov
+  }, 0);
+
+
+  labelBalance.textContent = `${balance} EUR`;
+}
+
+calcDisplayBalance(account1.movements);
+
+
 
 
 
@@ -499,18 +514,18 @@ console.log(withdrawals);
 // movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
 
 //* accumulator is like snowball - and accumulator will return
-const balance = movements.reduce((accumulator, current, index, arr) => {
-  console.log(`Iteration ${index}: ${accumulator} (${current > 0 ? 'deposit' : 'withdrawal'}: ${current})`);  
-  return accumulator + current 
-}, 0)  //* second (initial) parameter of the accumulator 
+// const balance = movements.reduce((accumulator, current, index, arr) => {
+//   console.log(`Iteration ${index}: ${accumulator} (${current > 0 ? 'deposit' : 'withdrawal'}: ${current})`);  
+//   return accumulator + current 
+// }, 0)  //* second (initial) parameter of the accumulator 
 // the INITIAL value of accumulator in the FIRST loop iteration
 // here we want to start counting at ZERO
 
-const balance2 = movements.reduce((accumulator, current) => accumulator + current, 0)
-console.log('balance2: ', balance2);  //* 3840
+// const balance2 = movements.reduce((accumulator, current) => accumulator + current, 0)
+// console.log('balance2: ', balance2);  //* 3840
 
 
-console.log('balance: ', balance);
+// console.log('balance: ', balance);
 // Iteration 0: 0 (deposit: 200)
 // Iteration 1: 200 (deposit: 450)
 // Iteration 2: 650 (withdrawal: -400)
@@ -523,5 +538,5 @@ console.log('balance: ', balance);
 
 //? same with "for of"
 let balanceFor = 0  //* we always need external variable whenever we want to use a for loop
-for (const mov of movements) balanceFor += mov;
-console.log('balanceFor: ', balanceFor);
+// for (const mov of movements) balanceFor += mov;
+// console.log('balanceFor: ', balanceFor);
