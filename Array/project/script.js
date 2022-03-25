@@ -506,6 +506,10 @@ const balance = movements.reduce((accumulator, current, index, arr) => {
 // the INITIAL value of accumulator in the FIRST loop iteration
 // here we want to start counting at ZERO
 
+const balance2 = movements.reduce((accumulator, current) => accumulator + current, 0)
+console.log('balance2: ', balance2);  //* 3840
+
+
 console.log('balance: ', balance);
 // Iteration 0: 0 (deposit: 200)
 // Iteration 1: 200 (deposit: 450)
@@ -517,3 +521,7 @@ console.log('balance: ', balance);
 // Iteration 7: 2540 (deposit: 1300)
 // balance:  3840
 
+//? same with "for of"
+let balanceFor = 0  //* we always need external variable whenever we want to use a for loop
+for (const mov of movements) balanceFor += mov;
+console.log('balanceFor: ', balanceFor);
