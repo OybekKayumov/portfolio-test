@@ -488,8 +488,8 @@ const deposits = movements.filter((mov, index, arr) => {
   return mov > 0;
 })
 
-console.log(movements);
-console.log(deposits);
+// console.log(movements);
+// console.log(deposits);
 // (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
 // (5) [200, 450, 3000, 70, 1300]
 
@@ -501,11 +501,11 @@ for (const mov of movements) {
   }
 }
 
-console.log(depositsFor);
+// console.log(depositsFor);
 // (5) [200, 450, 3000, 70, 1300]
 
-const withdrawals = movements.filter(mov => mov < 0);  //! RETURN IS HIDDEN HERE
-console.log(withdrawals);
+// const withdrawals = movements.filter(mov => mov < 0);  //! RETURN IS HIDDEN HERE
+// console.log(withdrawals);
 // (3) [-400, -650, -130]
 
 
@@ -552,4 +552,15 @@ const maxValArr = movements.reduce((acc, curMov) => {
 
 }, movements[0]);  //* first element of array 
 
-console.log('max value of array is: ', maxValArr);
+// console.log('max value of array is: ', maxValArr);
+
+
+// chaining methods
+const eurToUsd2 = 1.1
+movements
+  .filter(mov => mov > 0)         //* returns new array
+  .map(mov => mov * eurToUsd2)    //* returns new array
+  .reduce((acc, mov) => acc + mov, 0) //* returns new array
+
+
+
