@@ -176,7 +176,15 @@ const calcDisplayBalance = (movements) => {
 
 calcDisplayBalance(account1.movements);
 
+const calcDisplaySummary = (movements) => {
+  const incomes = movements
+        .filter(mov => mov > 0)
+        .reduce((acc, mov) => acc + mov, 0)
 
+  labelSumIn.textContent = `${incomes}€`;
+}
+
+calcDisplaySummary(account1.movements);
 
 
 
@@ -557,7 +565,7 @@ const maxValArr = movements.reduce((acc, curMov) => {
 
 // chaining methods
 const eurToUsd2 = 1.1
-console.log(movements);
+// console.log(movements);
 
 const totalDepositsUSD = movements
   .filter(mov => mov > 0)         //* returns new array
@@ -565,19 +573,31 @@ const totalDepositsUSD = movements
   .reduce((acc, mov) => acc + mov, 0) //* return a value
 
 //
-const totalDepositsUSD2 = movements
-  .filter(mov => mov < 0)         
-  .map((mov, index, arr) =>  {
-    console.log(arr);   //* this arr is result of previous operation(filter)
-    return mov * eurToUsd2    
-  })  
-  .reduce((acc, mov) => acc + mov, 0) //* return a value
+// const totalDepositsUSD2 = movements
+//   .filter(mov => mov < 0)        //! < 
+//   .map((mov, index, arr) =>  {
+//     console.log(arr);   //* this arr is result of previous operation(filter)
+//     return mov * eurToUsd2    
+//   })  
+//   .reduce((acc, mov) => acc + mov, 0) //* return a value
 
-console.log(totalDepositsUSD);    //*  5522.001
-console.log(totalDepositsUSD2);    //* -1298.002
+// console.log(totalDepositsUSD);    //*  5522.001
+// console.log(totalDepositsUSD2);    //* -1298.002
 
 //* original array
 // (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
 //* after filter
 // (3) [-400, -650, -130]
 
+// const totalDepositsUSD3 = movements
+//   .filter(mov => mov > 0)      //! >   
+//   .map((mov, index, arr) =>  {
+//     console.log(arr);   //* this arr is result of previous operation(filter)
+//     return mov * eurToUsd2    
+//   })  
+//   .reduce((acc, mov) => acc + mov, 0) //* return a value
+
+// console.log(totalDepositsUSD);    //*  5522.001
+
+// (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
+// (5) [200, 450, 3000, 70, 1300]
