@@ -568,7 +568,7 @@ const totalDepositsUSD = movements
 const totalDepositsUSD2 = movements
   .filter(mov => mov < 0)         
   .map((mov, index, arr) =>  {
-    console.log(arr);
+    console.log(arr);   //* this arr is result of previous operation(filter)
     return mov * eurToUsd2    
   })  
   .reduce((acc, mov) => acc + mov, 0) //* return a value
@@ -576,5 +576,8 @@ const totalDepositsUSD2 = movements
 console.log(totalDepositsUSD);    //*  5522.001
 console.log(totalDepositsUSD2);    //* -1298.002
 
-
+//* original array
+// (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
+//* after filter
+// (3) [-400, -650, -130]
 
