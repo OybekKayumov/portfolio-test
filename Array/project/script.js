@@ -557,10 +557,21 @@ const maxValArr = movements.reduce((acc, curMov) => {
 
 // chaining methods
 const eurToUsd2 = 1.1
-movements
+const totalDepositsUSD = movements
   .filter(mov => mov > 0)         //* returns new array
-  .map(mov => mov * eurToUsd2)    //* returns new array
-  .reduce((acc, mov) => acc + mov, 0) //* returns new array
+  .map(mov => mov * eurToUsd2)    //* returns new array    
+  .reduce((acc, mov) => acc + mov, 0) //* return a value
+
+//
+const totalDepositsUSD2 = movements
+  .filter(mov => mov < 0)         
+  .map((mov, index, arr) =>  {
+  
+    mov * eurToUsd2    
+  })  
+  .reduce((acc, mov) => acc + mov, 0) //* return a value
+
+console.log(totalDepositsUSD);    //* 1:  5522.001
 
 
 
