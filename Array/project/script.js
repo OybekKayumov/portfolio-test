@@ -218,7 +218,13 @@ btnLogin.addEventListener('click', (e) => {
 
   // test for pin
   // and convert to Number from String
-  if (currentAccount.pin === Number(inputLoginPin.value)) {
+  //? if (currentAccount.pin === Number(inputLoginPin.value)) {
+    // check for exist username
+  //? if (currentAccount && currentAccount.pin === Number(inputLoginPin.value)) {
+    //! optional chaining
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+
+
     console.log('ok');
   }
 
