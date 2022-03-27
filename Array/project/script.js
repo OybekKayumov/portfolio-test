@@ -204,6 +204,37 @@ const calcDisplaySummary = (movements) => {
 
 calcDisplaySummary(account1.movements);
 
+//todo Event handler
+let currentAccount;
+
+btnLogin.addEventListener('click', (e) => {
+  //? prevent form from submitting
+  e.preventDefault();
+  // console.log('Login!!!');
+  
+  // find user from array
+  currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
+  // console.log(currentAccount);
+
+  // test for pin
+  // and convert to Number from String
+  //? if (currentAccount.pin === Number(inputLoginPin.value)) {
+    // check for exist username
+  //? if (currentAccount && currentAccount.pin === Number(inputLoginPin.value)) {
+    //! optional chaining
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // display UI and welcome message
+    
+    // display movements
+    
+    // display balance
+    
+    // display summary
+        
+  }
+
+})
+
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -618,3 +649,43 @@ const totalDepositsUSD = movements
 
 // (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
 // (5) [200, 450, 3000, 70, 1300]
+
+
+// todo FIND
+// use to retrieve an element of array
+// like a FILTER, the FIND also needs a callback function
+// that returns a Boolean
+// THE result of this is TRUE or FALSE
+// FIND will NOT return a NEW array
+// but will return the FIRST element in the array that satisfies this condition
+
+const firstWithdrawal =  movements.find(mov => mov < 0)
+
+// console.log(movements);
+// console.log(firstWithdrawal); //* -400
+
+//* (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
+//* -400
+
+//! 1
+// FILTER  returns all element that match the condition
+// FIND  returns first element 
+//! 2
+// FILTER  returns a NEW ARRAY
+// FIND  returns only element itself, NO an ARRAY
+
+// todo 'Jessica Davis'
+// const accounts = [account1, account2, account3, account4];
+// console.log(accounts);
+// (4) [{…}, {…}, {…}, {…}]
+// 0: {owner: 'Jonas Schmedtmann', movements: Array(8), interestRate: 1.2, pin: 1111, username: 'js'}
+// 1: {owner: 'Jessica Davis', movements: Array(8), interestRate: 1.5, pin: 2222, username: 'jd'}
+// 2: {owner: 'Steven Thomas Williams', movements: Array(8), interestRate: 0.7, pin: 3333, username: 'stw'}
+// 3: {owner: 'Sarah Smith', movements: Array(5), interestRate: 1, pin: 4444, username: 'ss'}
+
+const accountJess = accounts.find(acc => acc.owner === 'Jessica Davis');
+
+// console.log(accountJess);
+//* {owner: 'Jessica Davis', movements: Array(8), interestRate: 1.5, pin: 2222, username: 'jd'}
+// console.log('accountJess.movements: ', accountJess.movements);
+//* accountJess.movements:  (8) [5000, 3400, -150, -790, -3210, -1000, 8500, -30]
