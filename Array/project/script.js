@@ -223,9 +223,14 @@ btnLogin.addEventListener('click', (e) => {
   //? if (currentAccount && currentAccount.pin === Number(inputLoginPin.value)) {
     //! optional chaining
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
-
-
-    console.log('ok');
+    // display UI and welcome message
+    
+    // display movements
+    
+    // display balance
+    
+    // display summary
+        
   }
 
 })
