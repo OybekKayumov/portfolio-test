@@ -624,4 +624,14 @@ const totalDepositsUSD = movements
 // use to retrieve an element of array
 // like a FILTER, the FIND also needs a callback function
 // that returns a Boolean
-movements.find(mov => mov < 0)
+// THE result of this is TRUE or FALSE
+// FIND will NOT return a NEW array
+// but will return the FIRST element in the array that satisfies this condition
+
+const firstWithdrawal =  movements.find(mov => mov < 0)
+
+console.log(movements);
+console.log(firstWithdrawal); //* -400
+
+//* (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
+//* -400
