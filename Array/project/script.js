@@ -618,3 +618,10 @@ const totalDepositsUSD = movements
 
 // (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
 // (5) [200, 450, 3000, 70, 1300]
+
+
+// todo FIND
+// use to retrieve an element of array
+// like a FILTER, the FIND also needs a callback function
+// that returns a Boolean
+movements.find(mov => mov < 0)
