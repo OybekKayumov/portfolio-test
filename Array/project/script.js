@@ -635,3 +635,12 @@ console.log(firstWithdrawal); //* -400
 
 //* (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
 //* -400
+
+//! 1
+// FILTER  returns all element that match the condition
+// FIND  returns first element 
+//! 2
+// FILTER  returns a NEW ARRAY
+// FIND  returns only element itself, NO an ARRAY
+
+// const accounts = [account1, account2, account3, account4];
