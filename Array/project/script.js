@@ -643,4 +643,18 @@ console.log(firstWithdrawal); //* -400
 // FILTER  returns a NEW ARRAY
 // FIND  returns only element itself, NO an ARRAY
 
+// todo 'Jessica Davis'
 // const accounts = [account1, account2, account3, account4];
+// console.log(accounts);
+// (4) [{…}, {…}, {…}, {…}]
+// 0: {owner: 'Jonas Schmedtmann', movements: Array(8), interestRate: 1.2, pin: 1111, username: 'js'}
+// 1: {owner: 'Jessica Davis', movements: Array(8), interestRate: 1.5, pin: 2222, username: 'jd'}
+// 2: {owner: 'Steven Thomas Williams', movements: Array(8), interestRate: 0.7, pin: 3333, username: 'stw'}
+// 3: {owner: 'Sarah Smith', movements: Array(5), interestRate: 1, pin: 4444, username: 'ss'}
+
+const accountJess = accounts.find(acc => acc.owner === 'Jessica Davis');
+
+console.log(accountJess);
+//* {owner: 'Jessica Davis', movements: Array(8), interestRate: 1.5, pin: 2222, username: 'jd'}
+console.log('accountJess.movements: ', accountJess.movements);
+//* accountJess.movements:  (8) [5000, 3400, -150, -790, -3210, -1000, 8500, -30]
