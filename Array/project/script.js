@@ -205,9 +205,16 @@ const calcDisplaySummary = (movements) => {
 calcDisplaySummary(account1.movements);
 
 //todo Event handler
+let currentAccount;
+
 btnLogin.addEventListener('click', (e) => {
+  //? prevent form from submitting
   e.preventDefault();
-  console.log('Login!!!');
+  // console.log('Login!!!');
+  
+  // find user from array
+  accounts.find(acc => acc.owner === inputLoginUsername.value);
+
 })
 
 
