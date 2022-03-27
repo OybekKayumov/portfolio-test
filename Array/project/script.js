@@ -213,7 +213,14 @@ btnLogin.addEventListener('click', (e) => {
   // console.log('Login!!!');
   
   // find user from array
-  accounts.find(acc => acc.owner === inputLoginUsername.value);
+  currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
+  // console.log(currentAccount);
+
+  // test for pin
+  // and convert to Number from String
+  if (currentAccount.pin === Number(inputLoginPin.value)) {
+    console.log('ok');
+  }
 
 })
 
