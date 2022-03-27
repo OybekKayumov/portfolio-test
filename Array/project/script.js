@@ -204,6 +204,12 @@ const calcDisplaySummary = (movements) => {
 
 calcDisplaySummary(account1.movements);
 
+//todo Event handler
+btnLogin.addEventListener('click', (e) => {
+  e.preventDefault();
+  console.log('Login!!!');
+})
+
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -630,8 +636,8 @@ const totalDepositsUSD = movements
 
 const firstWithdrawal =  movements.find(mov => mov < 0)
 
-console.log(movements);
-console.log(firstWithdrawal); //* -400
+// console.log(movements);
+// console.log(firstWithdrawal); //* -400
 
 //* (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
 //* -400
@@ -654,7 +660,7 @@ console.log(firstWithdrawal); //* -400
 
 const accountJess = accounts.find(acc => acc.owner === 'Jessica Davis');
 
-console.log(accountJess);
+// console.log(accountJess);
 //* {owner: 'Jessica Davis', movements: Array(8), interestRate: 1.5, pin: 2222, username: 'jd'}
-console.log('accountJess.movements: ', accountJess.movements);
+// console.log('accountJess.movements: ', accountJess.movements);
 //* accountJess.movements:  (8) [5000, 3400, -150, -790, -3210, -1000, 8500, -30]
