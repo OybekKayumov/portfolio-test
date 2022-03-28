@@ -83,7 +83,7 @@ const displayMovements = function(movements) {
   });
 }
 
-displayMovements(account1.movements)
+// displayMovements(account1.movements)
 
 const user = 'Steven Thomas Williams'; // stw
 // 1
@@ -174,25 +174,27 @@ const calcDisplayBalance = (movements) => {
   labelBalance.textContent = `${balance} EUR`;
 }
 
-calcDisplayBalance(account1.movements);
+// calcDisplayBalance(account1.movements);
 
-const calcDisplaySummary = (movements) => {
-  const incomes = movements
+// const calcDisplaySummary = (movements) => {
+const calcDisplaySummary = (acc) => {
+  const incomes = acc.movements
         .filter(mov => mov > 0)
         .reduce((acc, mov) => acc + mov, 0)
 
   labelSumIn.textContent = `${incomes}€`;
 
-  const outcomes = movements
+  const outcomes = acc.movements
         .filter(mov => mov < 0)
         .reduce((acc, mov) => acc + mov, 0)
 
   // labelSumOut.textContent = `${outcomes}€`;  
   labelSumOut.textContent = `${Math.abs(outcomes)}€`;  //* without -
 
-  const interest = movements
+  const interest = acc.movements
         .filter(mov => mov > 0)
-        .map(deposit => (deposit * 1.2) / 100)  //* new arr
+        // .map(deposit => (deposit * 1.2) / 100)  //* new arr
+        .map(deposit => (deposit * acc.interestRate) / 100)  //* new arr
         .filter((int, ind, arr) => {
           // console.log(arr);
           return int >= 1;      //5) [2.4, 5.4, 36, (- 0.84), 15.6]
@@ -202,7 +204,7 @@ const calcDisplaySummary = (movements) => {
   labelSumInterest.textContent = `${interest}€`;
 }
 
-calcDisplaySummary(account1.movements);
+// calcDisplaySummary(account1.movements);
 
 //todo Event handler
 let currentAccount;
@@ -224,12 +226,27 @@ btnLogin.addEventListener('click', (e) => {
     //! optional chaining
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     // display UI and welcome message
+    // take first word from array with split and [0]
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`
     
+    containerApp.style.opacity = 100;
+
+    // clear input fields
+    //! assignment operator works from right to left  <--
+    inputLoginUsername.value = inputLoginPin.value = '';
+
+    //! how to lose focus fom input
+    inputLoginPin.blur();
+
     // display movements
+    displayMovements(currentAccount.movements);
     
     // display balance
+    calcDisplayBalance(currentAccount.movements);
     
     // display summary
+    // calcDisplaySummary(currentAccount.movements);
+    calcDisplaySummary(currentAccount);
         
   }
 
