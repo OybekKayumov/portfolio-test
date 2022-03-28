@@ -83,7 +83,7 @@ const displayMovements = function(movements) {
   });
 }
 
-displayMovements(account1.movements)
+// displayMovements(account1.movements)
 
 const user = 'Steven Thomas Williams'; // stw
 // 1
@@ -174,7 +174,7 @@ const calcDisplayBalance = (movements) => {
   labelBalance.textContent = `${balance} EUR`;
 }
 
-calcDisplayBalance(account1.movements);
+// calcDisplayBalance(account1.movements);
 
 const calcDisplaySummary = (movements) => {
   const incomes = movements
@@ -202,7 +202,7 @@ const calcDisplaySummary = (movements) => {
   labelSumInterest.textContent = `${interest}€`;
 }
 
-calcDisplaySummary(account1.movements);
+// calcDisplaySummary(account1.movements);
 
 //todo Event handler
 let currentAccount;
@@ -228,12 +228,15 @@ btnLogin.addEventListener('click', (e) => {
     labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`
     
     containerApp.style.opacity = 100;
-    
+
     // display movements
+    displayMovements(currentAccount.movements);
     
     // display balance
+    calcDisplayBalance(currentAccount.movements);
     
     // display summary
+    calcDisplaySummary(currentAccount.movements);
         
   }
 
