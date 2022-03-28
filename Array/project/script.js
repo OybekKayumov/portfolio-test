@@ -176,23 +176,25 @@ const calcDisplayBalance = (movements) => {
 
 // calcDisplayBalance(account1.movements);
 
-const calcDisplaySummary = (movements) => {
-  const incomes = movements
+// const calcDisplaySummary = (movements) => {
+const calcDisplaySummary = (acc) => {
+  const incomes = acc.movements
         .filter(mov => mov > 0)
         .reduce((acc, mov) => acc + mov, 0)
 
   labelSumIn.textContent = `${incomes}€`;
 
-  const outcomes = movements
+  const outcomes = acc.movements
         .filter(mov => mov < 0)
         .reduce((acc, mov) => acc + mov, 0)
 
   // labelSumOut.textContent = `${outcomes}€`;  
   labelSumOut.textContent = `${Math.abs(outcomes)}€`;  //* without -
 
-  const interest = movements
+  const interest = acc.movements
         .filter(mov => mov > 0)
-        .map(deposit => (deposit * 1.2) / 100)  //* new arr
+        // .map(deposit => (deposit * 1.2) / 100)  //* new arr
+        .map(deposit => (deposit * acc.interestRate) / 100)  //* new arr
         .filter((int, ind, arr) => {
           // console.log(arr);
           return int >= 1;      //5) [2.4, 5.4, 36, (- 0.84), 15.6]
@@ -243,7 +245,8 @@ btnLogin.addEventListener('click', (e) => {
     calcDisplayBalance(currentAccount.movements);
     
     // display summary
-    calcDisplaySummary(currentAccount.movements);
+    // calcDisplaySummary(currentAccount.movements);
+    calcDisplaySummary(currentAccount);
         
   }
 
