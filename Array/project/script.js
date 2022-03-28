@@ -229,6 +229,10 @@ btnLogin.addEventListener('click', (e) => {
     
     containerApp.style.opacity = 100;
 
+    // clear input fields
+    //! assignment operator works from right to left  <--
+    inputLoginUsername.value = inputLoginPin.value = '';
+
     // display movements
     displayMovements(currentAccount.movements);
     
