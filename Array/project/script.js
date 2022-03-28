@@ -224,6 +224,8 @@ btnLogin.addEventListener('click', (e) => {
     //! optional chaining
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     // display UI and welcome message
+    // take first word from array with split and [0]
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`
     
     // display movements
     
