@@ -233,6 +233,9 @@ btnLogin.addEventListener('click', (e) => {
     //! assignment operator works from right to left  <--
     inputLoginUsername.value = inputLoginPin.value = '';
 
+    //! how to lose focus fom input
+    inputLoginPin.blur();
+
     // display movements
     displayMovements(currentAccount.movements);
     
