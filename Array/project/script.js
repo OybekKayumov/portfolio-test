@@ -227,6 +227,8 @@ btnLogin.addEventListener('click', (e) => {
     // take first word from array with split and [0]
     labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`
     
+    containerApp.style.opacity = 100;
+    
     // display movements
     
     // display balance
