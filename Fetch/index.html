@@ -13,6 +13,9 @@
     <input type="number" id="id" placeholder="Id">
     <input type="submit" value="Add Todo">
   </form>
+  <div id="result">
+
+  </div>
 
   <script>
     const form = document.getElementById('form');
@@ -22,7 +25,7 @@
       e.preventDefault();
       const name = document.getElementById('name').value;
       const body = document.getElementById('body').value;
-      const id = document.getElementById('id').value;
+      // const id = document.getElementById('id').value;
 
       // fetch post request
       fetch('https://jsonplaceholder.typicode.com/posts', {
@@ -30,15 +33,30 @@
         body: JSON.stringify({
           title: name,
           body: body,
-          id: id,
+          // id: id,
         }),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
       })
       .then((response) => response.json())
-      .then((data) => console.log('data: ', data));
+      .then((data) => {
+        console.log('data: ', data);
+        const result = document.getElementById('result');
+
+        result.innerHTML = `
+          <p>
+            The title of the todo is ${data.title}  
+          </p>
+          <p>
+            The body of the todo is ${data.body}  
+          </p>
+        `;
+
+      })
+        
     })
+    
     // output
     // data:  {title: 'MyName', body: 'This is a body', id: 101}
   </script>
