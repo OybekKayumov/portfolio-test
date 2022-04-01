@@ -12,8 +12,20 @@
     <input type="text" id="body" placeholder="Body">
     <input type="number" id="id" placeholder="Id">
     <input type="submit" value="Add Todo">
-
   </form>
+
+  <script>
+    const form = document.getElementById('form');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name');
+      const body = document.getElementById('body');
+      const id = document.getElementById('id');
+
+
+    })
+  </script>
   
 </body>
-</html>
+</html> 
