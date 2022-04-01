@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form id="form" method="post">
+    <input type="text" id="name" placeholder="Name">
+    <input type="text" id="body" placeholder="Body">
+    <input type="number" id="id" placeholder="Id">
+    <input type="submit" value="Add Todo">
+  </form>
+  <div id="result">
+
+  </div>
+
+  <script>
+    const form = document.getElementById('form');
+
+    form.addEventListener('submit', (e) => {
+      // auto submission of the form
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const body = document.getElementById('body').value;
+      // const id = document.getElementById('id').value;
+
+      // fetch post request
+      // fetch('https://jsonplaceholder.typicode.com/posts', {
+      //   method: 'POST',
+      //   body: JSON.stringify({
+      //     title: name,
+      //     body: body,
+          // id: id,
+    //     }),
+    //     headers: {
+    //       'Content-type': 'application/json; charset=UTF-8',
+    //     },
+    //   })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log('data: ', data);
+    //     const result = document.getElementById('result');
+
+    //     result.innerHTML = `
+    //       <p>
+    //         The title of the todo is: "${data.title}"  
+    //       </p>
+    //       <p>
+    //         The body of the todo is: "${data.body}"  
+    //       </p>
+    //     `;
+    //   });        
+    // });
+        
+    // output
+    // data:  {title: 'MyName', body: 'This is a body', id: 101}
+
+    // fetch put request - updating a resource
+    fetch('https://jsonplaceholder.typicode.com/posts/1', {
+    method: 'PUT',
+    body: JSON.stringify({
+        id: 1,
+        title: name,
+        body: body,
+        userId: 1,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+     })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('data: ', data);
+        const result = document.getElementById('result');
+
+        result.innerHTML = `
+          <p>
+            The title of the todo is: "${data.title}"  
+          </p>
+          <p>
+            The body of the todo is: "${data.body}"  
+          </p>
+        `;
+      });
+    })
+
+  </script>
+  
+</body>
+</html> 
