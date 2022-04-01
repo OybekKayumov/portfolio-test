@@ -18,10 +18,14 @@
     const form = document.getElementById('form');
 
     form.addEventListener('submit', (e) => {
+      // auto submission of the form
       e.preventDefault();
       const name = document.getElementById('name');
       const body = document.getElementById('body');
       const id = document.getElementById('id');
+
+      // fetch post request
+      fetch('https://jsonplaceholder.typicode.com/posts')
 
 
     })
