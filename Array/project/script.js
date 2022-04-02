@@ -1,5 +1,7 @@
 'use strict';
 
+const { update } = require("lodash-es");
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -214,6 +216,19 @@ const calcDisplaySummary = (acc) => {
 
 // calcDisplaySummary(account1.movements);
 
+const updateUI = (acc) => {
+   // display movements
+    // displayMovements(currentAccount.movements);
+    displayMovements(acc.movements);
+    
+    // display balance
+    calcDisplayBalance(acc);
+    
+    // display summary
+    calcDisplaySummary(acc);        
+}
+
+
 //todo Event handler
 let currentAccount;
 
@@ -247,15 +262,16 @@ btnLogin.addEventListener('click', (e) => {
     inputLoginPin.blur();
 
     // display movements
-    displayMovements(currentAccount.movements);
+    // displayMovements(currentAccount.movements);
     
     // display balance
     // calcDisplayBalance(currentAccount.movements);
-    calcDisplayBalance(currentAccount);
+    // calcDisplayBalance(currentAccount);
     
     // display summary
     // calcDisplaySummary(currentAccount.movements);
-    calcDisplaySummary(currentAccount);        
+    // calcDisplaySummary(currentAccount);       
+    updateUI(currentAccount) 
   }
 });
 
