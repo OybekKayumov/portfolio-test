@@ -1,7 +1,5 @@
 'use strict';
 
-const { update } = require("lodash-es");
-
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -270,7 +268,9 @@ btnLogin.addEventListener('click', (e) => {
     
     // display summary
     // calcDisplaySummary(currentAccount.movements);
-    // calcDisplaySummary(currentAccount);       
+    // calcDisplaySummary(currentAccount); 
+    
+    // updateUI
     updateUI(currentAccount) 
   }
 });
@@ -281,7 +281,7 @@ btnTransfer.addEventListener('click', (e) => {
 
   const amount = Number(inputTransferAmount.value);
   const receiverAcc = accounts.find(acc => acc.username === inputTransferTo.value);
-  // console.log(amount, receiverAcc);
+  inputTransferAmount.value = inputTransferTo.value = ''; 
 
   // check for enough money
   if (amount > 0 && 
@@ -294,6 +294,9 @@ btnTransfer.addEventListener('click', (e) => {
       // doing transfer : update array with native and positive transfer amount
       currentAccount.movements.push(-amount);
       receiverAcc.movements.push(amount);
+
+      // updateUI
+      updateUI(currentAccount) 
     }
 })
 
