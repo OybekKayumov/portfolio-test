@@ -265,7 +265,7 @@ btnTransfer.addEventListener('click', (e) => {
 
   const amount = Number(inputTransferAmount.value);
   const receiverAcc = accounts.find(acc => acc.username === inputTransferTo.value);
-  console.log(amount, receiverAcc);
+  // console.log(amount, receiverAcc);
 
   // check for enough money
   if (amount > 0 && 
@@ -274,7 +274,10 @@ btnTransfer.addEventListener('click', (e) => {
     receiverAcc?.username !== currentAccount.username )  
     //*  receiverAcc? = (// receiverAcc && )
     {
-      console.log('valid transfer');
+      // console.log('valid transfer');
+      // doing transfer : update array with native and positive transfer amount
+      currentAccount.movements.push(-amount);
+      receiverAcc.movements.push(amount);
     }
 })
 
