@@ -269,7 +269,7 @@ btnTransfer.addEventListener('click', (e) => {
 
   // check for enough money
   if (amount > 0 && 
-    // receiverAcc && 
+    receiverAcc && 
     currentAccount.balance >= amount &&
     receiverAcc?.username !== currentAccount.username )  
     //*  receiverAcc? = (// receiverAcc && )
