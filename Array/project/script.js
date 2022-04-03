@@ -778,3 +778,7 @@ const accountJess = accounts.find(acc => acc.owner === 'Jessica Davis');
 // use to test if an array includes a certain value
 console.log(movements);
 console.log(movements.includes(-130));
+
+
+// test for condition method - "some"
+movements.some(mov => mov > 0);
