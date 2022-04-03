@@ -303,7 +303,13 @@ btnTransfer.addEventListener('click', (e) => {
 btnClose.addEventListener('click', (e) => {
   e.preventDefault();
 
-  console.log('Delete');
+  if (inputCloseUsername.value === currentAccount.username && Number(inputClosePin.value) === currentAccount.pin) {
+    // calculate index which we will delete
+    
+
+    // delete element, splice mutates array
+    accounts.splice(index, 1);
+  }
 })
 
 
