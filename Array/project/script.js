@@ -301,8 +301,7 @@ btnTransfer.addEventListener('click', (e) => {
 })
 
 btnClose.addEventListener('click', (e) => {
-  e.preventDefault();
-  inputCloseUsername.value = inputClosePin.value = '';
+  e.preventDefault();  
 
   if (inputCloseUsername.value === currentAccount.username && Number(inputClosePin.value) === currentAccount.pin) {
     // calculate index which we will delete
@@ -316,6 +315,8 @@ btnClose.addEventListener('click', (e) => {
     // hide UI
     containerApp.style.opacity = 0;
   }
+
+  inputCloseUsername.value = inputClosePin.value = '';
 })
 
 
