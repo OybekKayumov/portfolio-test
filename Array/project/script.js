@@ -300,6 +300,24 @@ btnTransfer.addEventListener('click', (e) => {
     }
 })
 
+btnClose.addEventListener('click', (e) => {
+  e.preventDefault();  
+
+  if (inputCloseUsername.value === currentAccount.username && Number(inputClosePin.value) === currentAccount.pin) {
+    // calculate index which we will delete
+    const index = accounts.findIndex(acc => acc.username === currentAccount.username);
+    // console.log('index to delete: ', index); 
+
+    // .indexOf(23) --> search for the value 23 in the array, if contains=true
+    // delete account element, splice mutates array
+    accounts.splice(index, 1);
+
+    // hide UI
+    containerApp.style.opacity = 0;
+  }
+
+  inputCloseUsername.value = inputClosePin.value = '';
+})
 
 
 /////////////////////////////////////////////////
@@ -755,3 +773,17 @@ const accountJess = accounts.find(acc => acc.owner === 'Jessica Davis');
 //* {owner: 'Jessica Davis', movements: Array(8), interestRate: 1.5, pin: 2222, username: 'jd'}
 // console.log('accountJess.movements: ', accountJess.movements);
 //* accountJess.movements:  (8) [5000, 3400, -150, -790, -3210, -1000, 8500, -30]
+
+// todo includes method
+// use to test if an array includes a certain value
+console.log(movements);
+//! equality
+console.log('? includes "-130": ', movements.includes(-130));    //* true
+
+
+// test for condition method - "some"
+//! condition
+console.log(movements.some(mov => mov === -130));       //* true
+
+const anyDeposits = movements.some(mov => mov > 0);
+console.log('? anyDeposits: ', anyDeposits);                 //* true
