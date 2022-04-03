@@ -300,6 +300,11 @@ btnTransfer.addEventListener('click', (e) => {
     }
 })
 
+btnClose.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  console.log('Delete');
+})
 
 
 /////////////////////////////////////////////////
