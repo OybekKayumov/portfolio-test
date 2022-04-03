@@ -777,9 +777,13 @@ const accountJess = accounts.find(acc => acc.owner === 'Jessica Davis');
 // todo includes method
 // use to test if an array includes a certain value
 console.log(movements);
+//! equality
 console.log('? includes "-130": ', movements.includes(-130));    //* true
 
 
 // test for condition method - "some"
+//! condition
+console.log(movements.some(mov => mov === -130));       //* true
+
 const anyDeposits = movements.some(mov => mov > 0);
 console.log('? anyDeposits: ', anyDeposits);                 //* true
