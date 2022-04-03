@@ -306,11 +306,11 @@ btnClose.addEventListener('click', (e) => {
   if (inputCloseUsername.value === currentAccount.username && Number(inputClosePin.value) === currentAccount.pin) {
     // calculate index which we will delete
     const index = accounts.findIndex(acc => acc.username === currentAccount.username);
-    console.log('index to delete: ', index); 
+    // console.log('index to delete: ', index); 
 
-
+    // .indexOf(23) --> search for the value 23 in the array, if contains=true
     // delete element, splice mutates array
-    // accounts.splice(index, 1);
+    accounts.splice(index, 1);
   }
 })
 
