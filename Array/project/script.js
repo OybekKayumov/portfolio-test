@@ -302,6 +302,7 @@ btnTransfer.addEventListener('click', (e) => {
 
 btnClose.addEventListener('click', (e) => {
   e.preventDefault();
+  inputCloseUsername.value = inputClosePin.value = '';
 
   if (inputCloseUsername.value === currentAccount.username && Number(inputClosePin.value) === currentAccount.pin) {
     // calculate index which we will delete
@@ -309,8 +310,11 @@ btnClose.addEventListener('click', (e) => {
     // console.log('index to delete: ', index); 
 
     // .indexOf(23) --> search for the value 23 in the array, if contains=true
-    // delete element, splice mutates array
+    // delete account element, splice mutates array
     accounts.splice(index, 1);
+
+    // hide UI
+    containerApp.style.opacity = 0;
   }
 })
 
