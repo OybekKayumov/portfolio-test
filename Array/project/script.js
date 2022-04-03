@@ -773,3 +773,8 @@ const accountJess = accounts.find(acc => acc.owner === 'Jessica Davis');
 //* {owner: 'Jessica Davis', movements: Array(8), interestRate: 1.5, pin: 2222, username: 'jd'}
 // console.log('accountJess.movements: ', accountJess.movements);
 //* accountJess.movements:  (8) [5000, 3400, -150, -790, -3210, -1000, 8500, -30]
+
+// todo includes method
+// use to test if an array includes a certain value
+console.log(movements);
+console.log(movements.includes(-130));
