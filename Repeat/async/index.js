@@ -9,3 +9,8 @@
 // client request - response webserver
 // GET, POST, PUT...
 // WEB API - Application Programming Interface: PIECE OF SOFTWARE THAT CAN BE USED BY ANOTHER PIECE OF SOFTWARE, in order to allow applications to talk to each other and exchange information
+
+// data formats: 
+// xml(no API uses anymore),
+// json(): JavaScript Object, converted to a String
+// text() ...
