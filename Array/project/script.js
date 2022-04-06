@@ -806,5 +806,10 @@ const anyDeposits = movements.some(mov => mov > 0);
 // console.log(movements.some(mov => mov === -130));       //* true
 
 // todo every
-console.log(movements.every(mov => mov > 0));     //* false
-console.log(account4.movements.every(mov => mov > 0));     //* true
+// console.log(movements.every(mov => mov > 0));     //* false
+// console.log(account4.movements.every(mov => mov > 0));     //* true
+
+// separate callback
+const deposit = mov => mov > 0;
+
+console.log(movements.some(deposit));   //* true
