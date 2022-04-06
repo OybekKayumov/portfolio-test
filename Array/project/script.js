@@ -303,6 +303,14 @@ btnTransfer.addEventListener('click', (e) => {
 //use some
 btnLoan.addEventListener('click', () => {
   e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+  // 10% => ( * 0.1) or ( / 10)
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // add movement
+    currentAccount.movements.push(amount);
+    //update UI
+  } 
 })
 
 btnClose.addEventListener('click', (e) => {
