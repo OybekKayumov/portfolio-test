@@ -310,7 +310,9 @@ btnLoan.addEventListener('click', () => {
     // add movement
     currentAccount.movements.push(amount);
     //update UI
+    updateUI(currentAccount);
   } 
+  inputLoanAmount = '';
 })
 
 btnClose.addEventListener('click', (e) => {
