@@ -300,6 +300,21 @@ btnTransfer.addEventListener('click', (e) => {
     }
 })
 
+//use some
+btnLoan.addEventListener('click', () => {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+  // 10% => ( * 0.1) or ( / 10)
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // add movement
+    currentAccount.movements.push(amount);
+    //update UI
+    updateUI(currentAccount);
+  } 
+  inputLoanAmount = '';
+})
+
 btnClose.addEventListener('click', (e) => {
   e.preventDefault();  
 
@@ -776,14 +791,30 @@ const accountJess = accounts.find(acc => acc.owner === 'Jessica Davis');
 
 // todo includes method
 // use to test if an array includes a certain value
-console.log(movements);
+// console.log(movements);
 //! equality
-console.log('? includes "-130": ', movements.includes(-130));    //* true
+// console.log('? includes "-130": ', movements.includes(-130));    //* true
 
 
 // test for condition method - "some"
 //! condition
-console.log(movements.some(mov => mov === -130));       //* true
+// console.log(movements.some(mov => mov === -130));       //* true
 
 const anyDeposits = movements.some(mov => mov > 0);
-console.log('? anyDeposits: ', anyDeposits);                 //* true
+// console.log('? anyDeposits: ', anyDeposits);            //* true
+
+// console.log(movements.some(mov => mov === -130));       //* true
+
+// todo every
+// console.log(movements.every(mov => mov > 0));     //* false
+// console.log(account4.movements.every(mov => mov > 0));     //* true
+
+// separate callback
+const deposit = mov => mov > 0;
+
+console.log(movements.some(deposit));   //* true
+console.log(movements.every(deposit));   //* false
+console.log(movements.filter(deposit));   //* (5) [200, 450, 3000, 70, 1300
+
+const negative = mov => mov < 0;
+// this can be use for DRY
