@@ -807,3 +807,4 @@ const anyDeposits = movements.some(mov => mov > 0);
 
 // todo every
 console.log(movements.every(mov => mov > 0));     //* false
+console.log(account4.movements.every(mov => mov > 0));     //* true
