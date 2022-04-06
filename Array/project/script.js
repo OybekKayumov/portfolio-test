@@ -813,3 +813,5 @@ const anyDeposits = movements.some(mov => mov > 0);
 const deposit = mov => mov > 0;
 
 console.log(movements.some(deposit));   //* true
+console.log(movements.every(deposit));   //* false
+console.log(movements.filter(deposit));   //* (5) [200, 450, 3000, 70, 1300
