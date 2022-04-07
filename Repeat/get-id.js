@@ -14,15 +14,12 @@ class LocStorManager {
 
 const storage = new LocStorManager();
 
-// const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
 const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
 
-APP_NAME ='Movie API'
-
 const createGame = async () => {
-  // const game = {
-  //   name: 'Tetris',
-  // };
+  const game = {
+    name: 'Movie API',
+  };
 
   const response = await fetch(`${url}`, {
     method: 'POST',
@@ -30,10 +27,11 @@ const createGame = async () => {
       'Content-type': 'application/json; charset=UTF-8',
     },
     body: JSON.stringify({
-      name: APP_NAME,
+      name: game,
     }),
   });
 
+  const data = await response.text();
   // const gameID = await response.json();
   // const str = gameID.result;
 
@@ -41,7 +39,6 @@ const createGame = async () => {
 
   // return str;
 
-  const data = await response.text();
   return data;
 };
 
